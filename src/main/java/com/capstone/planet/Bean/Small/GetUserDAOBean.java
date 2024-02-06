@@ -15,6 +15,11 @@ public class GetUserDAOBean {
         this.userRepositoryJPA = userRepositoryJPA;
     }
 
+    // 유저 객체 가져오기
+    public UserDAO exec(Long userHandleId){
+        return userRepositoryJPA.findById(userHandleId).orElse(null);
+    }
+
     // 유저 중복 확인
     public UserDAO exec(String userId){
         return userRepositoryJPA.findByUserId(userId);

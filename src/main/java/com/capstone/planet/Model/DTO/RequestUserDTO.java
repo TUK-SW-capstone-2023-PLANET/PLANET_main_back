@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class RequestUserDTO {
-    String userid;
+    String userId;
     String passwd;
     String nickName;
     String imageUrl;

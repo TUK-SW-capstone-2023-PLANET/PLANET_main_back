@@ -29,7 +29,7 @@ public class SaveUserBean {
     public Long exec(RequestUserDTO requestUserDTO){
 
         // 유저 아이디 중복 확인
-        UserDAO duplicateuserDAO = getUserDAOBean.exec(requestUserDTO.getUserid());
+        UserDAO duplicateuserDAO = getUserDAOBean.exec(requestUserDTO.getUserId());
         if (duplicateuserDAO != null) return null;
 
         // 아이디 생성

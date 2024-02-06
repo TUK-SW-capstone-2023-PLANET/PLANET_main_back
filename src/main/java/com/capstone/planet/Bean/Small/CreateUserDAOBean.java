@@ -11,7 +11,7 @@ public class CreateUserDAOBean {
         UserDAO userDAO = new UserDAO();
 
         userDAO.setUserHandleId(userHandleId);
-        userDAO.setUserId(requestUserDTO.getUserid());
+        userDAO.setUserId(requestUserDTO.getUserId());
         userDAO.setPasswd(requestUserDTO.getPasswd());
         userDAO.setNickName(requestUserDTO.getNickName());
         userDAO.setImageUrl(requestUserDTO.getImageUrl());

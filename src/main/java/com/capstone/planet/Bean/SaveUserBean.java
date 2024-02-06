@@ -5,7 +5,7 @@ import com.capstone.planet.Bean.Small.CreateUserDAOBean;
 import com.capstone.planet.Bean.Small.GetUserDAOBean;
 import com.capstone.planet.Bean.Small.SaveUserDAOBean;
 import com.capstone.planet.Model.DAO.UserDAO;
-import com.capstone.planet.Model.DTO.RequestUserDTO;
+import com.capstone.planet.Model.DTO.RequestUserSaveDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,17 +26,17 @@ public class SaveUserBean {
     }
 
     // 유저 회원가입
-    public Long exec(RequestUserDTO requestUserDTO){
+    public Long exec(RequestUserSaveDTO requestUserSaveDTO){
 
         // 유저 아이디 중복 확인
-        UserDAO duplicateuserDAO = getUserDAOBean.exec(requestUserDTO.getUserId());
+        UserDAO duplicateuserDAO = getUserDAOBean.exec(requestUserSaveDTO.getUserId());
         if (duplicateuserDAO != null) return null;
 
         // 아이디 생성
         Long userHandleId = createUniqueIdBean.exec();
 
         // UserDAO 객체 생성
-        UserDAO userDAO = createUserDAOBean.exec(userHandleId, requestUserDTO);
+        UserDAO userDAO = createUserDAOBean.exec(userHandleId, requestUserSaveDTO);
 
         // 유저 저장
         saveUserDAOBean.exec(userDAO);

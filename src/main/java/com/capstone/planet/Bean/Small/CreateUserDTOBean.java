@@ -1,28 +1,28 @@
 package com.capstone.planet.Bean.Small;
 
 import com.capstone.planet.Model.DAO.UserDAO;
-import com.capstone.planet.Model.DTO.ResponseUserDTO;
+import com.capstone.planet.Model.DTO.ResponseUserGetDTO;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CreateUserDTOBean {
 
     // 유저 DTO 생성
-    public ResponseUserDTO exec(UserDAO userDAO){
+    public ResponseUserGetDTO exec(UserDAO userDAO){
 
-        ResponseUserDTO responseUserDTO = new ResponseUserDTO();
+        ResponseUserGetDTO responseUserGetDTO = new ResponseUserGetDTO();
 
-        responseUserDTO.setUserHandleId(userDAO.getUserHandleId());
-        responseUserDTO.setUserId(userDAO.getUserId());
-        responseUserDTO.setPasswd(userDAO.getPasswd());
-        responseUserDTO.setNickName(userDAO.getNickName());
-        responseUserDTO.setImageUrl(userDAO.getImageUrl());
-        responseUserDTO.setAddress(userDAO.getAddress());
-        responseUserDTO.setPloggingCount(userDAO.getPloggingCount());
-        responseUserDTO.setTrashCount(userDAO.getTrashCount());
-        responseUserDTO.setTotalDistance(userDAO.getTotalDistance());
-        responseUserDTO.setScore(userDAO.getScore());
+        responseUserGetDTO.setUserHandleId(userDAO.getUserHandleId());
+        responseUserGetDTO.setUserId(userDAO.getUserId());
+        responseUserGetDTO.setPasswd(userDAO.getPasswd());
+        responseUserGetDTO.setNickName(userDAO.getNickName());
+        responseUserGetDTO.setImageUrl(userDAO.getImageUrl());
+        responseUserGetDTO.setAddress(userDAO.getAddress());
+        responseUserGetDTO.setPloggingCount(userDAO.getPloggingCount());
+        responseUserGetDTO.setTrashCount(userDAO.getTrashCount());
+        responseUserGetDTO.setTotalDistance(userDAO.getTotalDistance());
+        responseUserGetDTO.setScore(userDAO.getScore());
 
-        return responseUserDTO;
+        return responseUserGetDTO;
     }
 }

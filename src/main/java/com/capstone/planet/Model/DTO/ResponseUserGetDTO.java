@@ -3,7 +3,7 @@ package com.capstone.planet.Model.DTO;
 import lombok.Data;
 
 @Data
-public class ResponseUserDTO {
+public class ResponseUserGetDTO {
     Long userHandleId;
     String userId;
     String passwd;

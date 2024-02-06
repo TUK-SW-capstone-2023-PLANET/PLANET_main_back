@@ -3,7 +3,7 @@ package com.capstone.planet.Model.DTO;
 import lombok.Data;
 
 @Data
-public class RequestUserDTO {
+public class RequestUserSaveDTO {
     String userId;
     String passwd;
     String nickName;

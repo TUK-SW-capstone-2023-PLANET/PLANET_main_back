@@ -2,8 +2,8 @@ package com.capstone.planet.Service;
 
 import com.capstone.planet.Bean.GetUserBean;
 import com.capstone.planet.Bean.SaveUserBean;
-import com.capstone.planet.Model.DTO.RequestUserDTO;
-import com.capstone.planet.Model.DTO.ResponseUserDTO;
+import com.capstone.planet.Model.DTO.RequestUserSaveDTO;
+import com.capstone.planet.Model.DTO.ResponseUserGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +20,12 @@ public class UserService {
     }
 
     // 유저 조회
-    public ResponseUserDTO getUser(Long userHandleId){
+    public ResponseUserGetDTO getUser(Long userHandleId){
         return getUserBean.exec(userHandleId);
     }
 
     // 유저 회원가입
-    public Long saveUser(RequestUserDTO requestUserDTO){
-        return saveUserBean.exec(requestUserDTO);
+    public Long saveUser(RequestUserSaveDTO requestUserSaveDTO){
+        return saveUserBean.exec(requestUserSaveDTO);
     }
 }

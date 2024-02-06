@@ -1,7 +1,7 @@
 package com.capstone.planet.Controller;
 
-import com.capstone.planet.Model.DTO.RequestUserDTO;
-import com.capstone.planet.Model.DTO.ResponseUserDTO;
+import com.capstone.planet.Model.DTO.RequestUserSaveDTO;
+import com.capstone.planet.Model.DTO.ResponseUserGetDTO;
 import com.capstone.planet.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,14 +24,14 @@ public class UserController {
 
     // 유저 정보조회
     @GetMapping("user/{userHandleId}")
-    public ResponseUserDTO getUser(@PathVariable Long userHandleId){
+    public ResponseUserGetDTO getUser(@PathVariable Long userHandleId){
         return userService.getUser(userHandleId);
     }
 
     // 유저 회원가입
     @PostMapping("user/join")
-    public ResponseEntity<Map<String, Object>> saveUser(@RequestBody RequestUserDTO requestUserDTO){
-        Long userHandleId = userService.saveUser(requestUserDTO);
+    public ResponseEntity<Map<String, Object>> saveUser(@RequestBody RequestUserSaveDTO requestUserSaveDTO){
+        Long userHandleId = userService.saveUser(requestUserSaveDTO);
 
         // HTTP 상태 반환
         HttpStatus httpStatus = (userHandleId != null) ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR;

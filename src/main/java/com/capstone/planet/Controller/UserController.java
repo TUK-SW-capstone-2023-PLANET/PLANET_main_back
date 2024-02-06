@@ -2,6 +2,7 @@ package com.capstone.planet.Controller;
 
 import com.capstone.planet.Model.DTO.RequestUserSaveDTO;
 import com.capstone.planet.Model.DTO.RequestUserUpdateDTO;
+import com.capstone.planet.Model.DTO.ResponseUserAllGetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserGetDTO;
 import com.capstone.planet.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,12 @@ public class UserController {
     @GetMapping("user/{userHandleId}")
     public ResponseUserGetDTO getUser(@PathVariable Long userHandleId){
         return userService.getUser(userHandleId);
+    }
+
+    // 전체 유저 정보조회
+    @GetMapping("user/all")
+    public ResponseUserAllGetDTO getUserAllInfo(){
+        return userService.getUserAllInfo();
     }
 
     // 유저 회원가입

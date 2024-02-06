@@ -7,8 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,7 +14,7 @@ import java.util.UUID;
 @Setter
 public class UserDAO {
     @Id
-    UUID userHandleId;
+    Long userHandleId;
     String userId;
     String passwd;
     String nickName;

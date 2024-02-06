@@ -28,7 +28,7 @@ public class UserController {
     // 유저 회원가입
     @PostMapping("user/join")
     public ResponseEntity<Map<String, Object>> saveUser(@RequestBody RequestUserDTO requestUserDTO){
-        UUID userHandleId = userService.saveUser(requestUserDTO);
+        Long userHandleId = userService.saveUser(requestUserDTO);
 
         // HTTP 상태 반환
         HttpStatus httpStatus = (userHandleId != null) ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR;

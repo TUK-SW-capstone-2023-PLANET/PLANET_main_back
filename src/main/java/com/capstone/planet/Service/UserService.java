@@ -18,7 +18,7 @@ public class UserService {
     }
 
     // 유저 회원가입
-    public UUID saveUser(RequestUserDTO requestUserDTO){
+    public Long saveUser(RequestUserDTO requestUserDTO){
         return saveUserBean.exec(requestUserDTO);
     }
 }

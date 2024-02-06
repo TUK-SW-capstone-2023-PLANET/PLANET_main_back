@@ -4,12 +4,10 @@ import com.capstone.planet.Model.DAO.UserDAO;
 import com.capstone.planet.Model.DTO.RequestUserDTO;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 public class CreateUserDAOBean {
 
-    public UserDAO exec(UUID userHandleId, RequestUserDTO requestUserDTO){
+    public UserDAO exec(Long userHandleId, RequestUserDTO requestUserDTO){
         UserDAO userDAO = new UserDAO();
 
         userDAO.setUserHandleId(userHandleId);

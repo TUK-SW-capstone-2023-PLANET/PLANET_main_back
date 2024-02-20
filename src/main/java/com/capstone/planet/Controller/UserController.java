@@ -5,6 +5,8 @@ import com.capstone.planet.Model.DTO.RequestUserUpdateDTO;
 import com.capstone.planet.Model.DTO.ResponseUserAllGetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserGetDTO;
 import com.capstone.planet.Service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
+@Tag(name = "User", description = "유저 기능 관련 API")
 @RestController
 @CrossOrigin("*")
 public class UserController {
@@ -25,18 +28,21 @@ public class UserController {
     }
 
     // 유저 정보조회
+    @Operation(summary = "유저 정보 조회", description = "유저 핸들 아이디로 유저 정보 조회")
     @GetMapping("user/{userHandleId}")
     public ResponseUserGetDTO getUser(@PathVariable Long userHandleId){
         return userService.getUser(userHandleId);
     }
 
     // 전체 유저 정보조회
+    @Operation(summary = "전체 유저 정보 조회", description = "전체 유저 수, 전체 쓰레기 수, 전체 이동거리 정보 조회")
     @GetMapping("user/all")
     public ResponseUserAllGetDTO getUserAllInfo(){
         return userService.getUserAllInfo();
     }
 
     // 유저 회원가입
+    @Operation(summary = "유저 회원가입", description = "유저 회원가입 -> 추후 Oauth로 대체 예정")
     @PostMapping("user/join")
     public ResponseEntity<Map<String, Object>> saveUser(@RequestBody RequestUserSaveDTO requestUserSaveDTO){
         Long userHandleId = userService.saveUser(requestUserSaveDTO);
@@ -53,6 +59,7 @@ public class UserController {
     }
 
     // 유저 정보 수정
+    @Operation(summary = "유저 정보 수정", description = "마이페이지 수정 - 정보 하나만 바뀌더라도 전체 정보 받아야만 작동")
     @PutMapping("user")
     public ResponseEntity<Map<String, Object>> updateUser(@RequestBody RequestUserUpdateDTO requestUserUpdateDTO){
         Long userHandleId = userService.updateUser(requestUserUpdateDTO);

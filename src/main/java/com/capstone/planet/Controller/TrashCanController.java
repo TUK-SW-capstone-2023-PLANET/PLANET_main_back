@@ -1,5 +1,6 @@
 package com.capstone.planet.Controller;
 
+import com.capstone.planet.Model.DTO.ResponseTrashCanAllGetDTO;
 import com.capstone.planet.Model.DTO.ResponseTrashCanGetDTO;
 import com.capstone.planet.Service.TrashCanService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @Tag(name = "Trash Can", description = "쓰레기통 관련 API")
 @RestController
@@ -27,5 +30,12 @@ public class TrashCanController {
     @GetMapping("trash-can/{trashCanId}")
     public ResponseTrashCanGetDTO getUser(@PathVariable Long trashCanId){
         return userService.getTrashCan(trashCanId);
+    }
+
+    // 쓰레기통 전체 조회
+    @Operation(summary = "전체 쓰레기통 정보 조회", description = "전체 쓰레기통 정보 조회")
+    @GetMapping("trash-can/all")
+    public List<ResponseTrashCanAllGetDTO> getUserAllInfo(){
+        return userService.getTrashCanAll();
     }
 }

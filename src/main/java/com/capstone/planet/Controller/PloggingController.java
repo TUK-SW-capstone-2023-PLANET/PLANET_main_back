@@ -7,10 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +22,13 @@ public class PloggingController {
     @Autowired
     public PloggingController(PloggingService ploggingService) {
         this.ploggingService = ploggingService;
+    }
+
+    // 플로깅 시작시 플로깅 Id 생성
+    @Operation(summary = "플로깅 아이디 생성", description = "플로깅 시작시 아이디 생성")
+    @GetMapping("plogging/id")
+    public Long getPloggingId(){
+        return ploggingService.getPloggingId();
     }
 
     // 플로깅 저장

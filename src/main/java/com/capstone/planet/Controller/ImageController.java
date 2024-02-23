@@ -25,7 +25,7 @@ public class ImageController {
     }
 
     // 이미지 저장
-    @Operation(summary = "이미지 저장", description = "멀티파일로 이미지 저장")
+    @Operation(summary = "이미지 저장", description = "멀티파일로 이미지 저장 후 imageUrl 반환")
     @PostMapping("image")
     public String saveImage(@RequestParam("file") MultipartFile file) throws IOException {
         return imageService.saveImage(file);

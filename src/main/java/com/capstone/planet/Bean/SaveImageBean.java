@@ -1,6 +1,9 @@
 package com.capstone.planet.Bean;
 
+import com.capstone.planet.Bean.Small.CreateImageDAOBean;
+import com.capstone.planet.Bean.Small.SaveImageDAOBean;
 import com.capstone.planet.Bean.Small.SaveImageS3Bean;
+import com.capstone.planet.Model.DAO.ImageDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,10 +14,14 @@ import java.io.IOException;
 public class SaveImageBean {
 
     SaveImageS3Bean saveImageS3Bean;
+    CreateImageDAOBean createImageDAOBean;
+    SaveImageDAOBean saveImageDAOBean;
 
     @Autowired
-    public SaveImageBean(SaveImageS3Bean saveImageS3Bean) {
+    public SaveImageBean(SaveImageS3Bean saveImageS3Bean, CreateImageDAOBean createImageDAOBean, SaveImageDAOBean saveImageDAOBean) {
         this.saveImageS3Bean = saveImageS3Bean;
+        this.createImageDAOBean = createImageDAOBean;
+        this.saveImageDAOBean = saveImageDAOBean;
     }
 
     // 이미지 저장
@@ -29,10 +36,10 @@ public class SaveImageBean {
         String imageUrls = saveImageS3Bean.exec(file);
 
         // 이미지 DAO 생성
-        //ImageDAO imageDAO = createImageDAOBean.exec(file, imageUrls);
+        ImageDAO imageDAO = createImageDAOBean.exec(file, imageUrls);
 
         // 이미지 DAO 저장
-        //saveImageDAOBean.exec(imageDAO);
+        saveImageDAOBean.exec(imageDAO);
 
         // 이미지 Url 반환
         return imageUrls;

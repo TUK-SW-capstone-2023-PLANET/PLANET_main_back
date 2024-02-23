@@ -25,15 +25,12 @@ public class SavePloggingBean {
     // 플로깅 저장
     public Long exec(RequestPloggingSaveDTO requestPloggingSaveDTO){
 
-        // 플로깅 unique id 생성
-        long ploggingId = createUniqueIdBean.exec();
-
         // 플로깅 DAO 생성
-        PloggingDAO ploggingDAO = createPloggingDAOBean.exec(ploggingId, requestPloggingSaveDTO);
+        PloggingDAO ploggingDAO = createPloggingDAOBean.exec(requestPloggingSaveDTO);
 
         // 플로깅 저장
         savePloggingDAOBean.exec(ploggingDAO);
 
-        return ploggingId;
+        return requestPloggingSaveDTO.getPloggingId();
     }
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 
 @Data
 public class RequestPloggingSaveDTO {
+    Long ploggingId;
     Long userId;
     String imageUrl;
     List<LocationDTO> location;

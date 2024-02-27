@@ -1,6 +1,7 @@
 package com.capstone.planet.Service;
 
 import com.capstone.planet.Bean.SaveImageBean;
+import com.capstone.planet.Model.DTO.ImageDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,7 +19,7 @@ public class ImageService {
     }
 
     // 이미지 저장
-    public String saveImage(MultipartFile file) throws IOException {
+    public ImageDTO saveImage(MultipartFile file) throws IOException {
         return saveImageBean.exec(file);
     }
 }

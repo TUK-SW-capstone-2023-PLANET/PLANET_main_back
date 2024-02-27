@@ -22,7 +22,7 @@ public class MainController {
 
     @Operation(summary = "상태 확인", description = "서버 생존 확인 API")
     @GetMapping("/")
-    public String health() {
+    public JsonNode health() {
 
         // 좌표값
         String coords = "126.97838810000002,37.56661020000001";
@@ -55,12 +55,13 @@ public class MainController {
             // JsonNode를 JSON 문자열로 변환하여 반환
             System.out.println("Response: " + jsonMapper.writeValueAsString(jsonNode));
 
+            return jsonNode;
         } catch (IOException | InterruptedException e) {
             // 예외 발생 시 처리
             e.printStackTrace();
         }
 
-        return "server on";
+        return null;
     }
 
     // XML을 JSON으로 변환하는 메소드

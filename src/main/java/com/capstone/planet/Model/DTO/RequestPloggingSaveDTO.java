@@ -9,7 +9,6 @@ import java.util.Map;
 public class RequestPloggingSaveDTO {
     Long ploggingId;
     Long userId;
-    String imageUrl;
     List<LocationDTO> location;
     List<Map<String, Integer>> trashCount;
     Double distance;

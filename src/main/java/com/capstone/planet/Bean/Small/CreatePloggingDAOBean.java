@@ -17,7 +17,6 @@ public class CreatePloggingDAOBean {
 
         ploggingDAO.setPloggingId(requestPloggingSaveDTO.getPloggingId());
         ploggingDAO.setUserId(requestPloggingSaveDTO.getUserId());
-        ploggingDAO.setImageUrl(requestPloggingSaveDTO.getImageUrl());
         ploggingDAO.setDistance(requestPloggingSaveDTO.getDistance());
         ploggingDAO.setKcal(requestPloggingSaveDTO.getKcal());
         ploggingDAO.setSpeed(requestPloggingSaveDTO.getSpeed());

@@ -1,16 +1,22 @@
 package com.capstone.planet.Controller;
 
+import com.capstone.planet.Bean.Small.CreateMultipartFileBean;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -20,8 +26,51 @@ import java.net.http.HttpResponse;
 @CrossOrigin("*")
 public class MainController {
 
-    @Operation(summary = "상태 확인", description = "서버 생존 확인 API")
+    @Autowired
+    CreateMultipartFileBean createMultipartFileBean;
+
     @GetMapping("/")
+    public void getMapImage() {
+        String URL_STATICMAP = "https://naveropenapi.apigw.ntruss.com/map-static/v2/raster?";
+
+        try {
+            String url = URL_STATICMAP;
+            url += "center=126.97838810000002,37.56661020000001";
+            url += "&level=16&w=500&h=500";
+
+            URL u = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) u.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("X-NCP-APIGW-API-KEY-ID", "d62cogf955");
+            con.setRequestProperty("X-NCP-APIGW-API-KEY", "PD9WvJTFLDShaTWdAN0JiYJPfusVsO3tRv4SMDbv");
+
+            int responseCode = con.getResponseCode();
+
+            // 정상호출인 경우.
+            if (responseCode == 200) {
+                InputStream is = con.getInputStream();
+                BufferedImage image = ImageIO.read(is);
+                is.close();
+
+            } else {    // 에러 발생
+                BufferedReader br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = br.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                br.close();
+                throw new IOException("Error response from server: " + response.toString());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    //@Operation(summary = "상태 확인", description = "서버 생존 확인 API")
+    //@GetMapping("/")
     public JsonNode health() {
 
         // 좌표값

@@ -6,6 +6,8 @@ import com.capstone.planet.Model.DTO.RequestPloggingSaveDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 @Service
 public class PloggingService {
 
@@ -24,7 +26,7 @@ public class PloggingService {
     }
 
     // 플로깅 정보 저장
-    public Long savePlogging(RequestPloggingSaveDTO requestPloggingSaveDTO){
+    public Long savePlogging(RequestPloggingSaveDTO requestPloggingSaveDTO) throws IOException {
         return savePloggingBean.exec(requestPloggingSaveDTO);
     }
 }

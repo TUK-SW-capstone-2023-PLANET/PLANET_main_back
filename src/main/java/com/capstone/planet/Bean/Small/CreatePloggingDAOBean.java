@@ -11,12 +11,13 @@ import java.time.LocalDateTime;
 public class CreatePloggingDAOBean {
 
     // 플로깅 DAO 생성
-    public PloggingDAO exec(RequestPloggingSaveDTO requestPloggingSaveDTO){
+    public PloggingDAO exec(String imageUrl, RequestPloggingSaveDTO requestPloggingSaveDTO){
 
         PloggingDAO ploggingDAO = new PloggingDAO();
 
         ploggingDAO.setPloggingId(requestPloggingSaveDTO.getPloggingId());
         ploggingDAO.setUserId(requestPloggingSaveDTO.getUserId());
+        ploggingDAO.setImageUrl(imageUrl);
         ploggingDAO.setDistance(requestPloggingSaveDTO.getDistance());
         ploggingDAO.setKcal(requestPloggingSaveDTO.getKcal());
         ploggingDAO.setSpeed(requestPloggingSaveDTO.getSpeed());

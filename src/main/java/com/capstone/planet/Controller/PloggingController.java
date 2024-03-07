@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public class PloggingController {
     // 플로깅 저장
     @Operation(summary = "플로깅 저장", description = "플로깅 종료시 정보 받은 후 저장")
     @PostMapping("plogging")
-    public ResponseEntity<Map<String, Object>> savePlogging(@RequestBody RequestPloggingSaveDTO requestPloggingSaveDTO){
+    public ResponseEntity<Map<String, Object>> savePlogging(@RequestBody RequestPloggingSaveDTO requestPloggingSaveDTO) throws IOException {
         Long ploggingId = ploggingService.savePlogging(requestPloggingSaveDTO);
 
         // HTTP 상태 변환

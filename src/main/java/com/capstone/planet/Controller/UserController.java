@@ -1,9 +1,6 @@
 package com.capstone.planet.Controller;
 
-import com.capstone.planet.Model.DTO.RequestUserSaveDTO;
-import com.capstone.planet.Model.DTO.RequestUserUpdateDTO;
-import com.capstone.planet.Model.DTO.ResponseUserAllGetDTO;
-import com.capstone.planet.Model.DTO.ResponseUserGetDTO;
+import com.capstone.planet.Model.DTO.*;
 import com.capstone.planet.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Tag(name = "User", description = "유저 기능 관련 API")
@@ -29,9 +27,9 @@ public class UserController {
 
     // 유저 정보조회
     @Operation(summary = "유저 정보 조회", description = "유저 핸들 아이디로 유저 정보 조회")
-    @GetMapping("user/{userHandleId}")
-    public ResponseUserGetDTO getUser(@PathVariable Long userHandleId){
-        return userService.getUser(userHandleId);
+    @GetMapping("user/{userId}")
+    public ResponseUserGetDTO getUser(@PathVariable Long userId){
+        return userService.getUser(userId);
     }
 
     // 전체 유저 정보조회
@@ -39,6 +37,13 @@ public class UserController {
     @GetMapping("user/all")
     public ResponseUserAllGetDTO getUserAllInfo(){
         return userService.getUserAllInfo();
+    }
+
+    // 대학교 소속 유저 전체조회
+    @Operation(summary = "대학교 소속 유저 전체조회", description = "대학교 소속 유저 전체조회")
+    @GetMapping("user/{userId}/university")
+    public List<Map<Integer, ResponseUserUniversityGetDTO>> getUniversityUser(@PathVariable Long userId){
+        return userService.getUniversityUser(userId);
     }
 
     // 유저 회원가입

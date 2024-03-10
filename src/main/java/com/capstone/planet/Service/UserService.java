@@ -1,15 +1,12 @@
 package com.capstone.planet.Service;
 
-import com.capstone.planet.Bean.GetUserAllBean;
-import com.capstone.planet.Bean.GetUserBean;
-import com.capstone.planet.Bean.SaveUserBean;
-import com.capstone.planet.Bean.UpdateUserBean;
-import com.capstone.planet.Model.DTO.RequestUserSaveDTO;
-import com.capstone.planet.Model.DTO.RequestUserUpdateDTO;
-import com.capstone.planet.Model.DTO.ResponseUserAllGetDTO;
-import com.capstone.planet.Model.DTO.ResponseUserGetDTO;
+import com.capstone.planet.Bean.*;
+import com.capstone.planet.Model.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserService {
@@ -18,13 +15,15 @@ public class UserService {
     GetUserAllBean getUserAllBean;
     SaveUserBean saveUserBean;
     UpdateUserBean updateUserBean;
+    GetUniversityUserBean getUniversityUserBean;
 
     @Autowired
-    public UserService(GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean) {
+    public UserService(GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean, GetUniversityUserBean getUniversityUserBean) {
         this.getUserBean = getUserBean;
         this.getUserAllBean = getUserAllBean;
         this.saveUserBean = saveUserBean;
         this.updateUserBean = updateUserBean;
+        this.getUniversityUserBean = getUniversityUserBean;
     }
 
     // 유저 조회
@@ -45,5 +44,10 @@ public class UserService {
     // 유저 정보수정
     public Long updateUser(RequestUserUpdateDTO requestUserUpdateDTO){
         return updateUserBean.exec(requestUserUpdateDTO);
+    }
+
+    // 대학교 소속 유저 전체조회
+    public List<Map<Integer, ResponseUserUniversityGetDTO>> getUniversityUser(Long userHandleId){
+        return getUniversityUserBean.exec(userHandleId);
     }
 }

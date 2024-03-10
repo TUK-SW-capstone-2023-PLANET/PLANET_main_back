@@ -14,8 +14,8 @@ import lombok.Setter;
 @Setter
 public class UserDAO {
     @Id
-    Long userHandleId;
-    String userId;
+    Long userId;
+    String loginId;
     String passwd;
     String nickName;
     String imageUrl;
@@ -23,5 +23,7 @@ public class UserDAO {
     Integer ploggingCount;
     Integer trashCount;
     Double totalDistance;
+    String universityName;
+    String universityLogo;
     Integer score;
 }

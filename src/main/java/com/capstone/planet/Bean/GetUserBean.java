@@ -20,10 +20,10 @@ public class GetUserBean {
     }
 
     // 유저 정보 조회
-    public ResponseUserGetDTO exec(Long userHandleId){
+    public ResponseUserGetDTO exec(Long userId){
 
         // 유저 객체 가져오기
-        UserDAO userDAO = getUserDAOBean.exec(userHandleId);
+        UserDAO userDAO = getUserDAOBean.exec(userId);
         if (userDAO == null) return null;
 
         // 유저 DTO 반환

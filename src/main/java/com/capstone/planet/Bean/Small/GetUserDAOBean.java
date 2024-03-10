@@ -6,6 +6,8 @@ import com.capstone.planet.Repository.UserRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class GetUserDAOBean {
 
@@ -21,11 +23,6 @@ public class GetUserDAOBean {
         return userRepositoryJPA.findById(userHandleId).orElse(null);
     }
 
-    // 유저 중복 확인
-    public UserDAO exec(String userId){
-        return userRepositoryJPA.findByUserId(userId);
-    }
-
     // 전체 유저 정보 가져오기
     public ResponseUserAllGetDTO exec(){
 
@@ -38,4 +35,8 @@ public class GetUserDAOBean {
         return responseUserAllGetDTO;
     }
 
+    // 대학교에 해당하는 유저 전부 가져오기
+    public List<UserDAO> exec(String universityName){
+        return userRepositoryJPA.findByUniversityNameOrderByScoreDesc(universityName);
+    }
 }

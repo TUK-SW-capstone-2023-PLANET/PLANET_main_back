@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class CreateUserDAOBean {
 
-    public UserDAO exec(Long userHandleId, RequestUserSaveDTO requestUserSaveDTO){
+    public UserDAO exec(Long userId, RequestUserSaveDTO requestUserSaveDTO){
         UserDAO userDAO = new UserDAO();
 
-        userDAO.setUserHandleId(userHandleId);
-        userDAO.setUserId(requestUserSaveDTO.getUserId());
+        userDAO.setUserId(userId);
+        userDAO.setLoginId(requestUserSaveDTO.getLoginId());
         userDAO.setPasswd(requestUserSaveDTO.getPasswd());
         userDAO.setNickName(requestUserSaveDTO.getNickName());
         userDAO.setImageUrl(requestUserSaveDTO.getImageUrl());

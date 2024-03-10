@@ -28,9 +28,7 @@ public class SaveUserBean {
     // 유저 회원가입
     public Long exec(RequestUserSaveDTO requestUserSaveDTO){
 
-        // 유저 아이디 중복 확인
-        UserDAO duplicateuserDAO = getUserDAOBean.exec(requestUserSaveDTO.getUserId());
-        if (duplicateuserDAO != null) return null;
+
 
         // 아이디 생성
         Long userHandleId = createUniqueIdBean.exec();

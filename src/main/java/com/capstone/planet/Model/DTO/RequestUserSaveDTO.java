@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class RequestUserSaveDTO {
-    String userId;
+    String loginId;
     String passwd;
     String nickName;
     String imageUrl;

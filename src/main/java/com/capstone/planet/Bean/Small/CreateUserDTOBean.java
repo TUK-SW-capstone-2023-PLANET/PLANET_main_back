@@ -12,8 +12,8 @@ public class CreateUserDTOBean {
 
         ResponseUserGetDTO responseUserGetDTO = new ResponseUserGetDTO();
 
-        responseUserGetDTO.setUserHandleId(userDAO.getUserHandleId());
         responseUserGetDTO.setUserId(userDAO.getUserId());
+        responseUserGetDTO.setLoginId(userDAO.getLoginId());
         responseUserGetDTO.setPasswd(userDAO.getPasswd());
         responseUserGetDTO.setNickName(userDAO.getNickName());
         responseUserGetDTO.setImageUrl(userDAO.getImageUrl());

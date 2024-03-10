@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class RequestUserUpdateDTO {
-    Long userHandleId;
-    String userId;
+    Long userId;
+    String loginId;
     String passwd;
     String nickName;
     String imageUrl;

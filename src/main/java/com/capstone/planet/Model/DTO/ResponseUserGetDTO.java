@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class ResponseUserGetDTO {
-    Long userHandleId;
-    String userId;
+    Long userId;
+    String loginId;
     String passwd;
     String nickName;
     String imageUrl;

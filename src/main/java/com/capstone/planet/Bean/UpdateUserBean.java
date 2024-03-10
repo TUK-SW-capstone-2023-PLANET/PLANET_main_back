@@ -26,7 +26,7 @@ public class UpdateUserBean {
     public Long exec(RequestUserUpdateDTO requestUserUpdateDTO){
 
         // 유저 객체 가져오기
-        UserDAO userDAO = getUserDAOBean.exec(requestUserUpdateDTO.getUserHandleId());
+        UserDAO userDAO = getUserDAOBean.exec(requestUserUpdateDTO.getUserId());
         if (userDAO == null) return null;
 
         // 유저 정보 수정
@@ -35,7 +35,7 @@ public class UpdateUserBean {
         // 유저 저장
         saveUserDAOBean.exec(updateUserDAO);
 
-        return updateUserDAO.getUserHandleId();
+        return updateUserDAO.getUserId();
     }
 
 }

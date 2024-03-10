@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Advertisement {
+public class AdvertisementDAO {
     @Id
     Long advertisementId;
     String imageUrl;

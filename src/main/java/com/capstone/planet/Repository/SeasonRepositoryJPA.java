@@ -9,5 +9,7 @@ import java.util.List;
 @Repository
 public interface SeasonRepositoryJPA extends JpaRepository<SeasonDAO, Long>{
 
+    SeasonDAO findByUserId(Long userId);
+
     List<SeasonDAO> findAllByOrderByScoreDesc();
 }

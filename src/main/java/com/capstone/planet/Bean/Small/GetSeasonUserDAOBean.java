@@ -18,6 +18,10 @@ public class GetSeasonUserDAOBean {
         this.seasonRepositoryJPA = seasonRepositoryJPA;
     }
 
+    public SeasonDAO exec(Long userId){
+        return seasonRepositoryJPA.findByUserId(userId);
+    }
+
     // 시즌에 소속된 유저 점수 순으로 전부 가져오기
     public List<SeasonDAO> exec(){
         return seasonRepositoryJPA.findAllByOrderByScoreDesc();

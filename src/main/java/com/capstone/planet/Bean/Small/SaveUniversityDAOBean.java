@@ -5,23 +5,17 @@ import com.capstone.planet.Repository.UniversityRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
-public class GetUniversityDAOBean {
+public class SaveUniversityDAOBean {
 
     UniversityRepositoryJPA universityRepositoryJPA;
 
     @Autowired
-    public GetUniversityDAOBean(UniversityRepositoryJPA universityRepositoryJPA) {
+    public SaveUniversityDAOBean(UniversityRepositoryJPA universityRepositoryJPA) {
         this.universityRepositoryJPA = universityRepositoryJPA;
     }
 
-    public UniversityDAO exec(String name){
-        return universityRepositoryJPA.findByName(name);
-    }
-
-    public List<UniversityDAO> exec(){
-        return universityRepositoryJPA.findTop3ByOrderByScoreDesc();
+    public void exec(UniversityDAO universityDAO){
+        universityRepositoryJPA.save(universityDAO);
     }
 }

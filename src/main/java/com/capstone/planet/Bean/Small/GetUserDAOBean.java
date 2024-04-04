@@ -39,4 +39,9 @@ public class GetUserDAOBean {
     public List<UserDAO> exec(String universityName){
         return userRepositoryJPA.findByUniversityNameOrderByScoreDesc(universityName);
     }
+
+    // 유저 랭킹 3개
+    public List<UserDAO> exec(String check1, String check2){
+        return userRepositoryJPA.findTop3ByOrderByScoreDesc();
+    }
 }

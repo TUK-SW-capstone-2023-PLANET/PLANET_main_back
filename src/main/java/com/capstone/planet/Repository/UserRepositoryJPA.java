@@ -19,4 +19,6 @@ public interface UserRepositoryJPA extends JpaRepository<UserDAO, Long> {
     Double getTotalDistanceSum();
 
     List<UserDAO> findByUniversityNameOrderByScoreDesc(String universityName);
+
+    List<UserDAO> findTop3ByOrderByScoreDesc();
 }

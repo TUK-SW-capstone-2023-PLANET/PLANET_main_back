@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 @Tag(name = "University", description = "대학 관련 API")
 @RestController
@@ -23,9 +24,16 @@ public class UniversityController {
         this.universityService = universityService;
     }
 
-    @Operation(summary = "대학 전체 조회", description = "대학 전체 조회")
+    @Operation(summary = "대학 랭킹 3개 조회", description = "대학 랭킹 3개 조회")
     @GetMapping("/university")
     public List<ResponseUniversityGetDTO> university() {
         return universityService.getUniversityTop3();
     }
+
+    @Operation(summary = "대학 랭킹 전체 조회", description = "대학 랭킹 전체 조회")
+    @GetMapping("/university/all")
+    public List<Map<Integer, ResponseUniversityGetDTO>> universityAll() {
+        return universityService.getUniversitys();
+    }
+
 }

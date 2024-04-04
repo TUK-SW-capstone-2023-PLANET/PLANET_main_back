@@ -25,9 +25,16 @@ public class SeasonController {
         this.seasonService = seasonService;
     }
 
+    // 시즌 유저 탑3 조회
+    @Operation(summary = "시즌 유저 탑3 조회", description = "시즌 유저 탑3 조회")
+    @GetMapping("/season/rank")
+    public List<ResponseSeasonUserGetDTO> getSeasonTop3(){
+        return seasonService.getSeasonTop3();
+    }
+
     // 시즌 유저 전체 조회
     @Operation(summary = "시즌 유저 전체 조회", description = "시즌 유저 전체 조회")
-    @GetMapping("/season/user/{userId}")
+    @GetMapping("/season/rank/all/user/{userId}")
     public List<Map<Integer, ResponseSeasonUserGetDTO>> getSeasons(@PathVariable Long userId){
         return seasonService.getSeasonUsers(userId);
     }

@@ -38,11 +38,17 @@ public class CreateUniversityDTOBean {
 
         int i = 1;
         for(UniversityDAO universityDAO : universityDAOList){
-            ResponseUniversityGetDTO responseUniversityGetDTO = exec(universityDAO);
+            ResponseUniversityGetDTO responseUniversityGetDTO = new ResponseUniversityGetDTO();
 
-            Map map = Map.of(i, responseUniversityGetDTO);
-            i++;
+            responseUniversityGetDTO.setName(universityDAO.getName());
+            responseUniversityGetDTO.setImageUrl(universityDAO.getImageUrl());
+            responseUniversityGetDTO.setScore(universityDAO.getScore());
+            responseUniversityGetDTO.setRank(i);
+
+            Map<Integer, ResponseUniversityGetDTO> map = Map.of(i, responseUniversityGetDTO);
             responseUniversityGetDTOList.add(map);
+            
+            i++;
         }
 
         return responseUniversityGetDTOList;

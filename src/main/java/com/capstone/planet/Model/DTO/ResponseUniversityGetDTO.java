@@ -7,4 +7,5 @@ public class ResponseUniversityGetDTO {
     String name;
     String imageUrl;
     Integer score;
+    Integer rank;
 }

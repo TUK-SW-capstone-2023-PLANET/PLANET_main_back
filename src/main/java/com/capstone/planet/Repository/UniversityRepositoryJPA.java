@@ -12,4 +12,6 @@ public interface UniversityRepositoryJPA extends JpaRepository<UniversityDAO, Lo
     UniversityDAO findByName(String name);
 
     List<UniversityDAO> findTop3ByOrderByScoreDesc();
+
+    List<UniversityDAO> findAllByOrderByScoreDesc();
 }

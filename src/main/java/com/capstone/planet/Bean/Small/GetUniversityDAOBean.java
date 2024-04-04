@@ -21,7 +21,13 @@ public class GetUniversityDAOBean {
         return universityRepositoryJPA.findByName(name);
     }
 
+    // 대학랭킹 3개
     public List<UniversityDAO> exec(){
         return universityRepositoryJPA.findTop3ByOrderByScoreDesc();
+    }
+
+    // 대학 전체 랭킹 조회
+    public List<UniversityDAO> exec(String check1, String check2){
+        return universityRepositoryJPA.findAllByOrderByScoreDesc();
     }
 }

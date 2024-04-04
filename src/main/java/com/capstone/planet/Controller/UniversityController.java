@@ -25,13 +25,13 @@ public class UniversityController {
     }
 
     @Operation(summary = "대학 랭킹 3개 조회", description = "대학 랭킹 3개 조회")
-    @GetMapping("/university")
+    @GetMapping("/university/rank")
     public List<ResponseUniversityGetDTO> university() {
         return universityService.getUniversityTop3();
     }
 
     @Operation(summary = "대학 랭킹 전체 조회", description = "대학 랭킹 전체 조회")
-    @GetMapping("/university/all")
+    @GetMapping("/university/rank/all")
     public List<Map<Integer, ResponseUniversityGetDTO>> universityAll() {
         return universityService.getUniversitys();
     }

@@ -41,7 +41,7 @@ public class UserController {
 
     // 대학교 소속 유저 전체조회
     @Operation(summary = "대학교 소속 유저 전체조회", description = "대학교 소속 유저 전체조회")
-    @GetMapping("user/{userId}/university")
+    @GetMapping("user/{userId}/rank/university")
     public List<Map<Integer, ResponseUserUniversityGetDTO>> getUniversityUser(@PathVariable Long userId){
         return userService.getUniversityUser(userId);
     }

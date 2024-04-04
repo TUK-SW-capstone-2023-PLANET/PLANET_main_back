@@ -21,4 +21,6 @@ public interface UserRepositoryJPA extends JpaRepository<UserDAO, Long> {
     List<UserDAO> findByUniversityNameOrderByScoreDesc(String universityName);
 
     List<UserDAO> findTop3ByOrderByScoreDesc();
+
+    List<UserDAO> findAllByOrderByScoreDesc();
 }

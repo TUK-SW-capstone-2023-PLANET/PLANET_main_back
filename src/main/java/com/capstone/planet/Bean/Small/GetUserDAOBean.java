@@ -23,18 +23,6 @@ public class GetUserDAOBean {
         return userRepositoryJPA.findById(userHandleId).orElse(null);
     }
 
-    // 전체 유저 정보 가져오기
-    public ResponseUserAllGetDTO exec(){
-
-        ResponseUserAllGetDTO responseUserAllGetDTO = new ResponseUserAllGetDTO();
-
-        responseUserAllGetDTO.setUserCount(userRepositoryJPA.getTotalUserCount());
-        responseUserAllGetDTO.setTrashCount(userRepositoryJPA.getTotalTrashCount());
-        responseUserAllGetDTO.setDistance(userRepositoryJPA.getTotalDistanceSum());
-
-        return responseUserAllGetDTO;
-    }
-
     // 대학교에 해당하는 유저 전부 가져오기
     public List<UserDAO> exec(String universityName){
         return userRepositoryJPA.findByUniversityNameOrderByScoreDesc(universityName);
@@ -43,5 +31,10 @@ public class GetUserDAOBean {
     // 유저 랭킹 3개
     public List<UserDAO> exec(String check1, String check2){
         return userRepositoryJPA.findTop3ByOrderByScoreDesc();
+    }
+
+    // 유저 랭킹 점수 순으로 전부 가져오기
+    public List<UserDAO> exec(){
+        return userRepositoryJPA.findAllByOrderByScoreDesc();
     }
 }

@@ -1,12 +1,17 @@
 package com.capstone.planet.Bean.Small;
 
+import com.capstone.planet.Model.DAO.SeasonDAO;
 import com.capstone.planet.Model.DAO.UserDAO;
+import com.capstone.planet.Model.DTO.ResponseSeasonUserGetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserGetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserRankGetDTO;
+import com.capstone.planet.Model.DTO.ResponseUserRanksGetDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class CreateUserDTOBean {
@@ -46,5 +51,31 @@ public class CreateUserDTOBean {
         }
 
         return responseUserRankGetDTO;
+    }
+
+    public List<Map<Integer, ResponseUserRanksGetDTO>> exec(Long userId, List<UserDAO> userDAOS){
+
+        List<Map<Integer, ResponseUserRanksGetDTO>> responseList = new ArrayList<>();
+        Map<Integer, ResponseUserRanksGetDTO> map = new HashMap<>();
+
+        int i = 1;
+        for (UserDAO userDAO : userDAOS) {
+            ResponseUserRanksGetDTO responseUserRanksGetDTO = new ResponseUserRanksGetDTO();
+            responseUserRanksGetDTO.setNickName(userDAO.getNickName());
+            responseUserRanksGetDTO.setRank(i);
+            responseUserRanksGetDTO.setScore(userDAO.getScore());
+            responseUserRanksGetDTO.setImageUrl(userDAO.getImageUrl());
+            responseUserRanksGetDTO.setUniversityLogo(userDAO.getUniversityLogo());
+
+            if (userDAO.getUserId().equals(userId))
+                map.put(0, responseUserRanksGetDTO);
+
+            map.put(responseUserRanksGetDTO.getRank(), responseUserRanksGetDTO);
+            i++;
+        }
+
+        responseList.add(map);
+
+        return responseList;
     }
 }

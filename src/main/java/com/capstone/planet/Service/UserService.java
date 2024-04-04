@@ -35,11 +35,6 @@ public class UserService {
         return getUserBean.exec(userHandleId);
     }
 
-    // 전체 유저 정보 조회
-    public ResponseUserAllGetDTO getUserAllInfo(){
-        return getUserAllBean.exec();
-    }
-
     // 유저 회원가입
     public Long saveUser(RequestUserSaveDTO requestUserSaveDTO){
         return saveUserBean.exec(requestUserSaveDTO);
@@ -53,6 +48,11 @@ public class UserService {
     // 유저 랭킹 탑 3 조회
     public List<ResponseUserRankGetDTO> getUserTop3(){
         return getUserTop3Bean.exec();
+    }
+
+    // 유저 랭킹 전체조회
+    public List<Map<Integer, ResponseUserRanksGetDTO>> getUserAll(Long userId){
+        return getUserAllBean.exec(userId);
     }
 
     // 대학교 소속 유저 탑3 랭킹 조회

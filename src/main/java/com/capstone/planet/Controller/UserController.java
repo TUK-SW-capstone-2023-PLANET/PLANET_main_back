@@ -32,19 +32,19 @@ public class UserController {
         return userService.getUser(userId);
     }
 
-    // 전체 유저 정보조회
-    @Operation(summary = "전체 유저 정보 조회", description = "전체 유저 수, 전체 쓰레기 수, 전체 이동거리 정보 조회")
-    @GetMapping("user/all")
-    public ResponseUserAllGetDTO getUserAllInfo(){
-        return userService.getUserAllInfo();
-    }
-
 
     // 유저 랭킹 탑3 조회
     @Operation(summary = "유저 랭킹 탑3 조회", description = "유저 랭킹 탑3 조회")
     @GetMapping("user/rank")
     public List<ResponseUserRankGetDTO> getUserTop3(){
         return userService.getUserTop3();
+    }
+
+    // 유저 랭킹 전체조회
+    @Operation(summary = "유저 랭킹 전체조회", description = "유저 랭킹 전체조회")
+    @GetMapping("user/{userId}/rank/all")
+    public List<Map<Integer, ResponseUserRanksGetDTO>> getUserAll(@PathVariable Long userId){
+        return userService.getUserAll(userId);
     }
 
     // 대학교 소속 유저 탑3 랭킹 조회

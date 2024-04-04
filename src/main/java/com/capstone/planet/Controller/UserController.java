@@ -54,6 +54,13 @@ public class UserController {
         return userService.getUniversityUserTop3(userId);
     }
 
+    // 대학교 소속 유저 4개 전체조회
+    @Operation(summary = "대학교 소속 유저 4개 조회", description = "대학교 소속 유저 4개 전체조회")
+    @GetMapping("user/{userId}/rank/university/4")
+    public List<Map<Integer, ResponseUserUniversityGetDTO>> getUniversity4User(@PathVariable Long userId){
+        return userService.getUniversity4User(userId);
+    }
+
     // 대학교 소속 유저 전체조회
     @Operation(summary = "대학교 소속 유저 전체조회", description = "대학교 소속 유저 전체조회")
     @GetMapping("user/{userId}/rank/university/all")

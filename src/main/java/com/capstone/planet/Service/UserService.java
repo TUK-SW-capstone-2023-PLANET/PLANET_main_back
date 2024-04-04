@@ -18,9 +18,11 @@ public class UserService {
     GetUserTop3Bean getUserTop3Bean;
     GetUniversityUserBean getUniversityUserBean;
     GetUniversityUserTop3Bean getUniversityUserTop3Bean;
+    GetUniversityUser4Bean getUniversityUser4Bean;
 
     @Autowired
-    public UserService(GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean, GetUserTop3Bean getUserTop3Bean, GetUniversityUserBean getUniversityUserBean, GetUniversityUserTop3Bean getUniversityUserTop3Bean) {
+    public UserService(GetUniversityUser4Bean getUniversityUser4Bean, GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean, GetUserTop3Bean getUserTop3Bean, GetUniversityUserBean getUniversityUserBean, GetUniversityUserTop3Bean getUniversityUserTop3Bean) {
+        this.getUniversityUser4Bean = getUniversityUser4Bean;
         this.getUserBean = getUserBean;
         this.getUserAllBean = getUserAllBean;
         this.saveUserBean = saveUserBean;
@@ -63,5 +65,10 @@ public class UserService {
     // 대학교 소속 유저 전체조회
     public List<Map<Integer, ResponseUserUniversityGetDTO>> getUniversityUser(Long userHandleId){
         return getUniversityUserBean.exec(userHandleId);
+    }
+
+    // 대학교 소속 유저 4개조회
+    public List<Map<Integer, ResponseUserUniversityGetDTO>> getUniversity4User(Long userHandleId){
+        return getUniversityUser4Bean.exec(userHandleId);
     }
 }

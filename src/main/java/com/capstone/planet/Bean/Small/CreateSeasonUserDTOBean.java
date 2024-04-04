@@ -14,6 +14,27 @@ import java.util.Map;
 @Component
 public class CreateSeasonUserDTOBean {
 
+    public List<ResponseSeasonUserGetDTO> exec(List<SeasonDAO> seasonDAOS){
+
+        List<ResponseSeasonUserGetDTO> responseList = new ArrayList<>();
+
+        int i = 1;
+        for (SeasonDAO seasonDAO : seasonDAOS) {
+            ResponseSeasonUserGetDTO responseSeasonUserGetDTO = new ResponseSeasonUserGetDTO();
+            responseSeasonUserGetDTO.setUserName(seasonDAO.getUserName());
+            responseSeasonUserGetDTO.setScore(seasonDAO.getScore());
+
+            if (i>1) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+70.png");
+            else if (i==1) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+71.png");
+
+            responseList.add(responseSeasonUserGetDTO);
+            i++;
+        }
+
+
+        return responseList;
+    }
+
     public List<Map<Integer, ResponseSeasonUserGetDTO>> exec(UserDAO userDAO, List<SeasonDAO> seasonDAOS){
 
         List<Map<Integer, ResponseSeasonUserGetDTO>> responseList = new ArrayList<>();

@@ -2,6 +2,7 @@ package com.capstone.planet.Bean.Small;
 
 import com.capstone.planet.Model.DAO.UserDAO;
 import com.capstone.planet.Model.DTO.ResponseUserUniversityGetDTO;
+import com.capstone.planet.Model.DTO.ResponseUserUniversityTop3GetDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -44,5 +45,28 @@ public class CreateUniversityUserDTOBean {
         responseUserUniversityGetDTOS.add(map);
 
         return responseUserUniversityGetDTOS;
+    }
+
+    // 대학교 유저 탑 3 DTO 생성
+    public List<ResponseUserUniversityTop3GetDTO> exec(List<UserDAO> userDAOS){
+
+        List<ResponseUserUniversityTop3GetDTO> responseUserUniversityTop3GetDTOS = new ArrayList<>();
+
+        int i = 0;
+        for (UserDAO userDAO : userDAOS) {
+
+            if (i >= 3) break;
+
+            ResponseUserUniversityTop3GetDTO responseUserUniversityTop3GetDTO = new ResponseUserUniversityTop3GetDTO();
+            responseUserUniversityTop3GetDTO.setNickName(userDAO.getNickName());
+            responseUserUniversityTop3GetDTO.setScore(userDAO.getScore());
+            responseUserUniversityTop3GetDTO.setUniversityLogo(userDAO.getUniversityLogo());
+            responseUserUniversityTop3GetDTO.setUniversityName(userDAO.getUniversityName());
+
+            responseUserUniversityTop3GetDTOS.add(responseUserUniversityTop3GetDTO);
+            i++;
+        }
+
+        return responseUserUniversityTop3GetDTOS;
     }
 }

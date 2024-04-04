@@ -39,6 +39,14 @@ public class UserController {
         return userService.getUserAllInfo();
     }
 
+
+    // 유저 랭킹 탑3 조회
+    @Operation(summary = "유저 랭킹 탑3 조회", description = "유저 랭킹 탑3 조회")
+    @GetMapping("user/rank")
+    public List<ResponseUserRankGetDTO> getUserTop3(){
+        return userService.getUserTop3();
+    }
+
     // 대학교 소속 유저 탑3 랭킹 조회
     @Operation(summary = "대학교 소속 유저 탑3 랭킹 조회", description = "대학교 소속 유저 탑3 랭킹 조회")
     @GetMapping("user/{userId}/rank/university")

@@ -15,15 +15,17 @@ public class UserService {
     GetUserAllBean getUserAllBean;
     SaveUserBean saveUserBean;
     UpdateUserBean updateUserBean;
+    GetUserTop3Bean getUserTop3Bean;
     GetUniversityUserBean getUniversityUserBean;
     GetUniversityUserTop3Bean getUniversityUserTop3Bean;
 
     @Autowired
-    public UserService(GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean, GetUniversityUserBean getUniversityUserBean, GetUniversityUserTop3Bean getUniversityUserTop3Bean) {
+    public UserService(GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean, GetUserTop3Bean getUserTop3Bean, GetUniversityUserBean getUniversityUserBean, GetUniversityUserTop3Bean getUniversityUserTop3Bean) {
         this.getUserBean = getUserBean;
         this.getUserAllBean = getUserAllBean;
         this.saveUserBean = saveUserBean;
         this.updateUserBean = updateUserBean;
+        this.getUserTop3Bean = getUserTop3Bean;
         this.getUniversityUserBean = getUniversityUserBean;
         this.getUniversityUserTop3Bean = getUniversityUserTop3Bean;
     }
@@ -46,6 +48,11 @@ public class UserService {
     // 유저 정보수정
     public Long updateUser(RequestUserUpdateDTO requestUserUpdateDTO){
         return updateUserBean.exec(requestUserUpdateDTO);
+    }
+
+    // 유저 랭킹 탑 3 조회
+    public List<ResponseUserRankGetDTO> getUserTop3(){
+        return getUserTop3Bean.exec();
     }
 
     // 대학교 소속 유저 탑3 랭킹 조회

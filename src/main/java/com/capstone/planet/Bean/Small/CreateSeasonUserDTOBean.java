@@ -68,4 +68,52 @@ public class CreateSeasonUserDTOBean {
 
         return responseList;
     }
+
+    public List<Map<Integer, ResponseSeasonUserGetDTO>> exec(String check, UserDAO userDAO, List<SeasonDAO> seasonDAOS){
+
+        List<Map<Integer, ResponseSeasonUserGetDTO>> responseList = new ArrayList<>();
+        Map<Integer, ResponseSeasonUserGetDTO> map = new HashMap<>();
+
+        int i = 1;
+        for (SeasonDAO seasonDAO : seasonDAOS) {
+
+            ResponseSeasonUserGetDTO responseSeasonUserGetDTO = new ResponseSeasonUserGetDTO();
+
+            if (i>5){
+                if (seasonDAO.getUserId().equals(userDAO.getUserId())){
+                    responseSeasonUserGetDTO.setUserName(seasonDAO.getUserName());
+                    responseSeasonUserGetDTO.setRank(i);
+                    responseSeasonUserGetDTO.setScore(seasonDAO.getScore());
+                    responseSeasonUserGetDTO.setUniversityLogo(seasonDAO.getUniversityLogo());
+                    if (i >90) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+66.png");
+                    else if (i>55) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+67.png");
+                    else if (i>30) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+68.png");
+                    else if (i>10) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+69.png");
+                    else responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+70.png");
+
+                    map.put(0, responseSeasonUserGetDTO);
+                }
+                i++;
+                continue;
+            }
+            responseSeasonUserGetDTO.setUserName(seasonDAO.getUserName());
+            responseSeasonUserGetDTO.setRank(i);
+            responseSeasonUserGetDTO.setScore(seasonDAO.getScore());
+            responseSeasonUserGetDTO.setUniversityLogo(seasonDAO.getUniversityLogo());
+
+            if (i>1) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+70.png");
+            else if (i==1) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+71.png");
+            else responseSeasonUserGetDTO.setTierImageUrl(null);
+
+            if (seasonDAO.getUserId().equals(userDAO.getUserId()))
+                map.put(0, responseSeasonUserGetDTO);
+
+            map.put(responseSeasonUserGetDTO.getRank(), responseSeasonUserGetDTO);
+            i++;
+        }
+
+        responseList.add(map);
+
+        return responseList;
+    }
 }

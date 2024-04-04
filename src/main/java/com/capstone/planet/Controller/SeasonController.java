@@ -38,4 +38,11 @@ public class SeasonController {
     public List<Map<Integer, ResponseSeasonUserGetDTO>> getSeasons(@PathVariable Long userId){
         return seasonService.getSeasonUsers(userId);
     }
+
+    // 시즌 유저 5개 조회
+    @Operation(summary = "시즌 유저 전체 조회", description = "시즌 유저 전체 조회")
+    @GetMapping("/season/rank/5/user/{userId}")
+    public List<Map<Integer, ResponseSeasonUserGetDTO>> getSeasons5(@PathVariable Long userId){
+        return seasonService.getSeason5Users(userId);
+    }
 }

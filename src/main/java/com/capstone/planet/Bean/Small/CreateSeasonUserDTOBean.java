@@ -43,11 +43,14 @@ public class CreateSeasonUserDTOBean {
         return responseList;
     }
 
-    public Page<Map<Integer, ResponseSeasonUserGetDTO>> exec(UserDAO userDAO, Page<SeasonDAO> seasonDAOS) {
-        List<Map<Integer, ResponseSeasonUserGetDTO>> responseList = new ArrayList<>();
-        Map<Integer, ResponseSeasonUserGetDTO> map = new HashMap<>();
+    public Page<ResponseSeasonUserGetDTO> exec(Page<SeasonDAO> seasonDAOS) {
+        List<ResponseSeasonUserGetDTO> responseList = new ArrayList<>();
 
-        int i = 1;
+        int pageSize = seasonDAOS.getSize();
+        int pageNumber = seasonDAOS.getNumber();
+
+        int i = pageNumber*pageSize + 1;
+
         for (SeasonDAO seasonDAO : seasonDAOS) {
             ResponseSeasonUserGetDTO responseSeasonUserGetDTO = new ResponseSeasonUserGetDTO();
             responseSeasonUserGetDTO.setUserName(seasonDAO.getUserName());
@@ -83,15 +86,9 @@ public class CreateSeasonUserDTOBean {
                 responseSeasonUserGetDTO.setTierImageUrl(null);
                 responseSeasonUserGetDTO.setTierName(null);
             }
-
-            if (seasonDAO.getUserId().equals(userDAO.getUserId()))
-                map.put(0, responseSeasonUserGetDTO);
-
-            map.put(responseSeasonUserGetDTO.getRank(), responseSeasonUserGetDTO);
+            responseList.add(responseSeasonUserGetDTO);
             i++;
         }
-
-        responseList.add(map);
 
         // PageRequest.of() 메서드를 사용하여 페이지 정보를 생성하고 Page 객체로 반환
         return new PageImpl<>(responseList, seasonDAOS.getPageable(), responseList.size());

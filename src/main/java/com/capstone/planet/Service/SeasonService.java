@@ -1,5 +1,6 @@
 package com.capstone.planet.Service;
 
+import com.capstone.planet.Bean.GetSeasonRankBean;
 import com.capstone.planet.Bean.GetSeasonTop3Bean;
 import com.capstone.planet.Bean.GetSeasonUser5Bean;
 import com.capstone.planet.Bean.GetSeasonUserBean;
@@ -15,23 +16,23 @@ import java.util.Map;
 @Service
 public class SeasonService {
 
-    GetSeasonTop3Bean getSeasonTop3Bean;
+    GetSeasonRankBean getSeasonRankBean;
     GetSeasonUserBean getSeasonUserBean;
     GetSeasonUser5Bean getSeasonUser5Bean;
 
     @Autowired
-    public SeasonService(GetSeasonTop3Bean getSeasonTop3Bean, GetSeasonUserBean getSeasonUserBean, GetSeasonUser5Bean getSeasonUser5Bean) {
-        this.getSeasonTop3Bean = getSeasonTop3Bean;
+    public SeasonService(GetSeasonRankBean getSeasonRankBean, GetSeasonUserBean getSeasonUserBean, GetSeasonUser5Bean getSeasonUser5Bean) {
+        this.getSeasonRankBean = getSeasonRankBean;
         this.getSeasonUserBean = getSeasonUserBean;
         this.getSeasonUser5Bean = getSeasonUser5Bean;
     }
 
-    public List<ResponseSeasonUserGetDTO> getSeasonTop3() {
-        return getSeasonTop3Bean.exec();
+    public ResponseSeasonUserGetDTO getSeason(Long userId) {
+        return getSeasonRankBean.exec(userId);
     }
 
-    public Page<Map<Integer, ResponseSeasonUserGetDTO>> getSeasonUsers(Long userId, Pageable pageable) {
-        return getSeasonUserBean.exec(userId, pageable);
+    public Page<ResponseSeasonUserGetDTO> getSeasonUsers(Pageable pageable) {
+        return getSeasonUserBean.exec(pageable);
     }
 
     public List<Map<Integer, ResponseSeasonUserGetDTO>> getSeason5Users(Long userId) {

@@ -17,27 +17,21 @@ import java.util.Map;
 @Component
 public class GetSeasonUserBean {
 
-    GetUserDAOBean getUserDAOBean;
     GetSeasonUserDAOBean getSeasonUserDAOBean;
     CreateSeasonUserDTOBean createSeasonUserDTOBean;
 
     @Autowired
-    public GetSeasonUserBean(GetUserDAOBean getUserDAOBean, GetSeasonUserDAOBean getSeasonUserDAOBean, CreateSeasonUserDTOBean createSeasonUserDTOBean) {
-        this.getUserDAOBean = getUserDAOBean;
+    public GetSeasonUserBean(GetSeasonUserDAOBean getSeasonUserDAOBean, CreateSeasonUserDTOBean createSeasonUserDTOBean) {
         this.getSeasonUserDAOBean = getSeasonUserDAOBean;
         this.createSeasonUserDTOBean = createSeasonUserDTOBean;
     }
 
     // 시즌 유저 점수 랭킹 조회
-    public Page<Map<Integer, ResponseSeasonUserGetDTO>> exec(Long userId, Pageable pageable) {
-
-        // 유저 객체 가져오기
-        UserDAO userDAO = getUserDAOBean.exec(userId);
-        if (userDAO == null) return null;
+    public Page<ResponseSeasonUserGetDTO> exec(Pageable pageable) {
 
         // 시즌에 소속된 유저 점수 순으로 전부 가져오기
         Page<SeasonDAO> seasonDAOS = getSeasonUserDAOBean.exec(pageable);
 
-        return createSeasonUserDTOBean.exec(userDAO, seasonDAOS);
+        return createSeasonUserDTOBean.exec(seasonDAOS);
     }
 }

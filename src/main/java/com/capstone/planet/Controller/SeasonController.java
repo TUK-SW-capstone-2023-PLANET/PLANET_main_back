@@ -29,23 +29,23 @@ public class SeasonController {
         this.seasonService = seasonService;
     }
 
-    // 시즌 유저 탑3 조회
-    @Operation(summary = "시즌 유저 탑3 조회", description = "시즌 유저 탑3 조회")
-    @GetMapping("/season/rank")
-    public List<ResponseSeasonUserGetDTO> getSeasonTop3(){
-        return seasonService.getSeasonTop3();
+    // 시즌 유저 개인 랭킹 조회
+    @Operation(summary = "시즌 유저 개인 랭킹 조회", description = "시즌 유저 개인 랭킹 조회")
+    @GetMapping("/season/user/{userId}/rank")
+    public ResponseSeasonUserGetDTO getSeason(@PathVariable Long userId){
+        return seasonService.getSeason(userId);
     }
 
     // 시즌 유저 전체 조회
     @Operation(summary = "시즌 유저 전체 조회", description = "시즌 유저 전체 조회")
-    @GetMapping("/season/rank/all/user/{userId}")
-    public Page<Map<Integer, ResponseSeasonUserGetDTO>> getSeasons(@PathVariable Long userId, @PageableDefault(size=2, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
-        return seasonService.getSeasonUsers(userId, pageable);
+    @GetMapping("/season/rank/all")
+    public Page<ResponseSeasonUserGetDTO> getSeasons(@PageableDefault(size=2, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
+        return seasonService.getSeasonUsers(pageable);
     }
 
     // 시즌 유저 5개 조회
     @Operation(summary = "시즌 유저 전체 조회", description = "시즌 유저 전체 조회")
-    @GetMapping("/season/rank/5/user/{userId}")
+    @GetMapping("/season/user/{userId}/rank/5")
     public List<Map<Integer, ResponseSeasonUserGetDTO>> getSeasons5(@PathVariable Long userId){
         return seasonService.getSeason5Users(userId);
     }

@@ -2,6 +2,8 @@ package com.capstone.planet.Bean.Small;
 
 import com.capstone.planet.Model.DAO.UniversityDAO;
 import com.capstone.planet.Model.DTO.ResponseUniversityGetDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -32,7 +34,7 @@ public class CreateUniversityDTOBean {
         return responseUniversityGetDTOList;
     }
 
-    public List<Map<Integer, ResponseUniversityGetDTO>> exec(String check , List<UniversityDAO> universityDAOList){
+    public Page<Map<Integer, ResponseUniversityGetDTO>> exec(String check , Page<UniversityDAO> universityDAOList){
 
         List<Map<Integer, ResponseUniversityGetDTO>> responseUniversityGetDTOList = new ArrayList<>();
 
@@ -51,6 +53,6 @@ public class CreateUniversityDTOBean {
             i++;
         }
 
-        return responseUniversityGetDTOList;
+        return new PageImpl<>(responseUniversityGetDTOList, universityDAOList.getPageable(), universityDAOList.getTotalElements());
     }
 }

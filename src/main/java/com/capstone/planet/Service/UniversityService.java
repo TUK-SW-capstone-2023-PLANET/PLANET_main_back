@@ -4,6 +4,8 @@ import com.capstone.planet.Bean.GetUniversityTop3Bean;
 import com.capstone.planet.Bean.GetUniversitysBean;
 import com.capstone.planet.Model.DTO.ResponseUniversityGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +29,7 @@ public class UniversityService {
     }
 
     // 대학 랭킹 전체 조회
-    public List<Map<Integer, ResponseUniversityGetDTO>> getUniversitys(){
-        return getUniversitysBean.exec();
+    public Page<Map<Integer, ResponseUniversityGetDTO>> getUniversitys(Pageable pageable){
+        return getUniversitysBean.exec(pageable);
     }
 }

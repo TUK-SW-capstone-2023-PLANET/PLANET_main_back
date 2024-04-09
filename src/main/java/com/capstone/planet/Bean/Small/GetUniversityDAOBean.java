@@ -3,6 +3,8 @@ package com.capstone.planet.Bean.Small;
 import com.capstone.planet.Model.DAO.UniversityDAO;
 import com.capstone.planet.Repository.UniversityRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,7 +29,7 @@ public class GetUniversityDAOBean {
     }
 
     // 대학 전체 랭킹 조회
-    public List<UniversityDAO> exec(String check1, String check2){
-        return universityRepositoryJPA.findAllByOrderByScoreDesc();
+    public Page<UniversityDAO> exec(Pageable pageable){
+        return universityRepositoryJPA.findAll(pageable);
     }
 }

@@ -5,6 +5,10 @@ import com.capstone.planet.Service.UniversityService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,8 +36,8 @@ public class UniversityController {
 
     @Operation(summary = "대학 랭킹 전체 조회", description = "대학 랭킹 전체 조회")
     @GetMapping("/university/rank/all")
-    public List<Map<Integer, ResponseUniversityGetDTO>> universityAll() {
-        return universityService.getUniversitys();
+    public Page<Map<Integer, ResponseUniversityGetDTO>> universityAll(@PageableDefault(size=20, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
+        return universityService.getUniversitys(pageable);
     }
 
 }

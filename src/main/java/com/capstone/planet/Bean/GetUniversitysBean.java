@@ -5,6 +5,8 @@ import com.capstone.planet.Bean.Small.GetUniversityDAOBean;
 import com.capstone.planet.Model.DAO.UniversityDAO;
 import com.capstone.planet.Model.DTO.ResponseUniversityGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,9 +25,9 @@ public class GetUniversitysBean {
     }
 
     // 대학교 전체 랭킹 조회
-    public List<Map<Integer, ResponseUniversityGetDTO>> exec(){
+    public Page<Map<Integer, ResponseUniversityGetDTO>> exec(Pageable pageable){
 
-        List<UniversityDAO> universityDAOS = getUniversityDAOBean.exec(null, null);
+        Page<UniversityDAO> universityDAOS = getUniversityDAOBean.exec(pageable);
 
         return createUniversityDTOBean.exec(null, universityDAOS);
     }

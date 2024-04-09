@@ -9,4 +9,5 @@ public class ResponseSeasonUserGetDTO {
     String universityLogo;
     Integer score;
     String tierImageUrl;
+    String tierName;
 }

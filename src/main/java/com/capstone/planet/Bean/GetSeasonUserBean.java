@@ -7,6 +7,8 @@ import com.capstone.planet.Model.DAO.SeasonDAO;
 import com.capstone.planet.Model.DAO.UserDAO;
 import com.capstone.planet.Model.DTO.ResponseSeasonUserGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -27,14 +29,14 @@ public class GetSeasonUserBean {
     }
 
     // 시즌 유저 점수 랭킹 조회
-    public List<Map<Integer, ResponseSeasonUserGetDTO>> exec(Long userId) {
+    public Page<Map<Integer, ResponseSeasonUserGetDTO>> exec(Long userId, Pageable pageable) {
 
         // 유저 객체 가져오기
         UserDAO userDAO = getUserDAOBean.exec(userId);
         if (userDAO == null) return null;
 
         // 시즌에 소속된 유저 점수 순으로 전부 가져오기
-        List<SeasonDAO> seasonDAOS = getSeasonUserDAOBean.exec();
+        Page<SeasonDAO> seasonDAOS = getSeasonUserDAOBean.exec(pageable);
 
         return createSeasonUserDTOBean.exec(userDAO, seasonDAOS);
     }

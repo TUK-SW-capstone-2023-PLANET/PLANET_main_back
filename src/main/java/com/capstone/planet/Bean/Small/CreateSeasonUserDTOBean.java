@@ -4,6 +4,8 @@ import com.capstone.planet.Model.DAO.SeasonDAO;
 import com.capstone.planet.Model.DAO.UserDAO;
 import com.capstone.planet.Model.DTO.ResponseSeasonUserGetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserUniversityGetDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -24,8 +26,14 @@ public class CreateSeasonUserDTOBean {
             responseSeasonUserGetDTO.setUserName(seasonDAO.getUserName());
             responseSeasonUserGetDTO.setScore(seasonDAO.getScore());
 
-            if (i>1) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+70.png");
-            else if (i==1) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+71.png");
+            if (i>1) {
+                responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+70.png");
+                responseSeasonUserGetDTO.setTierName("master");
+            }
+            else if (i==1) {
+                responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+71.png");
+                responseSeasonUserGetDTO.setTierName("challenger");
+            }
 
             responseList.add(responseSeasonUserGetDTO);
             i++;
@@ -35,8 +43,7 @@ public class CreateSeasonUserDTOBean {
         return responseList;
     }
 
-    public List<Map<Integer, ResponseSeasonUserGetDTO>> exec(UserDAO userDAO, List<SeasonDAO> seasonDAOS){
-
+    public Page<Map<Integer, ResponseSeasonUserGetDTO>> exec(UserDAO userDAO, Page<SeasonDAO> seasonDAOS) {
         List<Map<Integer, ResponseSeasonUserGetDTO>> responseList = new ArrayList<>();
         Map<Integer, ResponseSeasonUserGetDTO> map = new HashMap<>();
 
@@ -48,14 +55,34 @@ public class CreateSeasonUserDTOBean {
             responseSeasonUserGetDTO.setScore(seasonDAO.getScore());
             responseSeasonUserGetDTO.setUniversityLogo(seasonDAO.getUniversityLogo());
 
-            if (i >90) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+66.png");
-            else if (i>55) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+67.png");
-            else if (i>30) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+68.png");
-            else if (i>10) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+69.png");
-            else if (i>1) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+70.png");
-            else if (i==1) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+71.png");
-            else responseSeasonUserGetDTO.setTierImageUrl(null);
-
+            if (i > 90) {
+                responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+66.png");
+                responseSeasonUserGetDTO.setTierName("bronze");
+            }
+            else if (i > 55) {
+                responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+67.png");
+                responseSeasonUserGetDTO.setTierName("silver");
+            }
+            else if (i > 30) {
+                responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+68.png");
+                responseSeasonUserGetDTO.setTierName("gold");
+            }
+            else if (i > 10) {
+                responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+69.png");
+                responseSeasonUserGetDTO.setTierName("diamond");
+            }
+            else if (i > 1) {
+                responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+70.png");
+                responseSeasonUserGetDTO.setTierName("master");
+            }
+            else if (i == 1) {
+                responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+71.png");
+                responseSeasonUserGetDTO.setTierName("challenger");
+            }
+            else {
+                responseSeasonUserGetDTO.setTierImageUrl(null);
+                responseSeasonUserGetDTO.setTierName(null);
+            }
 
             if (seasonDAO.getUserId().equals(userDAO.getUserId()))
                 map.put(0, responseSeasonUserGetDTO);
@@ -66,7 +93,8 @@ public class CreateSeasonUserDTOBean {
 
         responseList.add(map);
 
-        return responseList;
+        // PageRequest.of() 메서드를 사용하여 페이지 정보를 생성하고 Page 객체로 반환
+        return new PageImpl<>(responseList, seasonDAOS.getPageable(), responseList.size());
     }
 
     public List<Map<Integer, ResponseSeasonUserGetDTO>> exec(String check, UserDAO userDAO, List<SeasonDAO> seasonDAOS){
@@ -85,11 +113,26 @@ public class CreateSeasonUserDTOBean {
                     responseSeasonUserGetDTO.setRank(i);
                     responseSeasonUserGetDTO.setScore(seasonDAO.getScore());
                     responseSeasonUserGetDTO.setUniversityLogo(seasonDAO.getUniversityLogo());
-                    if (i >90) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+66.png");
-                    else if (i>55) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+67.png");
-                    else if (i>30) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+68.png");
-                    else if (i>10) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+69.png");
-                    else responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+70.png");
+                    if (i > 90) {
+                        responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+66.png");
+                        responseSeasonUserGetDTO.setTierName("bronze");
+                    }
+                    else if (i > 55) {
+                        responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+67.png");
+                        responseSeasonUserGetDTO.setTierName("silver");
+                    }
+                    else if (i > 30) {
+                        responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+68.png");
+                        responseSeasonUserGetDTO.setTierName("gold");
+                    }
+                    else if (i > 10) {
+                        responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+69.png");
+                        responseSeasonUserGetDTO.setTierName("diamond");
+                    }
+                    else {
+                        responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+70.png");
+                        responseSeasonUserGetDTO.setTierName("master");
+                    }
 
                     map.put(0, responseSeasonUserGetDTO);
                 }
@@ -101,9 +144,18 @@ public class CreateSeasonUserDTOBean {
             responseSeasonUserGetDTO.setScore(seasonDAO.getScore());
             responseSeasonUserGetDTO.setUniversityLogo(seasonDAO.getUniversityLogo());
 
-            if (i>1) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+70.png");
-            else if (i==1) responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+71.png");
-            else responseSeasonUserGetDTO.setTierImageUrl(null);
+            if (i>1) {
+                responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+70.png");
+                responseSeasonUserGetDTO.setTierName("master");
+            }
+            else if (i==1) {
+                responseSeasonUserGetDTO.setTierImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/tier/image+71.png");
+                responseSeasonUserGetDTO.setTierName("challenger");
+            }
+            else {
+                responseSeasonUserGetDTO.setTierImageUrl(null);
+                responseSeasonUserGetDTO.setTierName(null);
+            }
 
             if (seasonDAO.getUserId().equals(userDAO.getUserId()))
                 map.put(0, responseSeasonUserGetDTO);

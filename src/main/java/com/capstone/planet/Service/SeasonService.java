@@ -5,6 +5,8 @@ import com.capstone.planet.Bean.GetSeasonUser5Bean;
 import com.capstone.planet.Bean.GetSeasonUserBean;
 import com.capstone.planet.Model.DTO.ResponseSeasonUserGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,8 +30,8 @@ public class SeasonService {
         return getSeasonTop3Bean.exec();
     }
 
-    public List<Map<Integer, ResponseSeasonUserGetDTO>> getSeasonUsers(Long userId) {
-        return getSeasonUserBean.exec(userId);
+    public Page<Map<Integer, ResponseSeasonUserGetDTO>> getSeasonUsers(Long userId, Pageable pageable) {
+        return getSeasonUserBean.exec(userId, pageable);
     }
 
     public List<Map<Integer, ResponseSeasonUserGetDTO>> getSeason5Users(Long userId) {

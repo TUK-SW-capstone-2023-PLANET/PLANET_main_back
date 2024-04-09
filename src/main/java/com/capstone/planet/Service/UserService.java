@@ -3,6 +3,8 @@ package com.capstone.planet.Service;
 import com.capstone.planet.Bean.*;
 import com.capstone.planet.Model.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,8 +55,8 @@ public class UserService {
     }
 
     // 유저 랭킹 전체조회
-    public List<Map<Integer, ResponseUserRanksGetDTO>> getUserAll(Long userId){
-        return getUserAllBean.exec(userId);
+    public Page<Map<Integer, ResponseUserRanksGetDTO>> getUserAll(Long userId, Pageable pageable){
+        return getUserAllBean.exec(userId, pageable);
     }
 
     // 대학교 소속 유저 탑3 랭킹 조회

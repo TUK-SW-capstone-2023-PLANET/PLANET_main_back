@@ -6,6 +6,8 @@ import com.capstone.planet.Model.DTO.ResponseSeasonUserGetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserGetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserRankGetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserRanksGetDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -53,7 +55,7 @@ public class CreateUserDTOBean {
         return responseUserRankGetDTO;
     }
 
-    public List<Map<Integer, ResponseUserRanksGetDTO>> exec(Long userId, List<UserDAO> userDAOS){
+    public Page<Map<Integer, ResponseUserRanksGetDTO>> exec(Long userId, Page<UserDAO> userDAOS){
 
         List<Map<Integer, ResponseUserRanksGetDTO>> responseList = new ArrayList<>();
         Map<Integer, ResponseUserRanksGetDTO> map = new HashMap<>();
@@ -76,6 +78,6 @@ public class CreateUserDTOBean {
 
         responseList.add(map);
 
-        return responseList;
+        return new PageImpl<>(responseList, userDAOS.getPageable(), userDAOS.getTotalElements());
     }
 }

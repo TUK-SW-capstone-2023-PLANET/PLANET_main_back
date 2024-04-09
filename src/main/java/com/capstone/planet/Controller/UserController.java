@@ -5,6 +5,10 @@ import com.capstone.planet.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,8 +47,9 @@ public class UserController {
     // 유저 랭킹 전체조회
     @Operation(summary = "유저 랭킹 전체조회", description = "유저 랭킹 전체조회")
     @GetMapping("user/{userId}/rank/all")
-    public List<Map<Integer, ResponseUserRanksGetDTO>> getUserAll(@PathVariable Long userId){
-        return userService.getUserAll(userId);
+    public Page<Map<Integer, ResponseUserRanksGetDTO>> getUserAll(@PathVariable Long userId,
+                                                                  @PageableDefault(size=2, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
+        return userService.getUserAll(userId, pageable);
     }
 
     // 대학교 소속 유저 탑3 랭킹 조회

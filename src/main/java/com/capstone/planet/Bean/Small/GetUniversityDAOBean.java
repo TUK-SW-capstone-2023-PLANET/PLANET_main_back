@@ -28,6 +28,10 @@ public class GetUniversityDAOBean {
         return universityRepositoryJPA.findTop3ByOrderByScoreDesc();
     }
 
+    public List<UniversityDAO> exec(Long userId){
+        return universityRepositoryJPA.findAllByOrderByScoreDesc();
+    }
+
     // 대학 전체 랭킹 조회
     public Page<UniversityDAO> exec(Pageable pageable){
         return universityRepositoryJPA.findAll(pageable);

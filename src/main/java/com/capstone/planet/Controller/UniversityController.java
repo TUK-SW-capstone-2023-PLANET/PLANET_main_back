@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -28,6 +29,13 @@ public class UniversityController {
         this.universityService = universityService;
     }
 
+
+    @Operation(summary = "자기 대학 랭킹 조회", description = "자기 대학 랭킹 조회")
+    @GetMapping("/university/rank/user/{userId}")
+    public ResponseUniversityGetDTO university(@PathVariable("userId") Long userId) {
+        return universityService.getUniversity(userId);
+    }
+
     @Operation(summary = "대학 랭킹 3개 조회", description = "대학 랭킹 3개 조회")
     @GetMapping("/university/rank")
     public List<ResponseUniversityGetDTO> university() {
@@ -36,7 +44,7 @@ public class UniversityController {
 
     @Operation(summary = "대학 랭킹 전체 조회", description = "대학 랭킹 전체 조회")
     @GetMapping("/university/rank/all")
-    public Page<Map<Integer, ResponseUniversityGetDTO>> universityAll(@PageableDefault(size=20, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
+    public Page<ResponseUniversityGetDTO> universityAll(@PageableDefault(size=20, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
         return universityService.getUniversitys(pageable);
     }
 

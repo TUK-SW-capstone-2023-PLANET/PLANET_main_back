@@ -39,7 +39,7 @@ public class SeasonController {
     // 시즌 유저 전체 조회
     @Operation(summary = "시즌 유저 전체 조회", description = "시즌 유저 전체 조회")
     @GetMapping("/season/rank/all/user/{userId}")
-    public Page<Map<Integer, ResponseSeasonUserGetDTO>> getSeasons(@PathVariable Long userId, @PageableDefault(size=20, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
+    public Page<Map<Integer, ResponseSeasonUserGetDTO>> getSeasons(@PathVariable Long userId, @PageableDefault(size=2, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
         return seasonService.getSeasonUsers(userId, pageable);
     }
 

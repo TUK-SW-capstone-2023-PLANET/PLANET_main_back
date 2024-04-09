@@ -4,6 +4,8 @@ import com.capstone.planet.Model.DAO.UserDAO;
 import com.capstone.planet.Model.DTO.ResponseUserAllGetDTO;
 import com.capstone.planet.Repository.UserRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -36,5 +38,9 @@ public class GetUserDAOBean {
     // 유저 랭킹 점수 순으로 전부 가져오기
     public List<UserDAO> exec(){
         return userRepositoryJPA.findAllByOrderByScoreDesc();
+    }
+
+    public Page<UserDAO> exec(Pageable pageable){
+        return userRepositoryJPA.findAll(pageable);
     }
 }

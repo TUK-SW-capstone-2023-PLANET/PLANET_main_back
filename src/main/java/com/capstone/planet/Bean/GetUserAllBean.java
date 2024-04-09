@@ -5,6 +5,8 @@ import com.capstone.planet.Bean.Small.GetUserDAOBean;
 import com.capstone.planet.Model.DAO.UserDAO;
 import com.capstone.planet.Model.DTO.ResponseUserRanksGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,14 +25,14 @@ public class GetUserAllBean {
     }
 
     // 전체 유저 랭킹 정보 가져오기
-    public List<Map<Integer, ResponseUserRanksGetDTO>> exec(Long userId){
+    public Page<Map<Integer, ResponseUserRanksGetDTO>> exec(Long userId, Pageable pageable){
 
         // 유저 객체 가져오기
         UserDAO userDAO = getUserDAOBean.exec(userId);
         if (userDAO == null) return null;
 
         // 시즌에 소속된 유저 점수 순으로 전부 가져오기
-        List<UserDAO> userDAOS = getUserDAOBean.exec();
+        Page<UserDAO> userDAOS = getUserDAOBean.exec(pageable);
 
         return createUserDTOBean.exec(userId, userDAOS);
     }

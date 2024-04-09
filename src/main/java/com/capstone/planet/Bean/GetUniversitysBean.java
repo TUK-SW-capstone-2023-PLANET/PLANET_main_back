@@ -25,7 +25,7 @@ public class GetUniversitysBean {
     }
 
     // 대학교 전체 랭킹 조회
-    public Page<Map<Integer, ResponseUniversityGetDTO>> exec(Pageable pageable){
+    public Page<ResponseUniversityGetDTO> exec(Pageable pageable){
 
         Page<UniversityDAO> universityDAOS = getUniversityDAOBean.exec(pageable);
 

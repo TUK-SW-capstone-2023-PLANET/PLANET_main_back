@@ -1,5 +1,6 @@
 package com.capstone.planet.Service;
 
+import com.capstone.planet.Bean.GetUniversityBean;
 import com.capstone.planet.Bean.GetUniversityTop3Bean;
 import com.capstone.planet.Bean.GetUniversitysBean;
 import com.capstone.planet.Model.DTO.ResponseUniversityGetDTO;
@@ -14,13 +15,20 @@ import java.util.Map;
 @Service
 public class UniversityService {
 
+    GetUniversityBean getUniversityBean;
     GetUniversityTop3Bean getUniversityTop3Bean;
     GetUniversitysBean getUniversitysBean;
 
     @Autowired
-    public UniversityService(GetUniversityTop3Bean getUniversityTop3Bean, GetUniversitysBean getUniversitysBean) {
+    public UniversityService(GetUniversityBean getUniversityBean, GetUniversityTop3Bean getUniversityTop3Bean, GetUniversitysBean getUniversitysBean) {
+        this.getUniversityBean =getUniversityBean;
         this.getUniversityTop3Bean = getUniversityTop3Bean;
         this.getUniversitysBean = getUniversitysBean;
+    }
+
+    // 자기 대학 랭킹 조회
+    public ResponseUniversityGetDTO getUniversity(Long userId){
+        return getUniversityBean.exec(userId);
     }
 
     // 대학 탑 3 조회
@@ -29,7 +37,7 @@ public class UniversityService {
     }
 
     // 대학 랭킹 전체 조회
-    public Page<Map<Integer, ResponseUniversityGetDTO>> getUniversitys(Pageable pageable){
+    public Page<ResponseUniversityGetDTO> getUniversitys(Pageable pageable){
         return getUniversitysBean.exec(pageable);
     }
 }

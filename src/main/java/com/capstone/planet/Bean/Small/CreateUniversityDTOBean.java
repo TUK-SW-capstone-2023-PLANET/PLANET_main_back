@@ -34,12 +34,18 @@ public class CreateUniversityDTOBean {
         return responseUniversityGetDTOList;
     }
 
-    public Page<Map<Integer, ResponseUniversityGetDTO>> exec(String check , Page<UniversityDAO> universityDAOList){
+    public Page<ResponseUniversityGetDTO> exec(String check , Page<UniversityDAO> universityDAOList){
 
-        List<Map<Integer, ResponseUniversityGetDTO>> responseUniversityGetDTOList = new ArrayList<>();
+        List<ResponseUniversityGetDTO> responseUniversityGetDTOList = new ArrayList<>();
 
         int i = 1;
+
+        int pageSize = universityDAOList.getPageable().getPageSize();
+        int pageNumber = universityDAOList.getPageable().getPageNumber();
+        i = pageSize * pageNumber + 1;
+
         for(UniversityDAO universityDAO : universityDAOList){
+
             ResponseUniversityGetDTO responseUniversityGetDTO = new ResponseUniversityGetDTO();
 
             responseUniversityGetDTO.setName(universityDAO.getName());
@@ -47,8 +53,7 @@ public class CreateUniversityDTOBean {
             responseUniversityGetDTO.setScore(universityDAO.getScore());
             responseUniversityGetDTO.setRank(i);
 
-            Map<Integer, ResponseUniversityGetDTO> map = Map.of(i, responseUniversityGetDTO);
-            responseUniversityGetDTOList.add(map);
+            responseUniversityGetDTOList.add(responseUniversityGetDTO);
             
             i++;
         }

@@ -3,6 +3,8 @@ package com.capstone.planet.Bean.Small;
 import com.capstone.planet.Model.DAO.UserDAO;
 import com.capstone.planet.Model.DTO.ResponseUserUniversityGetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserUniversityTop3GetDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -14,17 +16,16 @@ import java.util.Map;
 public class CreateUniversityUserDTOBean {
 
     // 대학교 유저 DTO 생성
-    public List<Map<Integer, ResponseUserUniversityGetDTO>> exec(UserDAO user, List<UserDAO> userDAOS){
+    public Page<ResponseUserUniversityGetDTO> exec(int total, Page<UserDAO> userDAOS){
 
-        List<Map<Integer, ResponseUserUniversityGetDTO>> responseUserUniversityGetDTOS = new ArrayList<>();
-        Map<Integer, ResponseUserUniversityGetDTO> map = new HashMap<>();
+        List<ResponseUserUniversityGetDTO> responseUserUniversityGetDTOS = new ArrayList<>();
 
-        int total = 0;
-        for (UserDAO userDAO : userDAOS){
-            total += userDAO.getScore();
-        }
 
-        int i = 1;
+        int pageSize = userDAOS.getPageable().getPageSize();
+        int pageNumber = userDAOS.getPageable().getPageNumber();
+
+        int i = pageSize * pageNumber + 1;
+
         for (UserDAO userDAO : userDAOS) {
             ResponseUserUniversityGetDTO responseUserUniversityGetDTO = new ResponseUserUniversityGetDTO();
             responseUserUniversityGetDTO.setRank(i);
@@ -32,19 +33,12 @@ public class CreateUniversityUserDTOBean {
             responseUserUniversityGetDTO.setScore(userDAO.getScore());
             responseUserUniversityGetDTO.setContribution(((double) userDAO.getScore() / total * 100));
 
-            if (userDAO.getUserId().equals(user.getUserId())) {
-                responseUserUniversityGetDTO.setImageUrl(user.getImageUrl());
-                responseUserUniversityGetDTO.setUniversityLogo(user.getUniversityLogo());
-                responseUserUniversityGetDTO.setUniversityName(user.getUniversityName());
+            responseUserUniversityGetDTOS.add(responseUserUniversityGetDTO);
 
-                map.put(0, responseUserUniversityGetDTO);
-            }
-            map.put(i, responseUserUniversityGetDTO);
             i++;
         }
-        responseUserUniversityGetDTOS.add(map);
 
-        return responseUserUniversityGetDTOS;
+        return new PageImpl<>(responseUserUniversityGetDTOS, userDAOS.getPageable(), userDAOS.getTotalElements());
     }
 
     // 대학교 유저 탑4 DTO 생성
@@ -67,9 +61,6 @@ public class CreateUniversityUserDTOBean {
                     responseUserUniversityGetDTO.setNickName(userDAO.getNickName());
                     responseUserUniversityGetDTO.setScore(userDAO.getScore());
                     responseUserUniversityGetDTO.setContribution(((double) userDAO.getScore() / total * 100));
-                    responseUserUniversityGetDTO.setImageUrl(user.getImageUrl());
-                    responseUserUniversityGetDTO.setUniversityLogo(user.getUniversityLogo());
-                    responseUserUniversityGetDTO.setUniversityName(user.getUniversityName());
 
                     map.put(0, responseUserUniversityGetDTO);
                 }
@@ -83,9 +74,6 @@ public class CreateUniversityUserDTOBean {
             responseUserUniversityGetDTO.setContribution(((double) userDAO.getScore() / total * 100));
 
             if (userDAO.getUserId().equals(user.getUserId())) {
-                responseUserUniversityGetDTO.setImageUrl(user.getImageUrl());
-                responseUserUniversityGetDTO.setUniversityLogo(user.getUniversityLogo());
-                responseUserUniversityGetDTO.setUniversityName(user.getUniversityName());
 
                 map.put(0, responseUserUniversityGetDTO);
             }

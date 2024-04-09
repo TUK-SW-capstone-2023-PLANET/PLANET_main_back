@@ -13,24 +13,28 @@ import java.util.Map;
 @Service
 public class UserService {
 
+    GetUserRankBean getUserRankBean;
     GetUserBean getUserBean;
     GetUserAllBean getUserAllBean;
     SaveUserBean saveUserBean;
     UpdateUserBean updateUserBean;
     GetUserTop3Bean getUserTop3Bean;
+    GetUniversityUsersBean getUniversityUsersBean;
     GetUniversityUserBean getUniversityUserBean;
     GetUniversityUserTop3Bean getUniversityUserTop3Bean;
     GetUniversityUser4Bean getUniversityUser4Bean;
 
     @Autowired
-    public UserService(GetUniversityUser4Bean getUniversityUser4Bean, GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean, GetUserTop3Bean getUserTop3Bean, GetUniversityUserBean getUniversityUserBean, GetUniversityUserTop3Bean getUniversityUserTop3Bean) {
+    public UserService(GetUniversityUserBean getUniversityUserBean, GetUserRankBean getUserRankBean, GetUniversityUser4Bean getUniversityUser4Bean, GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean, GetUserTop3Bean getUserTop3Bean, GetUniversityUsersBean getUniversityUsersBean, GetUniversityUserTop3Bean getUniversityUserTop3Bean) {
+        this.getUniversityUserBean= getUniversityUserBean;
+        this.getUserRankBean = getUserRankBean;
         this.getUniversityUser4Bean = getUniversityUser4Bean;
         this.getUserBean = getUserBean;
         this.getUserAllBean = getUserAllBean;
         this.saveUserBean = saveUserBean;
         this.updateUserBean = updateUserBean;
         this.getUserTop3Bean = getUserTop3Bean;
-        this.getUniversityUserBean = getUniversityUserBean;
+        this.getUniversityUsersBean = getUniversityUsersBean;
         this.getUniversityUserTop3Bean = getUniversityUserTop3Bean;
     }
 
@@ -49,24 +53,34 @@ public class UserService {
         return updateUserBean.exec(requestUserUpdateDTO);
     }
 
+    // 나의 플로깅 랭킹 조회
+    public ResponseUserRanksGetDTO getMyRank(Long userId){
+        return getUserRankBean.exec(userId);
+    }
+
     // 유저 랭킹 탑 3 조회
     public List<ResponseUserRankGetDTO> getUserTop3(){
         return getUserTop3Bean.exec();
     }
 
     // 유저 랭킹 전체조회
-    public Page<Map<Integer, ResponseUserRanksGetDTO>> getUserAll(Long userId, Pageable pageable){
-        return getUserAllBean.exec(userId, pageable);
+    public Page<ResponseUserRanksGetDTO> getUserAll(Pageable pageable){
+        return getUserAllBean.exec(pageable);
     }
 
-    // 대학교 소속 유저 탑3 랭킹 조회
+    /*// 대학교 소속 유저 탑3 랭킹 조회
     public List<ResponseUserUniversityTop3GetDTO> getUniversityUserTop3(Long userHandleId){
         return getUniversityUserTop3Bean.exec(userHandleId);
+    }*/
+
+    // 나의 대학교 유저 랭킹 조회
+    public ResponseUserUniversityGetDTO getMyUniversityRank(Long userId){
+        return getUniversityUserBean.exec(userId);
     }
 
     // 대학교 소속 유저 전체조회
-    public List<Map<Integer, ResponseUserUniversityGetDTO>> getUniversityUser(Long userHandleId){
-        return getUniversityUserBean.exec(userHandleId);
+    public Page<ResponseUserUniversityGetDTO> getUniversityUser(Long userId, Pageable pageable){
+        return getUniversityUsersBean.exec(userId, pageable);
     }
 
     // 대학교 소속 유저 4개조회

@@ -55,12 +55,15 @@ public class CreateUserDTOBean {
         return responseUserRankGetDTO;
     }
 
-    public Page<Map<Integer, ResponseUserRanksGetDTO>> exec(Long userId, Page<UserDAO> userDAOS){
+    public Page<ResponseUserRanksGetDTO> exec(Page<UserDAO> userDAOS){
 
-        List<Map<Integer, ResponseUserRanksGetDTO>> responseList = new ArrayList<>();
-        Map<Integer, ResponseUserRanksGetDTO> map = new HashMap<>();
+        List<ResponseUserRanksGetDTO> responseList = new ArrayList<>();
 
-        int i = 1;
+        int pageSize = userDAOS.getPageable().getPageSize();
+        int pageNumber = userDAOS.getPageable().getPageNumber();
+        int i = pageSize * pageNumber + 1;
+
+
         for (UserDAO userDAO : userDAOS) {
             ResponseUserRanksGetDTO responseUserRanksGetDTO = new ResponseUserRanksGetDTO();
             responseUserRanksGetDTO.setNickName(userDAO.getNickName());
@@ -69,14 +72,10 @@ public class CreateUserDTOBean {
             responseUserRanksGetDTO.setImageUrl(userDAO.getImageUrl());
             responseUserRanksGetDTO.setUniversityLogo(userDAO.getUniversityLogo());
 
-            if (userDAO.getUserId().equals(userId))
-                map.put(0, responseUserRanksGetDTO);
-
-            map.put(responseUserRanksGetDTO.getRank(), responseUserRanksGetDTO);
+            responseList.add(responseUserRanksGetDTO);
             i++;
         }
 
-        responseList.add(map);
 
         return new PageImpl<>(responseList, userDAOS.getPageable(), userDAOS.getTotalElements());
     }

@@ -1,6 +1,8 @@
 package com.capstone.planet.Repository;
 
 import com.capstone.planet.Model.DAO.UserDAO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -23,4 +25,6 @@ public interface UserRepositoryJPA extends JpaRepository<UserDAO, Long> {
     List<UserDAO> findTop3ByOrderByScoreDesc();
 
     List<UserDAO> findAllByOrderByScoreDesc();
+
+    Page<UserDAO> findByUniversityName(String universityName, Pageable pageable);
 }

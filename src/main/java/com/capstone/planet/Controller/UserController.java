@@ -36,6 +36,12 @@ public class UserController {
         return userService.getUser(userId);
     }
 
+    // 자신 랭킹 조회
+    @Operation(summary = "자신 랭킹 조회", description = "자신 랭킹 조회")
+    @GetMapping("user/{userId}/rank")
+    public ResponseUserRanksGetDTO getMyRank(@PathVariable Long userId){
+        return userService.getMyRank(userId);
+    }
 
     // 유저 랭킹 탑3 조회
     @Operation(summary = "유저 랭킹 탑3 조회", description = "유저 랭킹 탑3 조회")
@@ -46,17 +52,28 @@ public class UserController {
 
     // 유저 랭킹 전체조회
     @Operation(summary = "유저 랭킹 전체조회", description = "유저 랭킹 전체조회")
-    @GetMapping("user/{userId}/rank/all")
-    public Page<Map<Integer, ResponseUserRanksGetDTO>> getUserAll(@PathVariable Long userId,
-                                                                  @PageableDefault(size=2, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
-        return userService.getUserAll(userId, pageable);
+    @GetMapping("user/rank/all")
+    public Page<ResponseUserRanksGetDTO> getUserAll(@PageableDefault(size=20, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
+        return userService.getUserAll(pageable);
     }
 
-    // 대학교 소속 유저 탑3 랭킹 조회
+
+
+
+
+
+    /*// 대학교 소속 유저 탑3 랭킹 조회
     @Operation(summary = "대학교 소속 유저 탑3 랭킹 조회", description = "대학교 소속 유저 탑3 랭킹 조회")
     @GetMapping("user/{userId}/rank/university")
     public List<ResponseUserUniversityTop3GetDTO> getUniversityUserTop3(@PathVariable Long userId){
         return userService.getUniversityUserTop3(userId);
+    }*/
+
+    // 자신 대학교 랭킹 조회
+    @Operation(summary = "자신 대학교 랭킹 조회", description = "자신 대학교 랭킹 조회")
+    @GetMapping("user/{userId}/rank/university")
+    public ResponseUserUniversityGetDTO getMyUniversityRank(@PathVariable Long userId){
+        return userService.getMyUniversityRank(userId);
     }
 
     // 대학교 소속 유저 4개 전체조회
@@ -68,9 +85,10 @@ public class UserController {
 
     // 대학교 소속 유저 전체조회
     @Operation(summary = "대학교 소속 유저 전체조회", description = "대학교 소속 유저 전체조회")
-    @GetMapping("user/{userId}/rank/university/all")
-    public List<Map<Integer, ResponseUserUniversityGetDTO>> getUniversityUser(@PathVariable Long userId){
-        return userService.getUniversityUser(userId);
+    @GetMapping("user/{userId}/rank/all/university")
+    public Page<ResponseUserUniversityGetDTO> getUniversityUser(@PathVariable("userId") Long userId,
+                                                                @PageableDefault(size=2, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
+        return userService.getUniversityUser(userId, pageable);
     }
 
     // 유저 회원가입

@@ -30,6 +30,11 @@ public class GetUserDAOBean {
         return userRepositoryJPA.findByUniversityNameOrderByScoreDesc(universityName);
     }
 
+    // 대학교에 해당하는 유저 전부 가져오기
+    public Page<UserDAO> exec(String universityName, Pageable pageable){
+        return userRepositoryJPA.findByUniversityName(universityName, pageable);
+    }
+
     // 유저 랭킹 3개
     public List<UserDAO> exec(String check1, String check2){
         return userRepositoryJPA.findTop3ByOrderByScoreDesc();

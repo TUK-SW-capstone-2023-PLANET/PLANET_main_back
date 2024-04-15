@@ -25,6 +25,11 @@ public class GetUserDAOBean {
         return userRepositoryJPA.findById(userHandleId).orElse(null);
     }
 
+    // 유저 객체 가져오기
+    public boolean exec(String nickName, Long check){
+        return userRepositoryJPA.existsByNickName(nickName);
+    }
+
     // 대학교에 해당하는 유저 전부 가져오기
     public List<UserDAO> exec(String universityName){
         return userRepositoryJPA.findByUniversityNameOrderByScoreDesc(universityName);

@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface UserRepositoryJPA extends JpaRepository<UserDAO, Long> {
 
+    boolean existsByNickName(String nickName);
     boolean existsByEmail(String email);
 
     List<UserDAO> findByUniversityNameOrderByScoreDesc(String universityName);

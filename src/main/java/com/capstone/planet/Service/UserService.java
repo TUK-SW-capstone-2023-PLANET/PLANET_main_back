@@ -13,6 +13,7 @@ import java.util.Map;
 @Service
 public class UserService {
 
+    CheckUserNameBean checkUserNameBean;
     GetUserRankBean getUserRankBean;
     GetUserBean getUserBean;
     GetUserAllBean getUserAllBean;
@@ -25,7 +26,8 @@ public class UserService {
     GetUniversityUser4Bean getUniversityUser4Bean;
 
     @Autowired
-    public UserService(GetUniversityUserBean getUniversityUserBean, GetUserRankBean getUserRankBean, GetUniversityUser4Bean getUniversityUser4Bean, GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean, GetUserTop3Bean getUserTop3Bean, GetUniversityUsersBean getUniversityUsersBean, GetUniversityUserTop3Bean getUniversityUserTop3Bean) {
+    public UserService(CheckUserNameBean checkUserNameBean, GetUniversityUserBean getUniversityUserBean, GetUserRankBean getUserRankBean, GetUniversityUser4Bean getUniversityUser4Bean, GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean, GetUserTop3Bean getUserTop3Bean, GetUniversityUsersBean getUniversityUsersBean, GetUniversityUserTop3Bean getUniversityUserTop3Bean) {
+        this.checkUserNameBean = checkUserNameBean;
         this.getUniversityUserBean= getUniversityUserBean;
         this.getUserRankBean = getUserRankBean;
         this.getUniversityUser4Bean = getUniversityUser4Bean;
@@ -36,6 +38,11 @@ public class UserService {
         this.getUserTop3Bean = getUserTop3Bean;
         this.getUniversityUsersBean = getUniversityUsersBean;
         this.getUniversityUserTop3Bean = getUniversityUserTop3Bean;
+    }
+
+    // 유저 이름 중복 체크
+    public boolean checkUserName(String nickName){
+        return checkUserNameBean.exec(nickName);
     }
 
     // 유저 조회

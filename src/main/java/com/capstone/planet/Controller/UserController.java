@@ -29,6 +29,14 @@ public class UserController {
         this.userService = userService;
     }
 
+
+    // 유저 이름 중복 체크
+    @Operation(summary = "유저 이름 중복 체크", description = "유저 이름 중복 체크")
+    @GetMapping("user/name")
+    public boolean checkUserName(@RequestParam String name){
+        return userService.checkUserName(name);
+    }
+
     // 유저 정보조회
     @Operation(summary = "유저 정보 조회", description = "유저 핸들 아이디로 유저 정보 조회")
     @GetMapping("user/{userId}")

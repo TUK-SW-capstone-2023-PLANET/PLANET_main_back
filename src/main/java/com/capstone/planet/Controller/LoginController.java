@@ -1,5 +1,7 @@
 package com.capstone.planet.Controller;
 
+import com.capstone.planet.Model.DTO.RequestUserLoginDTO;
+import com.capstone.planet.Service.LoginService;
 import com.capstone.planet.Service.UserService;
 import com.univcert.api.UnivCert;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,10 +20,12 @@ import java.util.Map;
 public class LoginController {
 
     UserService userService;
+    LoginService loginService;
 
     @Autowired
-    public LoginController(UserService userService) {
+    public LoginController(UserService userService, LoginService loginService) {
         this.userService = userService;
+        this.loginService = loginService;
     }
 
     // 로그인 - 대학명 확인
@@ -78,6 +82,16 @@ public class LoginController {
         }
 
         Map<String, Object> map = userService.saveUser(certify);
+
+        return ResponseEntity.status(HttpStatus.OK).body(map);
+    }
+
+    // 로그인
+    @Operation(summary = "로그인", description = "로그인")
+    @PostMapping("/login/user")
+    public ResponseEntity<Map<String, Object>> login(@RequestBody RequestUserLoginDTO requestUserLoginDTO) {
+
+        Map<String, Object> map = loginService.userLogin(requestUserLoginDTO);
 
         return ResponseEntity.status(HttpStatus.OK).body(map);
     }

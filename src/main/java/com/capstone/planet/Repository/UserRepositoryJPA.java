@@ -13,6 +13,8 @@ public interface UserRepositoryJPA extends JpaRepository<UserDAO, Long> {
     boolean existsByNickName(String nickName);
     boolean existsByEmail(String email);
 
+    UserDAO findByEmail(String email);
+
     List<UserDAO> findByUniversityNameOrderByScoreDesc(String universityName);
 
     List<UserDAO> findTop3ByOrderByScoreDesc();

@@ -44,6 +44,23 @@ public class UserController {
         return userService.getUser(userId);
     }
 
+    // 유저 정보 저장
+    @Operation(summary = "유저 정보 회원가입", description = "유저 회원가입시 정보 입력관련 저장")
+    @PostMapping("user")
+    public ResponseEntity<Map<String, Object>> saveUser(@RequestBody RequestUserProfileSaveDTO requestUserProfileSaveDTO){
+        Long userId = userService.saveUserProfile(requestUserProfileSaveDTO);
+
+        // HTTP 상태 반환
+        HttpStatus httpStatus = (userId != null) ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR;
+
+        // 메시지와 id 값 json 데이터로 반환
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("message", (userId != null) ? "Save Success" : "Save Fail");
+        requestMap.put("userId", userId);
+
+        return ResponseEntity.status(httpStatus).body(requestMap);
+    }
+
     // 자신 랭킹 조회
     @Operation(summary = "자신 랭킹 조회", description = "자신 랭킹 조회")
     @GetMapping("user/{userId}/rank")

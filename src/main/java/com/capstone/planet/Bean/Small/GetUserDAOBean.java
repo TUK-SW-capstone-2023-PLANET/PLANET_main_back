@@ -30,6 +30,11 @@ public class GetUserDAOBean {
         return userRepositoryJPA.existsByNickName(nickName);
     }
 
+    // 유저 객체 가져오기
+    public UserDAO exec(String email, String check, Long check2){
+        return userRepositoryJPA.findByEmail(email);
+    }
+
     // 대학교에 해당하는 유저 전부 가져오기
     public List<UserDAO> exec(String universityName){
         return userRepositoryJPA.findByUniversityNameOrderByScoreDesc(universityName);

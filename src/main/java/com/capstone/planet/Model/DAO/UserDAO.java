@@ -21,6 +21,7 @@ public class UserDAO {
     String imageUrl;
     Double weight;
     Double height;
+    String gender;
     String address;
     Integer ploggingCount;
     Integer trashCount;

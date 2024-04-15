@@ -27,9 +27,15 @@ public class SaveUserBean {
     // 유저 회원가입
     public Map<String, Object> exec(Map<String, Object> certify){
 
-        if (certify.get("univName").equals("한국산업기술대학교")){
+        String email = certify.get("certified_email").toString();
+        String univName = certify.get("univName").toString();
+
+        if (univName.equals("한국산업기술대학교")){
             certify.remove("univName");
             certify.put("univName", "한국공학대학교");
+            email = email.replace("kpu", "tukorea");
+            certify.remove("certified_email");
+            certify.put("certified_email", email);
         }
 
         if (userRepositoryJPA.existsByEmail(certify.get("certified_email").toString())){

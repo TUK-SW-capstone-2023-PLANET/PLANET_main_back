@@ -17,6 +17,7 @@ public class UserService {
     GetUserRankBean getUserRankBean;
     GetUserBean getUserBean;
     GetUserAllBean getUserAllBean;
+    SaveUserProfileBean saveUserProfileBean;
     SaveUserBean saveUserBean;
     UpdateUserBean updateUserBean;
     GetUserTop3Bean getUserTop3Bean;
@@ -26,18 +27,19 @@ public class UserService {
     GetUniversityUser4Bean getUniversityUser4Bean;
 
     @Autowired
-    public UserService(CheckUserNameBean checkUserNameBean, GetUniversityUserBean getUniversityUserBean, GetUserRankBean getUserRankBean, GetUniversityUser4Bean getUniversityUser4Bean, GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean, GetUserTop3Bean getUserTop3Bean, GetUniversityUsersBean getUniversityUsersBean, GetUniversityUserTop3Bean getUniversityUserTop3Bean) {
+    public UserService(CheckUserNameBean checkUserNameBean, GetUserRankBean getUserRankBean, GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserProfileBean saveUserProfileBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean, GetUserTop3Bean getUserTop3Bean, GetUniversityUsersBean getUniversityUsersBean, GetUniversityUserBean getUniversityUserBean, GetUniversityUserTop3Bean getUniversityUserTop3Bean, GetUniversityUser4Bean getUniversityUser4Bean) {
         this.checkUserNameBean = checkUserNameBean;
-        this.getUniversityUserBean= getUniversityUserBean;
         this.getUserRankBean = getUserRankBean;
-        this.getUniversityUser4Bean = getUniversityUser4Bean;
         this.getUserBean = getUserBean;
         this.getUserAllBean = getUserAllBean;
+        this.saveUserProfileBean = saveUserProfileBean;
         this.saveUserBean = saveUserBean;
         this.updateUserBean = updateUserBean;
         this.getUserTop3Bean = getUserTop3Bean;
         this.getUniversityUsersBean = getUniversityUsersBean;
+        this.getUniversityUserBean = getUniversityUserBean;
         this.getUniversityUserTop3Bean = getUniversityUserTop3Bean;
+        this.getUniversityUser4Bean = getUniversityUser4Bean;
     }
 
     // 유저 이름 중복 체크
@@ -48,6 +50,11 @@ public class UserService {
     // 유저 조회
     public ResponseUserGetDTO getUser(Long userHandleId){
         return getUserBean.exec(userHandleId);
+    }
+
+    // 유저 프로필 저장
+    public Long saveUserProfile(RequestUserProfileSaveDTO requestUserProfileSaveDTO){
+        return saveUserProfileBean.exec(requestUserProfileSaveDTO);
     }
 
     // 유저 회원가입

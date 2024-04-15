@@ -1,44 +1,60 @@
 package com.capstone.planet.Bean;
 
 import com.capstone.planet.Bean.Small.CreateUniqueIdBean;
-import com.capstone.planet.Bean.Small.CreateUserDAOBean;
-import com.capstone.planet.Bean.Small.GetUserDAOBean;
-import com.capstone.planet.Bean.Small.SaveUserDAOBean;
+import com.capstone.planet.Bean.Small.GetUniversityDAOBean;
+import com.capstone.planet.Model.DAO.UniversityDAO;
 import com.capstone.planet.Model.DAO.UserDAO;
-import com.capstone.planet.Model.DTO.RequestUserSaveDTO;
+import com.capstone.planet.Repository.UserRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 @Component
 public class SaveUserBean {
 
-    GetUserDAOBean getUserDAOBean;
+    UserRepositoryJPA userRepositoryJPA;
     CreateUniqueIdBean createUniqueIdBean;
-    CreateUserDAOBean createUserDAOBean;
-    SaveUserDAOBean saveUserDAOBean;
+    GetUniversityDAOBean getUniversityDAOBean;
 
     @Autowired
-    public SaveUserBean(GetUserDAOBean getUserDAOBean, CreateUniqueIdBean createUniqueIdBean, CreateUserDAOBean createUserDAOBean, SaveUserDAOBean saveUserDAOBean) {
-        this.getUserDAOBean = getUserDAOBean;
+    public SaveUserBean(UserRepositoryJPA userRepositoryJPA, CreateUniqueIdBean createUniqueIdBean, GetUniversityDAOBean getUniversityDAOBean) {
+        this.userRepositoryJPA = userRepositoryJPA;
         this.createUniqueIdBean = createUniqueIdBean;
-        this.createUserDAOBean = createUserDAOBean;
-        this.saveUserDAOBean = saveUserDAOBean;
+        this.getUniversityDAOBean = getUniversityDAOBean;
     }
 
     // 유저 회원가입
-    public Long exec(RequestUserSaveDTO requestUserSaveDTO){
+    public Map<String, Object> exec(Map<String, Object> certify){
+
+        if (certify.get("univName").equals("한국산업기술대학교")){
+            certify.remove("univName");
+            certify.put("univName", "한국공학대학교");
+        }
+
+        if (userRepositoryJPA.existsByEmail(certify.get("certified_email").toString())){
+            certify.remove("message");
+            certify.put("message", "이미 가입된 이메일입니다.");
+
+            return certify;
+        }
+
+        UniversityDAO universityDAO = getUniversityDAOBean.exec(certify.get("univName").toString());
+
+        UserDAO userDAO = new UserDAO();
+        userDAO.setUserId(createUniqueIdBean.exec());
+        userDAO.setEmail(certify.get("certified_email").toString());
+        userDAO.setUniversityName(universityDAO.getName());
+        userDAO.setUniversityLogo(universityDAO.getImageUrl());
+        userDAO.setScore(0);
+        userDAO.setPloggingCount(0);
+        userDAO.setTrashCount(0);
+        userDAO.setTotalDistance(0.0);
+        userDAO.setImageUrl("https://tuk-planet.s3.ap-northeast-2.amazonaws.com/user/free-icon-user-149071+3.png");
 
 
+        userRepositoryJPA.save(userDAO);
 
-        // 아이디 생성
-        Long userHandleId = createUniqueIdBean.exec();
-
-        // UserDAO 객체 생성
-        UserDAO userDAO = createUserDAOBean.exec(userHandleId, requestUserSaveDTO);
-
-        // 유저 저장
-        saveUserDAOBean.exec(userDAO);
-
-        return userHandleId;
+        return certify;
     }
 }

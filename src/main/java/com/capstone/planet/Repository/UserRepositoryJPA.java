@@ -9,16 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface UserRepositoryJPA extends JpaRepository<UserDAO, Long> {
-    UserDAO findByLoginId(String loginId);
 
-    @Query("SELECT COUNT(u) FROM UserDAO u")
-    Integer getTotalUserCount();
-
-    @Query("SELECT SUM(u.trashCount) FROM UserDAO u")
-    Integer getTotalTrashCount();
-
-    @Query("SELECT SUM(u.totalDistance) FROM UserDAO u")
-    Double getTotalDistanceSum();
+    boolean existsByEmail(String email);
 
     List<UserDAO> findByUniversityNameOrderByScoreDesc(String universityName);
 

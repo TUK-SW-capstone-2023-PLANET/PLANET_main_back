@@ -15,10 +15,12 @@ import lombok.Setter;
 public class UserDAO {
     @Id
     Long userId;
-    String loginId;
+    String email;
     String passwd;
     String nickName;
     String imageUrl;
+    Double weight;
+    Double height;
     String address;
     Integer ploggingCount;
     Integer trashCount;

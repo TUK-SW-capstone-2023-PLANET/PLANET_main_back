@@ -91,23 +91,6 @@ public class UserController {
         return userService.getUniversityUser(userId, pageable);
     }
 
-    // 유저 회원가입
-    @Operation(summary = "유저 회원가입", description = "유저 회원가입 -> 추후 Oauth로 대체 예정")
-    @PostMapping("user/join")
-    public ResponseEntity<Map<String, Object>> saveUser(@RequestBody RequestUserSaveDTO requestUserSaveDTO){
-        Long userHandleId = userService.saveUser(requestUserSaveDTO);
-
-        // HTTP 상태 반환
-        HttpStatus httpStatus = (userHandleId != null) ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR;
-
-        // 메시지와 id 값 json 데이터로 반환
-        Map<String, Object> requestMap = new HashMap<>();
-        requestMap.put("message", (userHandleId != null) ? "회원가입 성공" : "이미 존재하는 회원입니다.");
-        requestMap.put("userHandleId", userHandleId);
-
-        return ResponseEntity.status(httpStatus).body(requestMap);
-    }
-
     // 유저 정보 수정
     @Operation(summary = "유저 정보 수정", description = "마이페이지 수정 - 정보 하나만 바뀌더라도 전체 정보 받아야만 작동")
     @PutMapping("user")

@@ -44,8 +44,8 @@ public class UserService {
     }
 
     // 유저 회원가입
-    public Long saveUser(RequestUserSaveDTO requestUserSaveDTO){
-        return saveUserBean.exec(requestUserSaveDTO);
+    public Map<String, Object> saveUser(Map<String, Object> certify){
+        return saveUserBean.exec(certify);
     }
 
     // 유저 정보수정

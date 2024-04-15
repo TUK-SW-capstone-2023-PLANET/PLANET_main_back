@@ -29,20 +29,6 @@ import java.util.Map;
 @CrossOrigin("*")
 public class MainController {
 
-    @GetMapping("/")
-    public void exec() throws IOException {
-        Map<String, Object> certify = UnivCert.certify("1cc6fc5a-cf02-47a1-9b07-92a81b1f140c", "handmadeoutlier@korea.ac.kr", "고려대학교", true);
-        System.out.println(certify);
-
-    }
-
-    @GetMapping("/{code}")
-    public void exec1(@PathVariable int code) throws IOException {
-        Map<String, Object> stringObjectMap = UnivCert.certifyCode("1cc6fc5a-cf02-47a1-9b07-92a81b1f140c", "handmadeoutlier@korea.ac.kr", "고려대학교", code);
-        System.out.println(stringObjectMap);
-
-    }
-
     /*@Autowired
     CreateMultipartFileBean createMultipartFileBean;
 

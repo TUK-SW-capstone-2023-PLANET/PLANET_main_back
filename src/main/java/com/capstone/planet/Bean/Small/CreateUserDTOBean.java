@@ -69,7 +69,6 @@ public class CreateUserDTOBean {
             responseUserRanksGetDTO.setNickName(userDAO.getNickName());
             responseUserRanksGetDTO.setRank(i);
             responseUserRanksGetDTO.setScore(userDAO.getScore());
-            responseUserRanksGetDTO.setImageUrl(userDAO.getImageUrl());
             responseUserRanksGetDTO.setUniversityLogo(userDAO.getUniversityLogo());
 
             responseList.add(responseUserRanksGetDTO);

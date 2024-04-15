@@ -79,7 +79,7 @@ public class UserController {
     // 대학교 소속 유저 4개 전체조회
     @Operation(summary = "대학교 소속 유저 4개 조회", description = "대학교 소속 유저 4개 전체조회")
     @GetMapping("user/{userId}/rank/university/4")
-    public List<Map<Integer, ResponseUserUniversityGetDTO>> getUniversity4User(@PathVariable Long userId){
+    public List<Map<Integer, ResponseUserUniversity4GetDTO>> getUniversity4User(@PathVariable Long userId){
         return userService.getUniversity4User(userId);
     }
 
@@ -87,7 +87,7 @@ public class UserController {
     @Operation(summary = "대학교 소속 유저 전체조회", description = "대학교 소속 유저 전체조회")
     @GetMapping("user/{userId}/rank/all/university")
     public Page<ResponseUserUniversityGetDTO> getUniversityUser(@PathVariable("userId") Long userId,
-                                                                @PageableDefault(size=2, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
+                                                                @PageableDefault(size=20, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
         return userService.getUniversityUser(userId, pageable);
     }
 

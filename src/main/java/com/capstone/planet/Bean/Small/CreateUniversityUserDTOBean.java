@@ -1,6 +1,7 @@
 package com.capstone.planet.Bean.Small;
 
 import com.capstone.planet.Model.DAO.UserDAO;
+import com.capstone.planet.Model.DTO.ResponseUserUniversity4GetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserUniversityGetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserUniversityTop3GetDTO;
 import org.springframework.data.domain.Page;
@@ -42,10 +43,10 @@ public class CreateUniversityUserDTOBean {
     }
 
     // 대학교 유저 탑4 DTO 생성
-    public List<Map<Integer, ResponseUserUniversityGetDTO>> exec(String check, UserDAO user, List<UserDAO> userDAOS){
+    public List<Map<Integer, ResponseUserUniversity4GetDTO>> exec(String check, UserDAO user, List<UserDAO> userDAOS){
 
-        List<Map<Integer, ResponseUserUniversityGetDTO>> responseUserUniversityGetDTOS = new ArrayList<>();
-        Map<Integer, ResponseUserUniversityGetDTO> map = new HashMap<>();
+        List<Map<Integer, ResponseUserUniversity4GetDTO>> responseUserUniversityGetDTOS = new ArrayList<>();
+        Map<Integer, ResponseUserUniversity4GetDTO> map = new HashMap<>();
 
         int total = 0;
         for (UserDAO userDAO : userDAOS){
@@ -54,30 +55,36 @@ public class CreateUniversityUserDTOBean {
 
         int i = 1;
         for (UserDAO userDAO : userDAOS) {
-            ResponseUserUniversityGetDTO responseUserUniversityGetDTO = new ResponseUserUniversityGetDTO();
+            ResponseUserUniversity4GetDTO responseUserUniversity4GetDTO = new ResponseUserUniversity4GetDTO();
             if (i > 4){
                 if (userDAO.getUserId().equals(user.getUserId())) {
-                    responseUserUniversityGetDTO.setRank(i);
-                    responseUserUniversityGetDTO.setNickName(userDAO.getNickName());
-                    responseUserUniversityGetDTO.setScore(userDAO.getScore());
-                    responseUserUniversityGetDTO.setContribution(((double) userDAO.getScore() / total * 100));
+                    responseUserUniversity4GetDTO.setRank(i);
+                    responseUserUniversity4GetDTO.setNickName(userDAO.getNickName());
+                    responseUserUniversity4GetDTO.setScore(userDAO.getScore());
+                    responseUserUniversity4GetDTO.setContribution(((double) userDAO.getScore() / total * 100));
+                    responseUserUniversity4GetDTO.setUniversityLogo(user.getUniversityLogo());
+                    responseUserUniversity4GetDTO.setUniversityName(user.getUniversityName());
+                    responseUserUniversity4GetDTO.setImageUrl(user.getImageUrl());
 
-                    map.put(0, responseUserUniversityGetDTO);
+                    map.put(0, responseUserUniversity4GetDTO);
                 }
                 i++;
                 continue;
             }
 
-            responseUserUniversityGetDTO.setRank(i);
-            responseUserUniversityGetDTO.setNickName(userDAO.getNickName());
-            responseUserUniversityGetDTO.setScore(userDAO.getScore());
-            responseUserUniversityGetDTO.setContribution(((double) userDAO.getScore() / total * 100));
+            responseUserUniversity4GetDTO.setRank(i);
+            responseUserUniversity4GetDTO.setNickName(userDAO.getNickName());
+            responseUserUniversity4GetDTO.setScore(userDAO.getScore());
+            responseUserUniversity4GetDTO.setContribution(((double) userDAO.getScore() / total * 100));
 
             if (userDAO.getUserId().equals(user.getUserId())) {
 
-                map.put(0, responseUserUniversityGetDTO);
+                responseUserUniversity4GetDTO.setUniversityLogo(user.getUniversityLogo());
+                responseUserUniversity4GetDTO.setUniversityName(user.getUniversityName());
+                responseUserUniversity4GetDTO.setImageUrl(user.getImageUrl());
+                map.put(0, responseUserUniversity4GetDTO);
             }
-            map.put(i, responseUserUniversityGetDTO);
+            map.put(i, responseUserUniversity4GetDTO);
             i++;
         }
         responseUserUniversityGetDTOS.add(map);

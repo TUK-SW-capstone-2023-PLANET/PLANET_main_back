@@ -29,7 +29,6 @@ public class GetUserRankBean {
                 ResponseUserRanksGetDTO responseUserRanksGetDTO = new ResponseUserRanksGetDTO();
 
                 responseUserRanksGetDTO.setNickName(dao.getNickName());
-                responseUserRanksGetDTO.setImageUrl(dao.getImageUrl());
                 responseUserRanksGetDTO.setScore(dao.getScore());
                 responseUserRanksGetDTO.setRank(i);
                 responseUserRanksGetDTO.setUniversityLogo(dao.getUniversityLogo());

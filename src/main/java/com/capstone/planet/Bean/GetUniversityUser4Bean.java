@@ -3,6 +3,7 @@ package com.capstone.planet.Bean;
 import com.capstone.planet.Bean.Small.CreateUniversityUserDTOBean;
 import com.capstone.planet.Bean.Small.GetUserDAOBean;
 import com.capstone.planet.Model.DAO.UserDAO;
+import com.capstone.planet.Model.DTO.ResponseUserUniversity4GetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserUniversityGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ public class GetUniversityUser4Bean {
     }
 
     // 소속 대학교 유저 점수 랭킹 조회
-    public List<Map<Integer, ResponseUserUniversityGetDTO>> exec(Long userId){
+    public List<Map<Integer, ResponseUserUniversity4GetDTO>> exec(Long userId){
 
         // 유저 객체 가져오기
         UserDAO userDAO = getUserDAOBean.exec(userId);

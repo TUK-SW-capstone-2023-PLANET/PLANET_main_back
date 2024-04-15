@@ -84,7 +84,7 @@ public class UserService {
     }
 
     // 대학교 소속 유저 4개조회
-    public List<Map<Integer, ResponseUserUniversityGetDTO>> getUniversity4User(Long userHandleId){
+    public List<Map<Integer, ResponseUserUniversity4GetDTO>> getUniversity4User(Long userHandleId){
         return getUniversityUser4Bean.exec(userHandleId);
     }
 }

@@ -61,6 +61,25 @@ public class UserController {
         return ResponseEntity.status(httpStatus).body(requestMap);
     }
 
+
+    /*// 유저 정보 수정
+    @Operation(summary = "유저 정보 수정", description = "마이페이지 수정 - 정보 하나만 바뀌더라도 전체 정보 받아야만 작동")
+    @PutMapping("user")
+    public ResponseEntity<Map<String, Object>> updateUser(@RequestBody RequestUserUpdateDTO requestUserUpdateDTO){
+        Long userHandleId = userService.updateUser(requestUserUpdateDTO);
+
+        // HTTP 상태 반환
+        HttpStatus httpStatus = (userHandleId != null) ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR;
+
+        // 메시지와 id 값 json 데이터로 반환
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("message", (userHandleId != null) ? "Update Success" : "Update Fail");
+        requestMap.put("userHandleId", userHandleId);
+
+        return ResponseEntity.status(httpStatus).body(requestMap);
+    }*/
+
+
     // 자신 랭킹 조회
     @Operation(summary = "자신 랭킹 조회", description = "자신 랭킹 조회")
     @GetMapping("user/{userId}/rank")
@@ -85,15 +104,6 @@ public class UserController {
 
 
 
-
-
-    /*// 대학교 소속 유저 탑3 랭킹 조회
-    @Operation(summary = "대학교 소속 유저 탑3 랭킹 조회", description = "대학교 소속 유저 탑3 랭킹 조회")
-    @GetMapping("user/{userId}/rank/university")
-    public List<ResponseUserUniversityTop3GetDTO> getUniversityUserTop3(@PathVariable Long userId){
-        return userService.getUniversityUserTop3(userId);
-    }*/
-
     // 자신 대학교 랭킹 조회
     @Operation(summary = "자신 대학교 랭킹 조회", description = "자신 대학교 랭킹 조회")
     @GetMapping("user/{userId}/rank/university")
@@ -114,22 +124,5 @@ public class UserController {
     public Page<ResponseUserUniversityGetDTO> getUniversityUser(@PathVariable("userId") Long userId,
                                                                 @PageableDefault(size=20, sort="score", direction = Sort.Direction.DESC) Pageable pageable){
         return userService.getUniversityUser(userId, pageable);
-    }
-
-    // 유저 정보 수정
-    @Operation(summary = "유저 정보 수정", description = "마이페이지 수정 - 정보 하나만 바뀌더라도 전체 정보 받아야만 작동")
-    @PutMapping("user")
-    public ResponseEntity<Map<String, Object>> updateUser(@RequestBody RequestUserUpdateDTO requestUserUpdateDTO){
-        Long userHandleId = userService.updateUser(requestUserUpdateDTO);
-
-        // HTTP 상태 반환
-        HttpStatus httpStatus = (userHandleId != null) ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR;
-
-        // 메시지와 id 값 json 데이터로 반환
-        Map<String, Object> requestMap = new HashMap<>();
-        requestMap.put("message", (userHandleId != null) ? "Update Success" : "Update Fail");
-        requestMap.put("userHandleId", userHandleId);
-
-        return ResponseEntity.status(httpStatus).body(requestMap);
     }
 }

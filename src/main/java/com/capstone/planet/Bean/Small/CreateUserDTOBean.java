@@ -1,8 +1,6 @@
 package com.capstone.planet.Bean.Small;
 
-import com.capstone.planet.Model.DAO.SeasonDAO;
 import com.capstone.planet.Model.DAO.UserDAO;
-import com.capstone.planet.Model.DTO.ResponseSeasonUserGetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserGetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserRankGetDTO;
 import com.capstone.planet.Model.DTO.ResponseUserRanksGetDTO;
@@ -11,9 +9,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class CreateUserDTOBean {
@@ -24,13 +20,19 @@ public class CreateUserDTOBean {
         ResponseUserGetDTO responseUserGetDTO = new ResponseUserGetDTO();
 
         responseUserGetDTO.setUserId(userDAO.getUserId());
+        responseUserGetDTO.setEmail(userDAO.getEmail());
         responseUserGetDTO.setPasswd(userDAO.getPasswd());
         responseUserGetDTO.setNickName(userDAO.getNickName());
         responseUserGetDTO.setImageUrl(userDAO.getImageUrl());
+        responseUserGetDTO.setWeight(userDAO.getWeight());
+        responseUserGetDTO.setHeight(userDAO.getHeight());
+        responseUserGetDTO.setGender(userDAO.getGender());
         responseUserGetDTO.setAddress(userDAO.getAddress());
         responseUserGetDTO.setPloggingCount(userDAO.getPloggingCount());
         responseUserGetDTO.setTrashCount(userDAO.getTrashCount());
         responseUserGetDTO.setTotalDistance(userDAO.getTotalDistance());
+        responseUserGetDTO.setUniversityLogo(userDAO.getUniversityLogo());
+        responseUserGetDTO.setUniversityName(userDAO.getUniversityName());
         responseUserGetDTO.setScore(userDAO.getScore());
 
         return responseUserGetDTO;

@@ -30,12 +30,12 @@ public class UpdateUserBean {
         if (userDAO == null) return null;
 
         // 유저 정보 수정
-        UserDAO updateUserDAO = updateUserDAOBean.exec(userDAO, requestUserUpdateDTO);
+        updateUserDAOBean.exec(userDAO, requestUserUpdateDTO);
 
         // 유저 저장
-        saveUserDAOBean.exec(updateUserDAO);
+        saveUserDAOBean.exec(userDAO);
 
-        return updateUserDAO.getUserId();
+        return userDAO.getUserId();
     }
 
 }

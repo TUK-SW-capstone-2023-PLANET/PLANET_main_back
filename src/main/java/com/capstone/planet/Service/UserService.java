@@ -82,10 +82,6 @@ public class UserService {
         return getUserAllBean.exec(pageable);
     }
 
-    /*// 대학교 소속 유저 탑3 랭킹 조회
-    public List<ResponseUserUniversityTop3GetDTO> getUniversityUserTop3(Long userHandleId){
-        return getUniversityUserTop3Bean.exec(userHandleId);
-    }*/
 
     // 나의 대학교 유저 랭킹 조회
     public ResponseUserUniversityGetDTO getMyUniversityRank(Long userId){

@@ -18,6 +18,7 @@ public class UserDAO {
     String email;
     String passwd;
     String nickName;
+    String message;
     String imageUrl;
     Double weight;
     Double height;

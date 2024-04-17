@@ -21,19 +21,12 @@ public class CreateUserDTOBean {
 
         responseUserGetDTO.setUserId(userDAO.getUserId());
         responseUserGetDTO.setEmail(userDAO.getEmail());
-        responseUserGetDTO.setPasswd(userDAO.getPasswd());
         responseUserGetDTO.setNickName(userDAO.getNickName());
+        responseUserGetDTO.setMessage(userDAO.getMessage());
+        responseUserGetDTO.setPasswd(userDAO.getPasswd());
         responseUserGetDTO.setImageUrl(userDAO.getImageUrl());
         responseUserGetDTO.setWeight(userDAO.getWeight());
         responseUserGetDTO.setHeight(userDAO.getHeight());
-        responseUserGetDTO.setGender(userDAO.getGender());
-        responseUserGetDTO.setAddress(userDAO.getAddress());
-        responseUserGetDTO.setPloggingCount(userDAO.getPloggingCount());
-        responseUserGetDTO.setTrashCount(userDAO.getTrashCount());
-        responseUserGetDTO.setTotalDistance(userDAO.getTotalDistance());
-        responseUserGetDTO.setUniversityLogo(userDAO.getUniversityLogo());
-        responseUserGetDTO.setUniversityName(userDAO.getUniversityName());
-        responseUserGetDTO.setScore(userDAO.getScore());
 
         return responseUserGetDTO;
     }

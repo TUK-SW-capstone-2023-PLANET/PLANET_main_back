@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 public class UpdateUserDAOBean {
 
     // 유저 정보 수정
-    public UserDAO exec(UserDAO userDAO, RequestUserUpdateDTO requestUserUpdateDTO){
+    public void exec(UserDAO userDAO, RequestUserUpdateDTO requestUserUpdateDTO){
 
-        userDAO.setPasswd(requestUserUpdateDTO.getPasswd());
-        userDAO.setNickName(requestUserUpdateDTO.getNickName());
         userDAO.setImageUrl(requestUserUpdateDTO.getImageUrl());
-        userDAO.setAddress(requestUserUpdateDTO.getAddress());
-
-        return userDAO;
+        userDAO.setNickName(requestUserUpdateDTO.getNickName());
+        userDAO.setMessage(requestUserUpdateDTO.getMessage());
+        userDAO.setPasswd(requestUserUpdateDTO.getPasswd());
+        userDAO.setWeight(requestUserUpdateDTO.getWeight());
+        userDAO.setHeight(requestUserUpdateDTO.getHeight());
     }
 }

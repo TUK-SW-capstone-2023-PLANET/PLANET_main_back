@@ -62,8 +62,8 @@ public class UserController {
     }
 
 
-    /*// 유저 정보 수정
-    @Operation(summary = "유저 정보 수정", description = "마이페이지 수정 - 정보 하나만 바뀌더라도 전체 정보 받아야만 작동")
+    // 유저 정보 수정
+    @Operation(summary = "유저 정보 수정", description = "마이페이지 수정 - 이메일 제외 나머지 정보 전부 보내줌")
     @PutMapping("user")
     public ResponseEntity<Map<String, Object>> updateUser(@RequestBody RequestUserUpdateDTO requestUserUpdateDTO){
         Long userHandleId = userService.updateUser(requestUserUpdateDTO);
@@ -77,7 +77,7 @@ public class UserController {
         requestMap.put("userHandleId", userHandleId);
 
         return ResponseEntity.status(httpStatus).body(requestMap);
-    }*/
+    }
 
 
     // 자신 랭킹 조회

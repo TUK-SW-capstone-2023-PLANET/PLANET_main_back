@@ -5,9 +5,10 @@ import lombok.Data;
 @Data
 public class RequestUserUpdateDTO {
     Long userId;
-    String loginId;
-    String passwd;
-    String nickName;
     String imageUrl;
-    String address;
+    String nickName;
+    String message;
+    String passwd;
+    Double weight;
+    Double height;
 }

@@ -1,6 +1,7 @@
 package com.capstone.planet.Controller;
 
 import com.capstone.planet.Model.DTO.RequestPloggingSaveDTO;
+import com.capstone.planet.Model.DTO.ResponsePloggingStartDTO;
 import com.capstone.planet.Service.PloggingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -27,9 +28,9 @@ public class PloggingController {
 
     // 플로깅 시작시 플로깅 Id 생성
     @Operation(summary = "플로깅 아이디 생성", description = "플로깅 시작시 아이디 생성")
-    @GetMapping("plogging/id")
-    public Long getPloggingId(){
-        return ploggingService.getPloggingId();
+    @GetMapping("plogging/user/{userId}")
+    public ResponsePloggingStartDTO getPloggingStart(@PathVariable Long userId){
+        return ploggingService.getPloggingId(userId);
     }
 
     // 플로깅 저장

@@ -3,6 +3,7 @@ package com.capstone.planet.Service;
 import com.capstone.planet.Bean.GetPloggingIdBean;
 import com.capstone.planet.Bean.SavePloggingBean;
 import com.capstone.planet.Model.DTO.RequestPloggingSaveDTO;
+import com.capstone.planet.Model.DTO.ResponsePloggingStartDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +22,8 @@ public class PloggingService {
     }
 
     // 플로깅 시작시 아이디 생성
-    public Long getPloggingId(){
-        return getPloggingIdBean.exec();
+    public ResponsePloggingStartDTO getPloggingId(Long userId){
+        return getPloggingIdBean.exec(userId);
     }
 
     // 플로깅 정보 저장

@@ -66,15 +66,15 @@ public class UserController {
     @Operation(summary = "유저 정보 수정", description = "마이페이지 수정 - 이메일 제외 나머지 정보 전부 보내줌")
     @PutMapping("user")
     public ResponseEntity<Map<String, Object>> updateUser(@RequestBody RequestUserUpdateDTO requestUserUpdateDTO){
-        Long userHandleId = userService.updateUser(requestUserUpdateDTO);
+        Long userId = userService.updateUser(requestUserUpdateDTO);
 
         // HTTP 상태 반환
-        HttpStatus httpStatus = (userHandleId != null) ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR;
+        HttpStatus httpStatus = (userId != null) ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR;
 
         // 메시지와 id 값 json 데이터로 반환
         Map<String, Object> requestMap = new HashMap<>();
-        requestMap.put("message", (userHandleId != null) ? "Update Success" : "Update Fail");
-        requestMap.put("userHandleId", userHandleId);
+        requestMap.put("message", (userId != null) ? "Update Success" : "Update Fail");
+        requestMap.put("userId", userId);
 
         return ResponseEntity.status(httpStatus).body(requestMap);
     }

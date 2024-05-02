@@ -22,5 +22,7 @@ public class PloggingLiveDAO {
     String imageUrl;
     Double latitude;
     Double longitude;
+    String trash;
+    String address;
     LocalDateTime uploadTime;
 }

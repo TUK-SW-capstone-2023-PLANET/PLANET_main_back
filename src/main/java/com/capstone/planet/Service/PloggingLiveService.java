@@ -1,6 +1,7 @@
 package com.capstone.planet.Service;
 
 import com.capstone.planet.Bean.SavePloggingLiveBean;
+import com.capstone.planet.Model.DTO.LiveTrashDTO;
 import com.capstone.planet.Model.DTO.RequestPloggingLiveSaveDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class PloggingLiveService {
     }
 
     // 실시간 플로깅 쓰레기 사진 저장
-    public List<Map<String, Integer>> savePloggingLiveDAO(RequestPloggingLiveSaveDTO requestPloggingLiveSaveDTO){
+    public List<LiveTrashDTO> savePloggingLiveDAO(RequestPloggingLiveSaveDTO requestPloggingLiveSaveDTO){
         return savePloggingLiveBean.exec(requestPloggingLiveSaveDTO);
     }
 }

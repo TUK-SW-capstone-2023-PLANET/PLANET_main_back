@@ -1,5 +1,6 @@
 package com.capstone.planet.Controller;
 
+import com.capstone.planet.Model.DTO.LiveTrashDTO;
 import com.capstone.planet.Model.DTO.RequestPloggingLiveSaveDTO;
 import com.capstone.planet.Service.PloggingLiveService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -29,7 +30,7 @@ public class PloggingLiveController {
     // AI 없어서 테스트로 만들어둠 추후 수정 필요
     @Operation(summary = "플로깅 실시간 사진 저장", description = "플로깅시 촬영한 사진 저장 및 쓰레기 갯수 반환")
     @PostMapping("plogging-live")
-    public List<Map<String, Integer>> savePloggingLive(@RequestBody RequestPloggingLiveSaveDTO requestPloggingLiveSaveDTO){
+    public List<LiveTrashDTO> savePloggingLive(@RequestBody RequestPloggingLiveSaveDTO requestPloggingLiveSaveDTO){
         return ploggingService.savePloggingLiveDAO(requestPloggingLiveSaveDTO);
 
         /*// HTTP 상태 변환

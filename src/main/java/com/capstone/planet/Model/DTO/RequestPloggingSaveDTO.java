@@ -10,7 +10,7 @@ public class RequestPloggingSaveDTO {
     Long ploggingId;
     Long userId;
     List<LocationDTO> location;
-    List<Map<String, Integer>> trashCount;
+    List<Map<String, Integer>> trash;
     Double distance;
     Integer kcal;
     Double speed;

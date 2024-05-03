@@ -20,7 +20,8 @@ public class PloggingDAO {
     Long userId;
     String imageUrl;
     String location;
-    String trashCount;
+    String trash;
+    Integer trashCount;
     Double distance;
     Integer kcal;
     Double speed;

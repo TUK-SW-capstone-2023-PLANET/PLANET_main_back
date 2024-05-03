@@ -1,6 +1,7 @@
 package com.capstone.planet.Controller;
 
 import com.capstone.planet.Model.DTO.RequestPloggingSaveDTO;
+import com.capstone.planet.Model.DTO.ResponsePloggingGetDTO;
 import com.capstone.planet.Model.DTO.ResponsePloggingStartDTO;
 import com.capstone.planet.Service.PloggingService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -31,6 +32,13 @@ public class PloggingController {
     @GetMapping("plogging/user/{userId}")
     public ResponsePloggingStartDTO getPloggingStart(@PathVariable Long userId){
         return ploggingService.getPloggingId(userId);
+    }
+
+    // 플로깅 정보 조회
+    @Operation(summary = "플로깅 정보 조회", description = "플로깅 아이디로 플로깅 정보 조회")
+    @GetMapping("plogging/{ploggingId}")
+    public ResponsePloggingGetDTO getPlogging(@PathVariable Long ploggingId){
+        return ploggingService.getPlogging(ploggingId);
     }
 
     // 플로깅 저장

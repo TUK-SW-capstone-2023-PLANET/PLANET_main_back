@@ -10,4 +10,5 @@ import java.util.List;
 public interface PloggingLiveRepositoryJPA extends JpaRepository<PloggingLiveDAO, Long> {
 
     List<PloggingLiveDAO> findByPloggingId(Long ploggingId);
+    List<PloggingLiveDAO> findByPloggingIdOrderByUploadTimeAsc(Long ploggingId);
 }

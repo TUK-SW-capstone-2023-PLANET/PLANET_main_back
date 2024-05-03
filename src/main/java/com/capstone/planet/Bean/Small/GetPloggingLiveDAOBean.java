@@ -20,4 +20,8 @@ public class GetPloggingLiveDAOBean {
     public List<PloggingLiveDAO> exec(Long ploggingId){
         return ploggingLiveRepositoryJPA.findByPloggingId(ploggingId);
     }
+
+    public List<PloggingLiveDAO> exec(Long ploggingId, Long check){
+        return ploggingLiveRepositoryJPA.findByPloggingIdOrderByUploadTimeAsc(ploggingId);
+    }
 }

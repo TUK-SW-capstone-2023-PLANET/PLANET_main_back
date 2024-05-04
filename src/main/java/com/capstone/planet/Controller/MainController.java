@@ -29,51 +29,12 @@ import java.util.Map;
 @CrossOrigin("*")
 public class MainController {
 
-    /*@Autowired
+    @Autowired
     CreateMultipartFileBean createMultipartFileBean;
-
-    @GetMapping("/")
-    public void getMapImage() {
-        String URL_STATICMAP = "https://naveropenapi.apigw.ntruss.com/map-static/v2/raster?";
-
-        try {
-            String url = URL_STATICMAP;
-            url += "center=126.97838810000002,37.56661020000001";
-            url += "&level=16&w=500&h=500";
-
-            URL u = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) u.openConnection();
-            con.setRequestMethod("GET");
-            con.setRequestProperty("X-NCP-APIGW-API-KEY-ID", "d62cogf955");
-            con.setRequestProperty("X-NCP-APIGW-API-KEY", "PD9WvJTFLDShaTWdAN0JiYJPfusVsO3tRv4SMDbv");
-
-            int responseCode = con.getResponseCode();
-
-            // 정상호출인 경우.
-            if (responseCode == 200) {
-                InputStream is = con.getInputStream();
-                BufferedImage image = ImageIO.read(is);
-                is.close();
-
-            } else {    // 에러 발생
-                BufferedReader br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-                String inputLine;
-                StringBuffer response = new StringBuffer();
-
-                while ((inputLine = br.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                br.close();
-                throw new IOException("Error response from server: " + response.toString());
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
 
     //@Operation(summary = "상태 확인", description = "서버 생존 확인 API")
-    //@GetMapping("/")
+    @GetMapping("/")
     public JsonNode health() {
 
         // 좌표값
@@ -104,8 +65,25 @@ public class MainController {
             // XML 파싱하여 JsonNode로 변환
             JsonNode jsonNode = xmlMapper.readTree(httpResponse.body());
 
-            // JsonNode를 JSON 문자열로 변환하여 반환
-            System.out.println("Response: " + jsonMapper.writeValueAsString(jsonNode));
+            // 결과에서 주소 정보 가져오기
+            JsonNode resultsNode = jsonNode.get("results").get("order");
+
+            String area1 = "";
+            String area2 = "";
+            String area3 = "";
+
+            for (JsonNode result : resultsNode) {
+                if (result.get("name").equals("legalcode")) {
+                    JsonNode regionNode = result.get("region");
+                    area1 = regionNode.get("area1").get("name").asText();
+                    area2 = regionNode.get("area2").get("name").asText();
+                    area3 = regionNode.get("area3").get("name").asText();
+                }
+
+            }
+            // 주소 출력
+            System.out.println(area1 + " " + area2 + " " + area3);
+
 
             return jsonNode;
         } catch (IOException | InterruptedException e) {
@@ -128,5 +106,5 @@ public class MainController {
 
         // JsonNode를 JSON 문자열로 변환하여 반환
         return jsonMapper.writeValueAsString(jsonNode);
-    }*/
+    }
 }

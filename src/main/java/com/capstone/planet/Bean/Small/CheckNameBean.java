@@ -38,4 +38,22 @@ public class CheckNameBean {
             default -> "";
         };
     }
+
+    public String exec(String name, String check, String check1) {
+
+        return switch (name) {
+            case "종이" -> "paper";
+            case "종이컵" -> "paper_cup";
+            case "캔" -> "can";
+            case "유리" -> "glass";
+            case "페트병" -> "pet";
+            case "플라스틱" -> "plastic";
+            case "비닐" -> "vinyl";
+            case "일반쓰레기" -> "trash";
+            case "스티로폼" -> "styrofoam";
+            case "건전지"-> "battery";
+            default -> "";
+        };
+    }
+
 }

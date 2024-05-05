@@ -44,7 +44,7 @@ public class CreatePloggingDAOBean {
         ploggingDAO.setImageUrl(imageUrl);
         ploggingDAO.setDistance(requestPloggingSaveDTO.getDistance());
         ploggingDAO.setKcal(requestPloggingSaveDTO.getKcal());
-        ploggingDAO.setSpeed(requestPloggingSaveDTO.getSpeed());
+        ploggingDAO.setPace(requestPloggingSaveDTO.getPace());
         ploggingDAO.setScore(requestPloggingSaveDTO.getScore());
         ploggingDAO.setTrashCount(trashCount);
         ploggingDAO.setPloggingTime(requestPloggingSaveDTO.getPloggingTime());

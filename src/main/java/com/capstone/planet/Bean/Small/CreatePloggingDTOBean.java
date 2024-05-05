@@ -33,7 +33,7 @@ public class CreatePloggingDTOBean {
                 .trashCount(ploggingDAO.getTrashCount())
                 .distance(ploggingDAO.getDistance())
                 .kcal(ploggingDAO.getKcal())
-                .speed(ploggingDAO.getSpeed())
+                .pace(ploggingDAO.getPace())
                 .score(ploggingDAO.getScore())
                 .location(locationDTOS)
                 .firstLocation(locationDTOS.get(0))

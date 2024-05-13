@@ -1,0 +1,44 @@
+package com.capstone.planet.Bean.Small;
+
+import com.capstone.planet.Mapper.StringToListMapper;
+import com.capstone.planet.Model.DAO.PostDAO;
+import com.capstone.planet.Model.DAO.UserDAO;
+import com.capstone.planet.Model.DTO.ResponsePostGetDTO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Component
+public class CreatePostDTOBean {
+
+    StringToListMapper stringToListMapper;
+
+    @Autowired
+    public CreatePostDTOBean(StringToListMapper stringToListMapper) {
+        this.stringToListMapper = stringToListMapper;
+    }
+
+    public ResponsePostGetDTO exec(PostDAO postDAO, UserDAO userDAO, Long userId){
+
+        List<String> imageUrl;
+
+        if (postDAO.getImageUrl() == null)
+            imageUrl = null;
+         else imageUrl = stringToListMapper.exec(postDAO.getImageUrl());
+
+        return ResponsePostGetDTO.builder()
+                .postId(postDAO.getPostId())
+                .userId(postDAO.getUserId())
+                .nickName(userDAO.getNickName())
+                .profileUrl(userDAO.getImageUrl())
+                .imageUrl(imageUrl)
+                .title(postDAO.getTitle())
+                .content(postDAO.getContent())
+                .heartCount(postDAO.getHeartCount())
+                .commentCount(postDAO.getCommentCount())
+                .uploadTime(postDAO.getUploadTime().toString())
+                .heart(false)
+                .build();
+    }
+}

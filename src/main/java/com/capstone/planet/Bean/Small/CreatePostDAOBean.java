@@ -1,7 +1,9 @@
 package com.capstone.planet.Bean.Small;
 
+import com.capstone.planet.Mapper.ListToStringMapper;
 import com.capstone.planet.Model.DAO.PostDAO;
 import com.capstone.planet.Model.DTO.RequestPostSaveDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -9,13 +11,25 @@ import java.time.LocalDateTime;
 @Component
 public class CreatePostDAOBean {
 
+    ListToStringMapper listToStringMapper;
+
+    @Autowired
+    public CreatePostDAOBean(ListToStringMapper listToStringMapper) {
+        this.listToStringMapper = listToStringMapper;
+    }
+
     // 게시물 DAO 생성
     public PostDAO exec(Long postId, RequestPostSaveDTO requestPostSaveDTO) {
+
+        String imageUrl;
+        if (requestPostSaveDTO.getImageUrl() == null)
+            imageUrl = null;
+        else imageUrl = listToStringMapper.exec(requestPostSaveDTO.getImageUrl());
 
         return PostDAO.builder()
                 .postId(postId)
                 .userId(requestPostSaveDTO.getUserId())
-                .imageUrl(requestPostSaveDTO.getImageUrl())
+                .imageUrl(imageUrl)
                 .title(requestPostSaveDTO.getTitle())
                 .content(requestPostSaveDTO.getContent())
                 .heartCount(0)

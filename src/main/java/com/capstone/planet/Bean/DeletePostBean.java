@@ -1,5 +1,6 @@
 package com.capstone.planet.Bean;
 
+import com.capstone.planet.Bean.Small.DeleteCommentDAOBean;
 import com.capstone.planet.Bean.Small.DeletePostDAOBean;
 import com.capstone.planet.Bean.Small.DeletePostHeartDAOBean;
 import com.capstone.planet.Bean.Small.GetPostDAOBean;
@@ -13,12 +14,14 @@ public class DeletePostBean {
 
     GetPostDAOBean getPostDAOBean;
     DeletePostHeartDAOBean deletePostHeartDAOBean;
+    DeleteCommentDAOBean deleteCommentDAOBean;
     DeletePostDAOBean deletePostDAOBean;
 
     @Autowired
-    public DeletePostBean(GetPostDAOBean getPostDAOBean, DeletePostHeartDAOBean deletePostHeartDAOBean, DeletePostDAOBean deletePostDAOBean) {
+    public DeletePostBean(GetPostDAOBean getPostDAOBean, DeletePostHeartDAOBean deletePostHeartDAOBean, DeleteCommentDAOBean deleteCommentDAOBean, DeletePostDAOBean deletePostDAOBean) {
         this.getPostDAOBean = getPostDAOBean;
         this.deletePostHeartDAOBean = deletePostHeartDAOBean;
+        this.deleteCommentDAOBean = deleteCommentDAOBean;
         this.deletePostDAOBean = deletePostDAOBean;
     }
 
@@ -36,6 +39,7 @@ public class DeletePostBean {
         deletePostHeartDAOBean.exec(postDAO.getPostId());
 
         // 게시물 댓글 전부 삭제
+        deleteCommentDAOBean.exec(postDAO.getPostId());
 
         // 게시물 삭제
         deletePostDAOBean.exec(postDAO);

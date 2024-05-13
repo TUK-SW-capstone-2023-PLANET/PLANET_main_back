@@ -33,7 +33,7 @@ public class PostController {
     }
 
     // 게시물 저장
-    @Operation(summary = "게시물 저장", description = "플로깅 종료시 정보 받은 후 저장")
+    @Operation(summary = "게시물 저장", description = "게시물 저장")
     @PostMapping("/post")
     public ResponseEntity<Map<String, Object>> savePost(@RequestBody RequestPostSaveDTO requestPostSaveDTO) {
         Long postId = postService.savePost(requestPostSaveDTO);

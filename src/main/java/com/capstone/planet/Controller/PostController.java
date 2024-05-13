@@ -1,5 +1,6 @@
 package com.capstone.planet.Controller;
 
+import com.capstone.planet.Model.DTO.RequestPostDeleteDTO;
 import com.capstone.planet.Model.DTO.RequestPostSaveDTO;
 import com.capstone.planet.Model.DTO.ResponsePostGetDTO;
 import com.capstone.planet.Service.PostService;
@@ -45,6 +46,23 @@ public class PostController {
         Map<String, Object> requestMap = new HashMap<>();
         requestMap.put("message", (postId == null) ? "게시물 저장 실패" : "게시물 저장 성공");
         requestMap.put("postId", postId);
+
+        return ResponseEntity.status(httpStatus).body(requestMap);
+    }
+
+    // 게시물 삭제
+    @Operation(summary = "게시물 삭제", description = "게시물 삭제")
+    @DeleteMapping("/post")
+    public ResponseEntity<Map<String, Object>> deletePost(@RequestBody RequestPostDeleteDTO requestPostDeleteDTO) {
+        Long deletePostId = postService.deletePost(requestPostDeleteDTO);
+
+        // HTTP 상태 변환
+        HttpStatus httpStatus = (deletePostId == null) ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK;
+
+        // 메시지와 id 값 json 데이터로 반환
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("message", (deletePostId == null) ? "게시물 삭제 실패" : "게시물 삭제 성공");
+        requestMap.put("postId", deletePostId);
 
         return ResponseEntity.status(httpStatus).body(requestMap);
     }

@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface PostHeartRepositoryJPA extends JpaRepository<PostHeartDAO, Long> {
 
     PostHeartDAO findByUserIdAndPostId(Long userId, Long postId);
+
+    void deleteAllByPostId(Long postId);
 }

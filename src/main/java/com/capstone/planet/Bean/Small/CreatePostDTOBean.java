@@ -19,7 +19,7 @@ public class CreatePostDTOBean {
         this.stringToListMapper = stringToListMapper;
     }
 
-    public ResponsePostGetDTO exec(PostDAO postDAO, UserDAO userDAO, Long userId){
+    public ResponsePostGetDTO exec(PostDAO postDAO, UserDAO userDAO, boolean heart){
 
         List<String> imageUrl;
 
@@ -37,8 +37,9 @@ public class CreatePostDTOBean {
                 .content(postDAO.getContent())
                 .heartCount(postDAO.getHeartCount())
                 .commentCount(postDAO.getCommentCount())
+                .viewCount(postDAO.getViewCount())
                 .uploadTime(postDAO.getUploadTime().toString())
-                .heart(false)
+                .heart(heart)
                 .build();
     }
 }

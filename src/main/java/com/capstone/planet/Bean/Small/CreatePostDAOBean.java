@@ -21,10 +21,7 @@ public class CreatePostDAOBean {
     // 게시물 DAO 생성
     public PostDAO exec(Long postId, RequestPostSaveDTO requestPostSaveDTO) {
 
-        String imageUrl;
-        if (requestPostSaveDTO.getImageUrl() == null)
-            imageUrl = null;
-        else imageUrl = listToStringMapper.exec(requestPostSaveDTO.getImageUrl());
+        String imageUrl = listToStringMapper.exec(requestPostSaveDTO.getImageUrl());
 
         return PostDAO.builder()
                 .postId(postId)
@@ -34,6 +31,7 @@ public class CreatePostDAOBean {
                 .content(requestPostSaveDTO.getContent())
                 .heartCount(0)
                 .commentCount(0)
+                .viewCount(0)
                 .uploadTime(LocalDateTime.now())
                 .build();
     }

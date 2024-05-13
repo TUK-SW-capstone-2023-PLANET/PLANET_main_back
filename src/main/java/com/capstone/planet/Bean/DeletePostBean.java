@@ -22,6 +22,7 @@ public class DeletePostBean {
         this.deletePostDAOBean = deletePostDAOBean;
     }
 
+    // 게시물 삭제
     public Long exec(RequestPostDeleteDTO requestPostDeleteDTO) {
 
         // 게시물 찾기

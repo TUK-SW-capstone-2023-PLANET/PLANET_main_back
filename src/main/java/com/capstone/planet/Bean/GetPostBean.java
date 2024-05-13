@@ -1,8 +1,6 @@
 package com.capstone.planet.Bean;
 
-import com.capstone.planet.Bean.Small.CreatePostDTOBean;
-import com.capstone.planet.Bean.Small.GetPostDAOBean;
-import com.capstone.planet.Bean.Small.GetUserDAOBean;
+import com.capstone.planet.Bean.Small.*;
 import com.capstone.planet.Model.DAO.PostDAO;
 import com.capstone.planet.Model.DAO.UserDAO;
 import com.capstone.planet.Model.DTO.ResponsePostGetDTO;
@@ -14,15 +12,20 @@ public class GetPostBean {
 
     GetPostDAOBean getPostDAOBean;
     GetUserDAOBean getUserDAOBean;
+    SavePostDAOBean savePostDAOBean;
     CreatePostDTOBean createPostDTOBean;
+    GetPostHeartDAOBean getPostHeartDAOBean;
 
     @Autowired
-    public GetPostBean(GetPostDAOBean getPostDAOBean, GetUserDAOBean getUserDAOBean, CreatePostDTOBean createPostDTOBean) {
+    public GetPostBean(GetPostDAOBean getPostDAOBean, GetUserDAOBean getUserDAOBean, SavePostDAOBean savePostDAOBean, CreatePostDTOBean createPostDTOBean, GetPostHeartDAOBean getPostHeartDAOBean) {
         this.getPostDAOBean = getPostDAOBean;
         this.getUserDAOBean = getUserDAOBean;
+        this.savePostDAOBean = savePostDAOBean;
         this.createPostDTOBean = createPostDTOBean;
+        this.getPostHeartDAOBean = getPostHeartDAOBean;
     }
 
+    // 게시물 조회
     public ResponsePostGetDTO exec(Long postId, Long userId) {
 
         // 게시물 찾기
@@ -33,9 +36,16 @@ public class GetPostBean {
         UserDAO userDAO = getUserDAOBean.exec(postDAO.getUserId());
         if (userDAO == null) return null;
 
+        // 조회수 증가
+        postDAO.setViewCount(postDAO.getViewCount() + 1);
+
+        // 게시물 저장
+        savePostDAOBean.exec(postDAO);
+
         // 게시물 좋아요 여부 체크
+        boolean heart = getPostHeartDAOBean.exec(userId, postId) != null;
 
         // DTO 반환
-        return createPostDTOBean.exec(postDAO, userDAO, userId);
+        return createPostDTOBean.exec(postDAO, userDAO, heart);
     }
 }

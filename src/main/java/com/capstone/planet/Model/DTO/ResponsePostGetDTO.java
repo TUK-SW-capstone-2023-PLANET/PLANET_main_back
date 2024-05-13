@@ -17,6 +17,7 @@ public class ResponsePostGetDTO {
     String content;
     Integer heartCount;
     Integer commentCount;
+    Integer viewCount;
     String uploadTime;
     boolean heart;
 }

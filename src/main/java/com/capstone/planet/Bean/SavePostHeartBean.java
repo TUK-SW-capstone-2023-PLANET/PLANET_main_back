@@ -32,7 +32,7 @@ public class SavePostHeartBean {
 
         // 중복 확인
         if (getPostHeartDAOBean.exec(requestPostHeartSaveDTO.getUserId(), requestPostHeartSaveDTO.getPostId()) != null) return -1L;
-        
+
         // 게시물 좋아요 아이디 생성
         Long postHeartId = createUniqueIdBean.exec();
 

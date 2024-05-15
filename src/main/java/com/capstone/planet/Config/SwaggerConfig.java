@@ -17,7 +17,7 @@ public class SwaggerConfig{
     private static final String server = "Planet Main Backend Server check";
     private static final String github = "GitHub Organization Link";
     private static final String githubUrl = "https://github.com/TUK-SW-capstone-2023-PLANET/PLANET_main_back";
-    private static final String API_URL = "http://3.37.87.60:8080/";
+    private static final String API_URL = "http://54.180.102.87:8080/";
 
     @Bean
     public OpenAPI openAPI(){

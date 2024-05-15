@@ -9,10 +9,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class SavePloggingLiveBean {
@@ -38,6 +35,9 @@ public class SavePloggingLiveBean {
 
     // 실시간 플로깅 쓰레기 사진 저장
     public List<LiveTrashDTO> exec(RequestPloggingLiveSaveDTO requestPloggingLiveSaveDTO) {
+
+        if (requestPloggingLiveSaveDTO.getTrash().isEmpty())
+            return null;
 
         // 고유 아이디 생성
         long ploggingLiveId = createUniqueIdBean.exec();

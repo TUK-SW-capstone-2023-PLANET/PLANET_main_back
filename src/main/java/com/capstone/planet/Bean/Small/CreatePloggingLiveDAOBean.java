@@ -66,7 +66,7 @@ public class CreatePloggingLiveDAOBean {
         ploggingLiveDAO.setLongitude(requestPloggingLiveSaveDTO.getLongitude());
         ploggingLiveDAO.setTrash(trash);
         ploggingLiveDAO.setAddress(address);
-        ploggingLiveDAO.setUploadTime(LocalDateTime.now());
+        ploggingLiveDAO.setUploadTime(LocalDateTime.now().plusHours(9));
 
         return ploggingLiveDAO;
     }

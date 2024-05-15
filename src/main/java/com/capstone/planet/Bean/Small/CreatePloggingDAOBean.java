@@ -48,7 +48,7 @@ public class CreatePloggingDAOBean {
         ploggingDAO.setScore(requestPloggingSaveDTO.getScore());
         ploggingDAO.setTrashCount(trashCount);
         ploggingDAO.setPloggingTime(requestPloggingSaveDTO.getPloggingTime());
-        ploggingDAO.setUploadTime(LocalDateTime.now());
+        ploggingDAO.setUploadTime(LocalDateTime.now().plusHours(9));
 
         ObjectMapper objectMapper = new ObjectMapper();
         try {

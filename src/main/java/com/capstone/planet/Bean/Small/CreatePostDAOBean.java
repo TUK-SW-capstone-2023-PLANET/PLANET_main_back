@@ -32,7 +32,7 @@ public class CreatePostDAOBean {
                 .heartCount(0)
                 .commentCount(0)
                 .viewCount(0)
-                .uploadTime(LocalDateTime.now())
+                .uploadTime(LocalDateTime.now().plusHours(9))
                 .build();
     }
 }

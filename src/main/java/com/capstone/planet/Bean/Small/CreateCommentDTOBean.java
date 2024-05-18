@@ -29,7 +29,7 @@ public class CreateCommentDTOBean {
         UserDAO userDAO = getUserDAOBean.exec(commentDAO.getUserId());
         if (userDAO == null) return null;
 
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now().plusHours(9);
         Duration duration = Duration.between(commentDAO.getUploadTime(), now);
 
         long seconds = duration.getSeconds();

@@ -7,6 +7,7 @@ import com.capstone.planet.Model.DTO.ResponsePostGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -23,8 +24,8 @@ public class CreatePostDTOBean {
 
         List<String> imageUrl;
 
-        if (postDAO.getImageUrl() == null)
-            imageUrl = null;
+        if (postDAO.getImageUrl().equals("[]"))
+            imageUrl = new ArrayList<>();
          else imageUrl = stringToListMapper.exec(postDAO.getImageUrl());
 
         String type;

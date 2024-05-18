@@ -3,6 +3,7 @@ package com.capstone.planet.Controller;
 import com.capstone.planet.Model.DTO.RequestPostDeleteDTO;
 import com.capstone.planet.Model.DTO.RequestPostSaveDTO;
 import com.capstone.planet.Model.DTO.ResponsePostGetDTO;
+import com.capstone.planet.Model.DTO.ResponsePostsGetDTO;
 import com.capstone.planet.Service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Tag(name = "Post", description = "게시물 관련 API")
@@ -31,6 +33,13 @@ public class PostController {
     @GetMapping("/post")
     public ResponsePostGetDTO getPost(@RequestParam Long postId, @RequestParam Long userId) {
         return postService.getPost(postId, userId);
+    }
+
+    // 게시물 전체 조회
+    @Operation(summary = "게시물 전체 조회", description = "게시물 전체 조회지만 두가지 경우가 존재. /post/free : 자유게시판, /post/{대학교 이름} : 대학게시판, /post/ : 에러 처리")
+    @GetMapping("/post/{type}")
+    public List<ResponsePostsGetDTO> getPosts(@PathVariable String type) {
+        return postService.getPosts(type);
     }
 
     // 게시물 저장

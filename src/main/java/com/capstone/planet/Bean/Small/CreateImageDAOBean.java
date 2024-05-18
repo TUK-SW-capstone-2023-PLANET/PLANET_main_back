@@ -28,7 +28,7 @@ public class CreateImageDAOBean {
         String imageName = file.getOriginalFilename();
 
         // 업로드 시간
-        LocalDateTime uploadTime = LocalDateTime.now();
+        LocalDateTime uploadTime = LocalDateTime.now().plusHours(9);
 
         // 이미지 DAO 리턴
         return new ImageDAO(imageId, imageName, imageUrl, uploadTime);

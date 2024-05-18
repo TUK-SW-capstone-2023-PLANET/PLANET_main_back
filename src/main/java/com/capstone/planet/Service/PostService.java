@@ -2,23 +2,29 @@ package com.capstone.planet.Service;
 
 import com.capstone.planet.Bean.DeletePostBean;
 import com.capstone.planet.Bean.GetPostBean;
+import com.capstone.planet.Bean.GetPostsBean;
 import com.capstone.planet.Bean.SavePostBean;
 import com.capstone.planet.Model.DTO.RequestPostDeleteDTO;
 import com.capstone.planet.Model.DTO.RequestPostSaveDTO;
 import com.capstone.planet.Model.DTO.ResponsePostGetDTO;
+import com.capstone.planet.Model.DTO.ResponsePostsGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class PostService {
 
     GetPostBean getPostBean;
+    GetPostsBean getPostsBean;
     SavePostBean savePostBean;
     DeletePostBean deletePostBean;
 
     @Autowired
-    public PostService(GetPostBean getPostBean, SavePostBean savePostBean, DeletePostBean deletePostBean) {
+    public PostService(GetPostBean getPostBean, GetPostsBean getPostsBean, SavePostBean savePostBean, DeletePostBean deletePostBean) {
         this.getPostBean = getPostBean;
+        this.getPostsBean = getPostsBean;
         this.savePostBean = savePostBean;
         this.deletePostBean = deletePostBean;
     }
@@ -26,6 +32,11 @@ public class PostService {
     // 게시물 가져오기
     public ResponsePostGetDTO getPost(Long postId, Long userId) {
         return getPostBean.exec(postId, userId);
+    }
+
+    // 게시물 전체 가져오기
+    public List<ResponsePostsGetDTO> getPosts(String type) {
+        return getPostsBean.exec(type);
     }
 
     // 게시물 저장

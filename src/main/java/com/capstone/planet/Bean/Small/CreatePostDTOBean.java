@@ -27,6 +27,11 @@ public class CreatePostDTOBean {
             imageUrl = null;
          else imageUrl = stringToListMapper.exec(postDAO.getImageUrl());
 
+        String type;
+        if (postDAO.getType().equals("free"))
+            type = "자유 게시판";
+        else type = "대학교 게시판";
+
         return ResponsePostGetDTO.builder()
                 .postId(postDAO.getPostId())
                 .userId(postDAO.getUserId())
@@ -40,6 +45,7 @@ public class CreatePostDTOBean {
                 .viewCount(postDAO.getViewCount())
                 .uploadTime(postDAO.getUploadTime().toString())
                 .heart(heart)
+                .type(type)
                 .build();
     }
 }

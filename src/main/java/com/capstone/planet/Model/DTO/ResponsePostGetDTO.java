@@ -20,4 +20,5 @@ public class ResponsePostGetDTO {
     Integer viewCount;
     String uploadTime;
     boolean heart;
+    String type;
 }

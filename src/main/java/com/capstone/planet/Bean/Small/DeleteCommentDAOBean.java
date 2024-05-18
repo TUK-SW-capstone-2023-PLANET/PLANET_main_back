@@ -1,5 +1,6 @@
 package com.capstone.planet.Bean.Small;
 
+import com.capstone.planet.Model.DAO.CommentDAO;
 import com.capstone.planet.Repository.CommentRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -19,5 +20,10 @@ public class DeleteCommentDAOBean {
     @Transactional
     public void exec(Long postId) {
         commentRepositoryJPA.deleteAllByPostId(postId);
+    }
+
+    // 댓글 삭제
+    public void exec(CommentDAO commentDAO){
+        commentRepositoryJPA.delete(commentDAO);
     }
 }

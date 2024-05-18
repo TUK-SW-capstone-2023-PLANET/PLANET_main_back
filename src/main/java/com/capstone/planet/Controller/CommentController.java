@@ -3,6 +3,7 @@ package com.capstone.planet.Controller;
 import com.capstone.planet.Model.DTO.RequestCommentDeleteDTO;
 import com.capstone.planet.Model.DTO.RequestCommentSaveDTO;
 import com.capstone.planet.Model.DTO.RequestPostSaveDTO;
+import com.capstone.planet.Model.DTO.ResponseCommentGetDTO;
 import com.capstone.planet.Service.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Tag(name = "Comment", description = "댓글 관련 API")
@@ -24,6 +26,13 @@ public class CommentController {
     @Autowired
     public CommentController(CommentService commentService) {
         this.commentService = commentService;
+    }
+
+    // 댓글 전체 조회
+    @Operation(summary = "댓글 전체 조회", description = "게시물에 해당하는 댓글 전부 조회")
+    @GetMapping("/comment")
+    public List<ResponseCommentGetDTO> getComments(@RequestParam Long postId, @RequestParam Long userId) {
+        return commentService.getComments(postId, userId);
     }
 
     // 댓글 저장

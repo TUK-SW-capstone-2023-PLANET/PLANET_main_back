@@ -18,7 +18,7 @@ public class CreateCommentDAOBean {
                 .userId(requestCommentSaveDTO.getUserId())
                 .content(requestCommentSaveDTO.getContent())
                 .heartCount(0)
-                .uploadTime(LocalDateTime.now())
+                .uploadTime(LocalDateTime.now().plusHours(9))
                 .build();
     }
 }

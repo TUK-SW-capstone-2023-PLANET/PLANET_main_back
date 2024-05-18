@@ -23,13 +23,14 @@ public class SavePostBean {
     }
 
     // 게시물 저장
-    public Long exec(RequestPostSaveDTO requestPostSaveDTO) {
+    public Long exec(String type, RequestPostSaveDTO requestPostSaveDTO) {
 
         // 게시물 id 생성
         Long postId = createUniqueIdBean.exec();
 
         // 게시물 DAO 생성
-        PostDAO postDAO = createPostDAOBean.exec(postId, requestPostSaveDTO);
+        PostDAO postDAO = createPostDAOBean.exec(postId, type, requestPostSaveDTO);
+        if (postDAO == null) return null;
 
         // 게시물 저장
         savePostDAOBean.exec(postDAO);

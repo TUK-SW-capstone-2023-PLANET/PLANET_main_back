@@ -34,10 +34,10 @@ public class PostController {
     }
 
     // 게시물 저장
-    @Operation(summary = "게시물 저장", description = "게시물 저장")
-    @PostMapping("/post")
-    public ResponseEntity<Map<String, Object>> savePost(@RequestBody RequestPostSaveDTO requestPostSaveDTO) {
-        Long postId = postService.savePost(requestPostSaveDTO);
+    @Operation(summary = "게시물 저장", description = "게시물 저장이지만 두가지 경우가 존재. /post/free : 자유게시판, /post/university : 대학게시판, /post/ : 에러 처리")
+    @PostMapping("/post/{type}")
+    public ResponseEntity<Map<String, Object>> savePost(@PathVariable String type, @RequestBody RequestPostSaveDTO requestPostSaveDTO) {
+        Long postId = postService.savePost(type, requestPostSaveDTO);
 
         // HTTP 상태 변환
         HttpStatus httpStatus = (postId == null) ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.OK;

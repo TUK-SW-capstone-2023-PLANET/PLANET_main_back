@@ -29,8 +29,8 @@ public class PostService {
     }
 
     // 게시물 저장
-    public Long savePost(RequestPostSaveDTO requestPostSaveDTO) {
-        return savePostBean.exec(requestPostSaveDTO);
+    public Long savePost(String type, RequestPostSaveDTO requestPostSaveDTO) {
+        return savePostBean.exec(type, requestPostSaveDTO);
     }
 
     // 게시물 삭제

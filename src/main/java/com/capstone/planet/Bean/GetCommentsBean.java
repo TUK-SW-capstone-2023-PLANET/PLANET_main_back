@@ -28,6 +28,6 @@ public class GetCommentsBean {
         List<CommentDAO> commentDAOS = getCommentDAOBean.exec(postId, 0L);
 
         // 댓글 DTO로 변환
-        return createCommentDTOBean.exec(commentDAOS);
+        return createCommentDTOBean.exec(userId, commentDAOS);
     }
 }

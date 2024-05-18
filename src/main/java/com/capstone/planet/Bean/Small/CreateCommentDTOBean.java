@@ -15,14 +15,16 @@ import java.util.List;
 public class CreateCommentDTOBean {
 
     GetUserDAOBean getUserDAOBean;
+    GetCommentHeartDAOBean getCommentHeartDAOBean;
 
     @Autowired
-    public CreateCommentDTOBean(GetUserDAOBean getUserDAOBean) {
+    public CreateCommentDTOBean(GetUserDAOBean getUserDAOBean, GetCommentHeartDAOBean getCommentHeartDAOBean) {
         this.getUserDAOBean = getUserDAOBean;
+        this.getCommentHeartDAOBean = getCommentHeartDAOBean;
     }
 
     // 댓글 DTO 생성
-    public ResponseCommentGetDTO exec(CommentDAO commentDAO){
+    public ResponseCommentGetDTO exec(Long userId, CommentDAO commentDAO){
 
         UserDAO userDAO = getUserDAOBean.exec(commentDAO.getUserId());
         if (userDAO == null) return null;
@@ -46,6 +48,8 @@ public class CreateCommentDTOBean {
             uploadTime = "방금 전";
         }
 
+        boolean heart = getCommentHeartDAOBean.exec(commentDAO.getCommentId(), userId) != null;
+
 
         return ResponseCommentGetDTO.builder()
                 .commentId(commentDAO.getCommentId())
@@ -54,15 +58,16 @@ public class CreateCommentDTOBean {
                 .imageUrl(userDAO.getImageUrl())
                 .content(commentDAO.getContent())
                 .heartCount(commentDAO.getHeartCount())
+                .heart(heart)
                 .uploadTime(uploadTime)
                 .build();
     }
 
 
-    public List<ResponseCommentGetDTO> exec(List<CommentDAO> commentDAOS){
+    public List<ResponseCommentGetDTO> exec(Long userId, List<CommentDAO> commentDAOS){
         List<ResponseCommentGetDTO> responseCommentGetDTOS = new ArrayList<>();
         for (CommentDAO commentDAO : commentDAOS){
-            responseCommentGetDTOS.add(exec(commentDAO));
+            responseCommentGetDTOS.add(exec(userId, commentDAO));
         }
         return responseCommentGetDTOS;
     }

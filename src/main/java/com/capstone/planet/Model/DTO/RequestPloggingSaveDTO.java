@@ -13,7 +13,7 @@ public class RequestPloggingSaveDTO {
     List<Map<String, Integer>> trash;
     Double distance;
     Integer kcal;
-    Double pace;
+    String pace;
     Integer score;
     Integer ploggingTime;
 }

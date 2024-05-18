@@ -29,6 +29,7 @@ public class SaveUserProfileBean {
         userDAO.setGender(requestUserProfileSaveDTO.getGender());
         userDAO.setNickName(requestUserProfileSaveDTO.getNickName());
         userDAO.setPasswd(requestUserProfileSaveDTO.getPassword());
+        userDAO.setMessage("");
 
         saveUserDAOBean.exec(userDAO);
 

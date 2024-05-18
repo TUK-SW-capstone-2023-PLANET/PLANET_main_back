@@ -24,7 +24,7 @@ public class PloggingDAO {
     Integer trashCount;
     Double distance;
     Integer kcal;
-    Double pace;
+    String pace;
     Integer score;
     Integer ploggingTime;
     LocalDateTime uploadTime;

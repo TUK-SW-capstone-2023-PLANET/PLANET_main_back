@@ -16,7 +16,7 @@ public class ResponsePloggingGetDTO {
     Integer trashCount;
     Double distance;
     Integer kcal;
-    Double pace;
+    String pace;
     Integer score;
     List<LocationDTO> location;
     LocationDTO firstLocation;

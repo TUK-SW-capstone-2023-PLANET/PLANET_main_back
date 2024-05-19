@@ -12,16 +12,18 @@ public class PostService {
 
     GetPostBean getPostBean;
     GetHotPostBean getHotPostBean;
+    GetViewPostBean getViewPostBean;
     GetPostsBean getPostsBean;
     GetHotPostsBean getHotPostsBean;
     SavePostBean savePostBean;
     DeletePostBean deletePostBean;
 
     @Autowired
-    public PostService(GetPostBean getPostBean, GetHotPostBean getHotPostBean, GetPostsBean getPostsBean, GetHotPostsBean getHotPostsBean, SavePostBean savePostBean, DeletePostBean deletePostBean) {
+    public PostService(GetPostBean getPostBean, GetHotPostBean getHotPostBean, GetViewPostBean getViewPostBean, GetPostsBean getPostsBean, GetHotPostsBean getHotPostsBean, SavePostBean savePostBean, DeletePostBean deletePostBean) {
         this.getPostBean = getPostBean;
-        this.getPostsBean = getPostsBean;
         this.getHotPostBean = getHotPostBean;
+        this.getViewPostBean = getViewPostBean;
+        this.getPostsBean = getPostsBean;
         this.getHotPostsBean = getHotPostsBean;
         this.savePostBean = savePostBean;
         this.deletePostBean = deletePostBean;
@@ -35,6 +37,11 @@ public class PostService {
     // 인기 게시물 한개 가져오기
     public ResponseHotPostGetDTO getHotPost(String type) {
         return getHotPostBean.exec(type);
+    }
+
+    // 조회수 기준 게시물 가져오기
+    public ResponseViewPostGetDTO getViewPost(String type) {
+        return getViewPostBean.exec(type);
     }
 
     // 게시물 전체 가져오기

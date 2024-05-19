@@ -33,10 +33,17 @@ public class PostController {
     }
 
     // 인기 게시물 조회
-    @Operation(summary = "인기 게시물 조회", description = "인기 게시물 조회")
+    @Operation(summary = "인기 게시물 조회", description = "인기 게시물 조회 두가지 경우가 존재. /post/hot/free : 자유게시판, /post/hot/{대학교 이름} : 대학게시판, /post/ : 에러 처리")
     @GetMapping("/post/hot/{type}")
     public ResponseHotPostGetDTO getHotPost(@PathVariable String type) {
         return postService.getHotPost(type);
+    }
+
+    // 조회수 기준 게시물 조회
+    @Operation(summary = "조회수 기준 게시물 조회", description = "조회수 기준 게시물 조회 두가지 경우가 존재. /post/view/free : 자유게시판, /post/view/{대학교 이름} : 대학게시판, /post/view/ : 에러 처리")
+    @GetMapping("/post/view/{type}")
+    public ResponseViewPostGetDTO getViewPost(@PathVariable String type) {
+        return postService.getViewPost(type);
     }
 
     // 게시물 전체 조회

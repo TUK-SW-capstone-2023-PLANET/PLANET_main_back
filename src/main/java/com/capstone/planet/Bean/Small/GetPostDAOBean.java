@@ -36,4 +36,9 @@ public class GetPostDAOBean {
     public PostDAO exec(String type, String check){
         return postRepositoryJPA.findTop1ByTypeOrderByHeartCountDescUploadTimeDesc(type);
     }
+
+    // 조회수 기준 게시물 조회
+    public PostDAO exec(String type, Long check){
+        return postRepositoryJPA.findTop1ByTypeOrderByViewCountDescUploadTimeDesc(type);
+    }
 }

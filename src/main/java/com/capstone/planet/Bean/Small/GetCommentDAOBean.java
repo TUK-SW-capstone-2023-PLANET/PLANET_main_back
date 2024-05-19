@@ -26,4 +26,9 @@ public class GetCommentDAOBean {
     public List<CommentDAO> exec(Long postId, Long check){
         return commentRepositoryJPA.findAllByPostId(postId);
     }
+
+    // 내가 쓴 댓글 전부 가졍호기
+    public List<CommentDAO> exec(Long userId, String check){
+        return commentRepositoryJPA.findAllByUserId(userId);
+    }
 }

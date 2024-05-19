@@ -46,4 +46,9 @@ public class GetPostDAOBean {
     public List<PostDAO> exec(Long userId, Long check){
         return postRepositoryJPA.findByUserIdOrderByUploadTimeDesc(userId);
     }
+
+    // 게시물 아이디가 존재하는 게시물
+    public List<PostDAO> exec(List<Long> postIds){
+        return postRepositoryJPA.findAllByPostIdInOrderByUploadTimeDesc(postIds);
+    }
 }

@@ -61,13 +61,18 @@ public class PostController {
     }
 
     // 내가 작성한 게시물 전체 조회
-    @Operation(summary = "내가 작성한 게시물 전체 조회", description = "내가 작성한 게시물 전체 조회 세가지 경우가 존재. /post/my/{userId}/all : 전체이자 기본으로 사용하면 좋을듯 /post/my/{userId}/free : 자유게시판, /post/my/{userId}/{userId} : 대학게시판, /post/my/ : 에러 처리")
+    @Operation(summary = "내가 작성한 게시물 전체 조회", description = "내가 작성한 게시물 전체 조회 세가지 경우가 존재. /post/my/{userId}/all : 전체이자 기본으로 사용하면 좋을듯 /post/my/{userId}/free : 자유게시판, /post/my/{userId}/{userId} : 대학게시판, /post/my/{userId}/ : 에러 처리")
     @GetMapping("/post/my/{userId}/{type}")
     public List<ResponseMyPostGetDTO> getMyPosts(@PathVariable String type, @PathVariable Long userId) {
         return postService.getMyPosts(type, userId);
     }
 
-
+    // 내가 작성한 댓글 게시물 전체 조회
+    @Operation(summary = "내가 작성한 댓글 게시물 전체 조회", description = "내가 작성한 댓글 게시물 전체 조회 세가지 경우가 존재. /post/my/comment/{userId}/all : 전체이자 기본으로 사용하면 좋을듯 /post/my/comment/{userId}/free : 자유게시판, /post/my/comment/{userId}/{userId} : 대학게시판, /post/my/comment/{userId} : 에러 처리")
+    @GetMapping("/post/my/comment/{userId}/{type}")
+    public List<ResponseMyPostGetDTO> getMyPostsComment(@PathVariable String type, @PathVariable Long userId) {
+        return postService.getMyPostsComment(type, userId);
+    }
 
     // 게시물 저장
     @Operation(summary = "게시물 저장", description = "게시물 저장이지만 두가지 경우가 존재. /post/free : 자유게시판, /post/university : 대학게시판, /post/ : 에러 처리")

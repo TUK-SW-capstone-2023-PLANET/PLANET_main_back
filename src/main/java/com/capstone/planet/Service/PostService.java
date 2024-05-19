@@ -16,17 +16,19 @@ public class PostService {
     GetPostsBean getPostsBean;
     GetHotPostsBean getHotPostsBean;
     GetMyPostsBean getMyPostsBean;
+    GetMyPostsCommentBean getMyPostsCommentBean;
     SavePostBean savePostBean;
     DeletePostBean deletePostBean;
 
     @Autowired
-    public PostService(GetPostBean getPostBean, GetHotPostBean getHotPostBean, GetViewPostBean getViewPostBean, GetPostsBean getPostsBean, GetHotPostsBean getHotPostsBean, GetMyPostsBean getMyPostsBean, SavePostBean savePostBean, DeletePostBean deletePostBean) {
+    public PostService(GetPostBean getPostBean, GetHotPostBean getHotPostBean, GetViewPostBean getViewPostBean, GetPostsBean getPostsBean, GetHotPostsBean getHotPostsBean, GetMyPostsBean getMyPostsBean, GetMyPostsCommentBean getMyPostsCommentBean, SavePostBean savePostBean, DeletePostBean deletePostBean) {
         this.getPostBean = getPostBean;
         this.getHotPostBean = getHotPostBean;
         this.getViewPostBean = getViewPostBean;
         this.getPostsBean = getPostsBean;
         this.getHotPostsBean = getHotPostsBean;
         this.getMyPostsBean = getMyPostsBean;
+        this.getMyPostsCommentBean = getMyPostsCommentBean;
         this.savePostBean = savePostBean;
         this.deletePostBean = deletePostBean;
     }
@@ -59,6 +61,11 @@ public class PostService {
     // 내가 쓴 글 가져오기
     public List<ResponseMyPostGetDTO> getMyPosts(String type, Long userId) {
         return getMyPostsBean.exec(type, userId);
+    }
+
+    // 내가 쓴 댓글 게시물 가져오기
+    public List<ResponseMyPostGetDTO> getMyPostsComment(String type, Long userId) {
+        return getMyPostsCommentBean.exec(type, userId);
     }
 
     // 게시물 저장

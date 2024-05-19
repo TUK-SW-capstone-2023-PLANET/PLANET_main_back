@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 
-@Tag(name = "Comment", description = "댓글 관련 API")
+@Tag(name = "Comment Heart", description = "댓글 좋아요 관련 API")
 @RestController
 @CrossOrigin("*")
 public class CommentHeartController {

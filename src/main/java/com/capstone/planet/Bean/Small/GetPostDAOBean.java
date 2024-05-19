@@ -26,4 +26,9 @@ public class GetPostDAOBean {
     public List<PostDAO> exec(String type) {
         return postRepositoryJPA.findByTypeOrderByUploadTimeDesc(type);
     }
+
+    // 자유 게시판 인기 게시글 전체 조회
+    public List<PostDAO> exec() {
+        return postRepositoryJPA.findTop10ByTypeOrderByHeartCountDescUploadTimeDesc("free");
+    }
 }

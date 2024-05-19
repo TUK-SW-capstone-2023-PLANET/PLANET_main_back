@@ -1,9 +1,6 @@
 package com.capstone.planet.Controller;
 
-import com.capstone.planet.Model.DTO.RequestPostDeleteDTO;
-import com.capstone.planet.Model.DTO.RequestPostSaveDTO;
-import com.capstone.planet.Model.DTO.ResponsePostGetDTO;
-import com.capstone.planet.Model.DTO.ResponsePostsGetDTO;
+import com.capstone.planet.Model.DTO.*;
 import com.capstone.planet.Service.PostService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,6 +37,13 @@ public class PostController {
     @GetMapping("/post/{type}")
     public List<ResponsePostsGetDTO> getPosts(@PathVariable String type) {
         return postService.getPosts(type);
+    }
+
+    // 인기 게시물 조회
+    @Operation(summary = "인기 게시물 전체 조회", description = "인기 게시물 전체 조회")
+    @GetMapping("/post/hot")
+    public List<ResponseHotPostsGetDTO> getHotPosts() {
+        return postService.getHotPosts();
     }
 
     // 게시물 저장

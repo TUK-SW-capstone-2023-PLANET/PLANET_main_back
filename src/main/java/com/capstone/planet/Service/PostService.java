@@ -1,13 +1,7 @@
 package com.capstone.planet.Service;
 
-import com.capstone.planet.Bean.DeletePostBean;
-import com.capstone.planet.Bean.GetPostBean;
-import com.capstone.planet.Bean.GetPostsBean;
-import com.capstone.planet.Bean.SavePostBean;
-import com.capstone.planet.Model.DTO.RequestPostDeleteDTO;
-import com.capstone.planet.Model.DTO.RequestPostSaveDTO;
-import com.capstone.planet.Model.DTO.ResponsePostGetDTO;
-import com.capstone.planet.Model.DTO.ResponsePostsGetDTO;
+import com.capstone.planet.Bean.*;
+import com.capstone.planet.Model.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +12,15 @@ public class PostService {
 
     GetPostBean getPostBean;
     GetPostsBean getPostsBean;
+    GetHotPostsBean getHotPostsBean;
     SavePostBean savePostBean;
     DeletePostBean deletePostBean;
 
     @Autowired
-    public PostService(GetPostBean getPostBean, GetPostsBean getPostsBean, SavePostBean savePostBean, DeletePostBean deletePostBean) {
+    public PostService(GetPostBean getPostBean, GetPostsBean getPostsBean, GetHotPostsBean getHotPostsBean, SavePostBean savePostBean, DeletePostBean deletePostBean) {
         this.getPostBean = getPostBean;
         this.getPostsBean = getPostsBean;
+        this.getHotPostsBean = getHotPostsBean;
         this.savePostBean = savePostBean;
         this.deletePostBean = deletePostBean;
     }
@@ -37,6 +33,11 @@ public class PostService {
     // 게시물 전체 가져오기
     public List<ResponsePostsGetDTO> getPosts(String type) {
         return getPostsBean.exec(type);
+    }
+
+    // 인기 게시물 가져오기
+    public List<ResponseHotPostsGetDTO> getHotPosts() {
+        return getHotPostsBean.exec();
     }
 
     // 게시물 저장

@@ -10,4 +10,6 @@ import java.util.List;
 public interface PostRepositoryJPA extends JpaRepository<PostDAO, Long> {
 
     List<PostDAO> findByTypeOrderByUploadTimeDesc(String type);
+
+    List<PostDAO> findTop10ByTypeOrderByHeartCountDescUploadTimeDesc(String type);
 }

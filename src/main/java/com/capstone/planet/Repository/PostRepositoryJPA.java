@@ -16,4 +16,6 @@ public interface PostRepositoryJPA extends JpaRepository<PostDAO, Long> {
     PostDAO findTop1ByTypeOrderByHeartCountDescUploadTimeDesc(String type);
 
     PostDAO findTop1ByTypeOrderByViewCountDescUploadTimeDesc(String type);
+
+    List<PostDAO> findByUserIdOrderByUploadTimeDesc(Long userId);
 }

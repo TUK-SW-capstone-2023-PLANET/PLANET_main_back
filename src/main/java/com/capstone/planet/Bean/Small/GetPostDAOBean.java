@@ -41,4 +41,9 @@ public class GetPostDAOBean {
     public PostDAO exec(String type, Long check){
         return postRepositoryJPA.findTop1ByTypeOrderByViewCountDescUploadTimeDesc(type);
     }
+
+    // 내가 작성한 게시물 시간순 전체 조회
+    public List<PostDAO> exec(Long userId, Long check){
+        return postRepositoryJPA.findByUserIdOrderByUploadTimeDesc(userId);
+    }
 }

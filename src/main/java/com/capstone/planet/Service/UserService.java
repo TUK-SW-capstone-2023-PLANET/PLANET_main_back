@@ -13,6 +13,7 @@ import java.util.Map;
 @Service
 public class UserService {
 
+    GetUniversityInfoBean getUniversityInfoBean;
     CheckUserNameBean checkUserNameBean;
     GetUserRankBean getUserRankBean;
     GetUserBean getUserBean;
@@ -27,7 +28,8 @@ public class UserService {
     GetUniversityUser4Bean getUniversityUser4Bean;
 
     @Autowired
-    public UserService(CheckUserNameBean checkUserNameBean, GetUserRankBean getUserRankBean, GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserProfileBean saveUserProfileBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean, GetUserTop3Bean getUserTop3Bean, GetUniversityUsersBean getUniversityUsersBean, GetUniversityUserBean getUniversityUserBean, GetUniversityUserTop3Bean getUniversityUserTop3Bean, GetUniversityUser4Bean getUniversityUser4Bean) {
+    public UserService(GetUniversityInfoBean getUniversityInfoBean, CheckUserNameBean checkUserNameBean, GetUserRankBean getUserRankBean, GetUserBean getUserBean, GetUserAllBean getUserAllBean, SaveUserProfileBean saveUserProfileBean, SaveUserBean saveUserBean, UpdateUserBean updateUserBean, GetUserTop3Bean getUserTop3Bean, GetUniversityUsersBean getUniversityUsersBean, GetUniversityUserBean getUniversityUserBean, GetUniversityUserTop3Bean getUniversityUserTop3Bean, GetUniversityUser4Bean getUniversityUser4Bean) {
+        this.getUniversityInfoBean = getUniversityInfoBean;
         this.checkUserNameBean = checkUserNameBean;
         this.getUserRankBean = getUserRankBean;
         this.getUserBean = getUserBean;
@@ -40,6 +42,11 @@ public class UserService {
         this.getUniversityUserBean = getUniversityUserBean;
         this.getUniversityUserTop3Bean = getUniversityUserTop3Bean;
         this.getUniversityUser4Bean = getUniversityUser4Bean;
+    }
+
+    // 유저 id로 대학교 정보 가져오기
+    public ResponseUniversityInfoGetDTO getUniversityInfo(Long userId){
+        return getUniversityInfoBean.exec(userId);
     }
 
     // 유저 이름 중복 체크

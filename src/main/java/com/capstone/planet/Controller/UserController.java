@@ -29,6 +29,12 @@ public class UserController {
         this.userService = userService;
     }
 
+    // 유저 id로 대학교 정보 가져오기
+    @Operation(summary = "유저 id로 대학교 정보 가져오기", description = "유저 id로 대학교 정보 가져오기")
+    @GetMapping("user/{userId}/university")
+    public ResponseUniversityInfoGetDTO getUniversityInfo(@PathVariable Long userId){
+        return userService.getUniversityInfo(userId);
+    }
 
     // 유저 이름 중복 체크
     @Operation(summary = "유저 이름 중복 체크", description = "유저 이름 중복 체크")

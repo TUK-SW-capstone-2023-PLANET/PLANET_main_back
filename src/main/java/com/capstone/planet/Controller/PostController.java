@@ -32,6 +32,13 @@ public class PostController {
         return postService.getPost(postId, userId);
     }
 
+    // 인기 게시물 조회
+    @Operation(summary = "인기 게시물 조회", description = "인기 게시물 조회")
+    @GetMapping("/post/hot/{type}")
+    public ResponseHotPostGetDTO getHotPost(@PathVariable String type) {
+        return postService.getHotPost(type);
+    }
+
     // 게시물 전체 조회
     @Operation(summary = "게시물 전체 조회", description = "게시물 전체 조회지만 두가지 경우가 존재. /post/free : 자유게시판, /post/{대학교 이름} : 대학게시판, /post/ : 에러 처리")
     @GetMapping("/post/{type}")

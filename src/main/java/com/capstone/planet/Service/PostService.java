@@ -11,15 +11,17 @@ import java.util.List;
 public class PostService {
 
     GetPostBean getPostBean;
+    GetHotPostBean getHotPostBean;
     GetPostsBean getPostsBean;
     GetHotPostsBean getHotPostsBean;
     SavePostBean savePostBean;
     DeletePostBean deletePostBean;
 
     @Autowired
-    public PostService(GetPostBean getPostBean, GetPostsBean getPostsBean, GetHotPostsBean getHotPostsBean, SavePostBean savePostBean, DeletePostBean deletePostBean) {
+    public PostService(GetPostBean getPostBean, GetHotPostBean getHotPostBean, GetPostsBean getPostsBean, GetHotPostsBean getHotPostsBean, SavePostBean savePostBean, DeletePostBean deletePostBean) {
         this.getPostBean = getPostBean;
         this.getPostsBean = getPostsBean;
+        this.getHotPostBean = getHotPostBean;
         this.getHotPostsBean = getHotPostsBean;
         this.savePostBean = savePostBean;
         this.deletePostBean = deletePostBean;
@@ -28,6 +30,11 @@ public class PostService {
     // 게시물 가져오기
     public ResponsePostGetDTO getPost(Long postId, Long userId) {
         return getPostBean.exec(postId, userId);
+    }
+
+    // 인기 게시물 한개 가져오기
+    public ResponseHotPostGetDTO getHotPost(String type) {
+        return getHotPostBean.exec(type);
     }
 
     // 게시물 전체 가져오기

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Tag(name = "Image", description = "사진 관련 API")
 @RestController
@@ -31,16 +33,16 @@ public class ImageController {
     public ImageDTO saveImage(@RequestParam("file") MultipartFile file) throws IOException {
 
         return imageService.saveImage(file);
+    }
 
-/*
-        // HTTP 상태 변환
-        HttpStatus httpStatus = (iId != null) ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR;
-
-        // 메시지와 id 값 json 데이터로 반환
-        Map<String, Object> requestMap = new HashMap<>();
-        requestMap.put("message", (iId != null) ? "Save Success" : "Save Fail");
-        requestMap.put("iId", iId);
-
-        return ResponseEntity.status(httpStatus).body(requestMap);*/
+    // 여러 이미지 저장
+    @Operation(summary = "여러 이미지 저장", description = "멀티파일로 여러 이미지 저장 후 imageUrls 반환")
+    @PostMapping("images")
+    public List<ImageDTO> saveImages(@RequestParam("files") List<MultipartFile> files) throws IOException {
+        List<ImageDTO> imageDTOs = new ArrayList<>();
+        for (MultipartFile file : files) {
+            imageDTOs.add(imageService.saveImage(file));
+        }
+        return imageDTOs;
     }
 }

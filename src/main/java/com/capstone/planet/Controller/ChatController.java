@@ -2,6 +2,7 @@ package com.capstone.planet.Controller;
 
 import com.capstone.planet.Model.DTO.RequestChatSaveDTO;
 import com.capstone.planet.Model.DTO.ResponseChatGetDTO;
+import com.capstone.planet.Model.DTO.ResponseChatRoomGetDTO;
 import com.capstone.planet.Service.ChatService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,6 +32,13 @@ public class ChatController {
     @GetMapping("/chat/chat-room/{chatRoomId}/user/{userId}")
     public List<ResponseChatGetDTO> getChats(@PathVariable Long chatRoomId, @PathVariable Long userId) {
         return chatService.getChats(chatRoomId, userId);
+    }
+
+    // 채팅방 전체 조회
+    @Operation(summary = "채팅방 전체 조회", description = "채팅방 전체 조회")
+    @GetMapping("/chat/chat-room/user/{userId}")
+    public List<ResponseChatRoomGetDTO> getChatRooms(@PathVariable Long userId) {
+        return chatService.getChatRooms(userId);
     }
 
     // 채팅 저장

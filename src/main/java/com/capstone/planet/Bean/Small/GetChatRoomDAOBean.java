@@ -5,6 +5,8 @@ import com.capstone.planet.Repository.ChatRoomRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class GetChatRoomDAOBean {
 
@@ -30,4 +32,16 @@ public class GetChatRoomDAOBean {
         if (byUserOneIdAndUserTwoId != null) return byUserOneIdAndUserTwoId;
         else return byUserOneIdAndUserTwoId1;
     }
+
+    public List<ChatRoomDAO> exec(Long userId, Long check, Long check2, Long check3){
+        return chatRoomRepositoryJPA.findAllByUserOneId(userId);
+    }
+
+    public List<ChatRoomDAO> exec(Long userId, Long check, Long check2){
+        return chatRoomRepositoryJPA.findAllByUserTwoId(userId);
+    }
+
+    /*public List<ChatRoomDAO> exec(Long userId, String check){
+        return chatRoomRepositoryJPA.findByUserOneIdOrUserTwoIdOrderByUploadTimeDesc(userId);
+    }*/
 }

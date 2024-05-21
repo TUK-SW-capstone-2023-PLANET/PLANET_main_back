@@ -7,6 +7,7 @@ import com.capstone.planet.Model.DTO.ResponsePostGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class CreatePostDTOBean {
             type = "자유 게시판";
         else type = "대학교 게시판";
 
+        String uploadTime = postDAO.getUploadTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
+
         return ResponsePostGetDTO.builder()
                 .postId(postDAO.getPostId())
                 .userId(postDAO.getUserId())
@@ -44,7 +47,7 @@ public class CreatePostDTOBean {
                 .heartCount(postDAO.getHeartCount())
                 .commentCount(postDAO.getCommentCount())
                 .viewCount(postDAO.getViewCount())
-                .uploadTime(postDAO.getUploadTime().toString())
+                .uploadTime(uploadTime)
                 .heart(heart)
                 .type(type)
                 .build();

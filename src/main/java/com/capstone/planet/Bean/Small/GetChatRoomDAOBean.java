@@ -15,6 +15,11 @@ public class GetChatRoomDAOBean {
         this.chatRoomRepositoryJPA = chatRoomRepositoryJPA;
     }
 
+    // 채팅방 아이디로 채팅방 조회
+    public ChatRoomDAO exec(Long chatRoomId){
+        return chatRoomRepositoryJPA.findById(chatRoomId).orElse(null);
+    }
+
     // 유저 아이디 2개로 채팅방 조회
     public ChatRoomDAO exec(Long userOneId, Long userTwoId){
 

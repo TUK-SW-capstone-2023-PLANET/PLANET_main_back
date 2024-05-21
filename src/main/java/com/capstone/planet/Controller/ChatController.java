@@ -1,18 +1,17 @@
 package com.capstone.planet.Controller;
 
 import com.capstone.planet.Model.DTO.RequestChatSaveDTO;
+import com.capstone.planet.Model.DTO.ResponseChatGetDTO;
 import com.capstone.planet.Service.ChatService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Tag(name = "Chat", description = "쪽지 관련 API")
@@ -25,6 +24,13 @@ public class ChatController {
     @Autowired
     public ChatController(ChatService chatService) {
         this.chatService = chatService;
+    }
+
+    // 채팅방 채팅 내역 조회
+    @Operation(summary = "채팅방 채팅 내역 전체 조회", description = "채팅방 채팅 내역 전체 조회")
+    @GetMapping("/chat/chat-room/{chatRoomId}/user/{userId}")
+    public List<ResponseChatGetDTO> getChats(@PathVariable Long chatRoomId, @PathVariable Long userId) {
+        return chatService.getChats(chatRoomId, userId);
     }
 
     // 채팅 저장

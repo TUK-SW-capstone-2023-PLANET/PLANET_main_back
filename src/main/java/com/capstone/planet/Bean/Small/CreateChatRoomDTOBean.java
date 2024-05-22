@@ -1,6 +1,7 @@
 package com.capstone.planet.Bean.Small;
 
 import com.capstone.planet.Model.DAO.ChatRoomDAO;
+import com.capstone.planet.Model.DAO.UserChatRoomDAO;
 import com.capstone.planet.Model.DAO.UserDAO;
 import com.capstone.planet.Model.DTO.ResponseChatRoomGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,12 @@ import java.util.List;
 public class CreateChatRoomDTOBean {
 
     GetUserDAOBean getUserDAOBean;
+    GetUserChatRoomDAOBean getUserChatRoomDAOBean;
 
     @Autowired
-    public CreateChatRoomDTOBean(GetUserDAOBean getUserDAOBean){
+    public CreateChatRoomDTOBean(GetUserDAOBean getUserDAOBean, GetUserChatRoomDAOBean getUserChatRoomDAOBean){
         this.getUserDAOBean = getUserDAOBean;
+        this.getUserChatRoomDAOBean = getUserChatRoomDAOBean;
     }
 
     public ResponseChatRoomGetDTO exec(Long userId, ChatRoomDAO chatRoomDAO){
@@ -26,6 +29,8 @@ public class CreateChatRoomDTOBean {
         String uploadTime = chatRoomDAO.getUploadTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
 
         UserDAO partnerUserDAO = getUserDAOBean.exec(partnerUserId);
+        UserChatRoomDAO userChatRoomDAO = getUserChatRoomDAOBean.exec(userId, chatRoomDAO.getChatRoomId());
+        boolean newType = userChatRoomDAO.isNewType();
 
         return ResponseChatRoomGetDTO.builder()
                 .chatRoomId(chatRoomDAO.getChatRoomId())
@@ -34,6 +39,7 @@ public class CreateChatRoomDTOBean {
                 .partnerUserImage(partnerUserDAO.getImageUrl())
                 .content(chatRoomDAO.getContent())
                 .uploadTime(uploadTime)
+                .newType(newType)
                 .build();
     }
 

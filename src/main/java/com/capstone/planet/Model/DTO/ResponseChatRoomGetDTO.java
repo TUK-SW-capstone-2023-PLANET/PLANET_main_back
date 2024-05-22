@@ -12,4 +12,5 @@ public class ResponseChatRoomGetDTO {
     String partnerUserImage;
     String content;
     String uploadTime;
+    boolean newType;
 }

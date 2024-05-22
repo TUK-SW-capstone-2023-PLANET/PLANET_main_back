@@ -1,11 +1,9 @@
 package com.capstone.planet.Bean;
 
-import com.capstone.planet.Bean.Small.CreateChatDTOBean;
-import com.capstone.planet.Bean.Small.GetChatDAOBean;
-import com.capstone.planet.Bean.Small.GetChatRoomDAOBean;
-import com.capstone.planet.Bean.Small.GetUserDAOBean;
+import com.capstone.planet.Bean.Small.*;
 import com.capstone.planet.Model.DAO.ChatDAO;
 import com.capstone.planet.Model.DAO.ChatRoomDAO;
+import com.capstone.planet.Model.DAO.UserChatRoomDAO;
 import com.capstone.planet.Model.DAO.UserDAO;
 import com.capstone.planet.Model.DTO.ResponseChatGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +18,17 @@ public class GetChatsBean {
     GetChatDAOBean getChatDAOBean;
     GetUserDAOBean getUserDAOBean;
     CreateChatDTOBean createChatDTOBean;
+    GetUserChatRoomDAOBean getUserChatRoomDAOBean;
+    SaveUserChatRoomDAOBean saveUserChatRoomDAOBean;
 
     @Autowired
-    public GetChatsBean(GetChatRoomDAOBean getChatRoomDAOBean, GetChatDAOBean getChatDAOBean, GetUserDAOBean getUserDAOBean, CreateChatDTOBean createChatDTOBean) {
+    public GetChatsBean(GetChatRoomDAOBean getChatRoomDAOBean, GetChatDAOBean getChatDAOBean, GetUserDAOBean getUserDAOBean, CreateChatDTOBean createChatDTOBean, GetUserChatRoomDAOBean getUserChatRoomDAOBean, SaveUserChatRoomDAOBean saveUserChatRoomDAOBean) {
         this.getChatRoomDAOBean = getChatRoomDAOBean;
         this.getChatDAOBean = getChatDAOBean;
         this.getUserDAOBean = getUserDAOBean;
         this.createChatDTOBean = createChatDTOBean;
+        this.getUserChatRoomDAOBean = getUserChatRoomDAOBean;
+        this.saveUserChatRoomDAOBean = saveUserChatRoomDAOBean;
     }
 
     // 채팅방 채팅 내역 조회
@@ -50,6 +52,11 @@ public class GetChatsBean {
 
         // 채팅방 채팅 내역 조회
         List<ChatDAO> chatDAOS = getChatDAOBean.exec(chatRoomId);
+
+        // 채팅방 조회시 newType 변경
+        UserChatRoomDAO userChatRoomDAO = getUserChatRoomDAOBean.exec(userId, chatRoomId);
+        userChatRoomDAO.setNewType(false);
+        saveUserChatRoomDAOBean.exec(userChatRoomDAO);
 
         // 채팅 내역 반환
         return createChatDTOBean.exec(userId, userDAO.getImageUrl(), partnerUserDAO.getImageUrl(), chatDAOS);

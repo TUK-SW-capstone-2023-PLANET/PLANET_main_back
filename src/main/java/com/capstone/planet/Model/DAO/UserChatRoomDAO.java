@@ -16,4 +16,5 @@ public class UserChatRoomDAO {
     Long userId;
     Long chatRoomId;
     boolean newType;
+    boolean deleteCheck;
 }

@@ -9,6 +9,7 @@ import com.capstone.planet.Model.DTO.ResponseChatGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -20,15 +21,21 @@ public class GetChatsBean {
     CreateChatDTOBean createChatDTOBean;
     GetUserChatRoomDAOBean getUserChatRoomDAOBean;
     SaveUserChatRoomDAOBean saveUserChatRoomDAOBean;
+    DeleteChatDAOBean deleteChatDAOBean;
+    DeleteChatRoomDAOBean deleteChatRoomDAOBean;
+    DeleteUserChatRoomDAOBean deleteUserChatRoomDAOBean;
 
     @Autowired
-    public GetChatsBean(GetChatRoomDAOBean getChatRoomDAOBean, GetChatDAOBean getChatDAOBean, GetUserDAOBean getUserDAOBean, CreateChatDTOBean createChatDTOBean, GetUserChatRoomDAOBean getUserChatRoomDAOBean, SaveUserChatRoomDAOBean saveUserChatRoomDAOBean) {
+    public GetChatsBean(GetChatRoomDAOBean getChatRoomDAOBean, GetChatDAOBean getChatDAOBean, GetUserDAOBean getUserDAOBean, CreateChatDTOBean createChatDTOBean, GetUserChatRoomDAOBean getUserChatRoomDAOBean, SaveUserChatRoomDAOBean saveUserChatRoomDAOBean, DeleteChatDAOBean deleteChatDAOBean, DeleteChatRoomDAOBean deleteChatRoomDAOBean, DeleteUserChatRoomDAOBean deleteUserChatRoomDAOBean) {
         this.getChatRoomDAOBean = getChatRoomDAOBean;
         this.getChatDAOBean = getChatDAOBean;
         this.getUserDAOBean = getUserDAOBean;
         this.createChatDTOBean = createChatDTOBean;
         this.getUserChatRoomDAOBean = getUserChatRoomDAOBean;
         this.saveUserChatRoomDAOBean = saveUserChatRoomDAOBean;
+        this.deleteChatDAOBean = deleteChatDAOBean;
+        this.deleteChatRoomDAOBean = deleteChatRoomDAOBean;
+        this.deleteUserChatRoomDAOBean = deleteUserChatRoomDAOBean;
     }
 
     // 채팅방 채팅 내역 조회
@@ -43,6 +50,13 @@ public class GetChatsBean {
             partnerUserId = chatRoomDAO.getUserTwoId();
         else
             partnerUserId = chatRoomDAO.getUserOneId();
+
+        if (getUserChatRoomDAOBean.exec(partnerUserId, chatRoomId).isDeleteCheck()){
+            deleteChatDAOBean.exec(chatRoomId);
+            deleteChatRoomDAOBean.exec(chatRoomId);
+            deleteUserChatRoomDAOBean.exec(chatRoomId);
+            return new ArrayList<>();
+        }
 
         // 내 정보
         UserDAO userDAO = getUserDAOBean.exec(userId);

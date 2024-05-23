@@ -81,6 +81,7 @@ public class SaveChatBean {
                     .userId(requestChatSaveDTO.getSenderId())
                     .chatRoomId(chatRoomId)
                     .newType(false)
+                    .deleteCheck(false)
                     .build();
 
             UserChatRoomDAO buyerChatRoomDAO = UserChatRoomDAO.builder()
@@ -88,6 +89,7 @@ public class SaveChatBean {
                     .userId(requestChatSaveDTO.getReceiverId())
                     .chatRoomId(chatRoomId)
                     .newType(true)
+                    .deleteCheck(false)
                     .build();
 
             saveUserChatRoomDAOBean.exec(senderChatRoomDAO);

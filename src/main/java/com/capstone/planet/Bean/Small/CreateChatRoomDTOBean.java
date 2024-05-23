@@ -28,6 +28,9 @@ public class CreateChatRoomDTOBean {
         Long partnerUserId = userId.equals(chatRoomDAO.getUserOneId()) ? chatRoomDAO.getUserTwoId() : chatRoomDAO.getUserOneId();
         String uploadTime = chatRoomDAO.getUploadTime().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm"));
 
+        if (getUserChatRoomDAOBean.exec(userId, chatRoomDAO.getChatRoomId()).isDeleteCheck())
+            return null;
+
         UserDAO partnerUserDAO = getUserDAOBean.exec(partnerUserId);
         UserChatRoomDAO userChatRoomDAO = getUserChatRoomDAOBean.exec(userId, chatRoomDAO.getChatRoomId());
         boolean newType = userChatRoomDAO.isNewType();
@@ -46,7 +49,9 @@ public class CreateChatRoomDTOBean {
     public List<ResponseChatRoomGetDTO> exec(Long userId, List<ChatRoomDAO> chatRoomDAOS){
         List<ResponseChatRoomGetDTO> responseChatRoomGetDTOS = new ArrayList<>();
         for (ChatRoomDAO chatRoomDAO : chatRoomDAOS) {
-            responseChatRoomGetDTOS.add(exec(userId, chatRoomDAO));
+            ResponseChatRoomGetDTO exec = exec(userId, chatRoomDAO);
+            if (exec != null)
+                responseChatRoomGetDTOS.add(exec);
         }
         return responseChatRoomGetDTOS;
     }

@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface UserChatRoomRepositoryJPA extends JpaRepository<UserChatRoomDAO, Long> {
 
     UserChatRoomDAO findByUserIdAndChatRoomId(Long userId, Long chatRoomId);
+
+    void deleteAllByChatRoomId(Long chatRoomId);
 }

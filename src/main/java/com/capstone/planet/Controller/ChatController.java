@@ -1,5 +1,6 @@
 package com.capstone.planet.Controller;
 
+import com.capstone.planet.Model.DTO.RequestChatRoomDeleteDTO;
 import com.capstone.planet.Model.DTO.RequestChatSaveDTO;
 import com.capstone.planet.Model.DTO.ResponseChatGetDTO;
 import com.capstone.planet.Model.DTO.ResponseChatRoomGetDTO;
@@ -30,8 +31,18 @@ public class ChatController {
     // 채팅방 채팅 내역 조회
     @Operation(summary = "채팅방 채팅 내역 전체 조회", description = "채팅방 채팅 내역 전체 조회")
     @GetMapping("/chat/chat-room/{chatRoomId}/user/{userId}")
-    public List<ResponseChatGetDTO> getChats(@PathVariable Long chatRoomId, @PathVariable Long userId) {
-        return chatService.getChats(chatRoomId, userId);
+    public ResponseEntity<Map<String, Object>> getChats(@PathVariable Long chatRoomId, @PathVariable Long userId) {
+
+        List<ResponseChatGetDTO> chats = chatService.getChats(chatRoomId, userId);
+
+        // HTTP 상태 변환
+
+        // 메시지와 id 값 json 데이터로 반환
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("message", (chats.isEmpty()) ? "상대방이 쪽지함을 삭제함" : "쪽지 전체 조회 성공");
+        requestMap.put("chats", chats);
+
+        return ResponseEntity.status(HttpStatus.OK).body(requestMap);
     }
 
     // 채팅방 전체 조회
@@ -57,4 +68,22 @@ public class ChatController {
 
         return ResponseEntity.status(httpStatus).body(requestMap);
     }
+
+    // 채팅방 삭제
+    @Operation(summary = "채팅방 삭제", description = "채팅방 삭제")
+    @DeleteMapping("/chat/chat-room")
+    public ResponseEntity<Map<String, Object>> deleteChatRoom(@RequestBody RequestChatRoomDeleteDTO requestChatRoomDeleteDTO) {
+        Long chatRoomId = chatService.deleteChatRoom(requestChatRoomDeleteDTO);
+
+        // HTTP 상태 반환
+        HttpStatus httpStatus = (chatRoomId != null) ? HttpStatus.OK : HttpStatus.INTERNAL_SERVER_ERROR;
+
+        // 메시지와 id 값 json 데이터로 반환
+        Map<String, Object> requestMap = new HashMap<>();
+        requestMap.put("message", (chatRoomId != null) ? "채팅방 삭제 성공" : "채팅방 삭제 실패");
+        requestMap.put("chatId", chatRoomId);
+
+        return ResponseEntity.status(httpStatus).body(requestMap);
+    }
+
 }

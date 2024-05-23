@@ -11,4 +11,7 @@ public interface ChatRepositoryJPA extends JpaRepository<ChatDAO, Long> {
 
     // 채팅방 아이디로 채팅내역 시간순 조회
     List<ChatDAO> findByChatRoomIdOrderByUploadTimeDesc(Long chatRoomId);
+
+    // 채팅방 아이디로 채팅내역 삭제
+    void deleteAllByChatRoomId(Long chatRoomId);
 }

@@ -5,6 +5,8 @@ import com.capstone.planet.Repository.PloggingRepositoryJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class GetPloggingDAOBean {
 
@@ -19,4 +21,10 @@ public class GetPloggingDAOBean {
     public PloggingDAO exec(Long ploggingId){
         return ploggingRepositoryJPA.findById(ploggingId).orElse(null);
     }
+
+    // 플로깅 개게 userId와 month 일치하는 객체 day 기준으로 Asc 정렬 후 가져오기
+    public List<PloggingDAO> exec(Long userId, String month){
+        return ploggingRepositoryJPA.findByUserIdAndMonthOrderByDayAsc(userId, month);
+    }
+
 }

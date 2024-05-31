@@ -28,6 +28,6 @@ public class PloggingDAO {
     Integer score;
     Integer ploggingTime;
     String month;
-    String day;
+    Integer day;
     LocalDateTime uploadTime;
 }

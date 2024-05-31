@@ -2,6 +2,7 @@ package com.capstone.planet.Controller;
 
 import com.capstone.planet.Model.DTO.RequestPloggingSaveDTO;
 import com.capstone.planet.Model.DTO.ResponsePloggingGetDTO;
+import com.capstone.planet.Model.DTO.ResponsePloggingGetsDTO;
 import com.capstone.planet.Model.DTO.ResponsePloggingStartDTO;
 import com.capstone.planet.Service.PloggingService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Tag(name = "Plogging", description = "플로깅 기록 관련 API")
@@ -40,6 +42,14 @@ public class PloggingController {
     public ResponsePloggingGetDTO getPlogging(@PathVariable Long ploggingId){
         return ploggingService.getPlogging(ploggingId);
     }
+
+    // 다이어리 플로깅 정보 조회
+    @Operation(summary = "다이어리 플로깅 정보 조회", description = "다이어리 날짜별 플로깅 정보 조회")
+    @GetMapping("plogging/user/{userId}/year/{year}/month/{month}")
+    public List<Map<Integer, List<ResponsePloggingGetsDTO>>> getPloggings(@PathVariable Long userId, @PathVariable String year, @PathVariable String month){
+        return ploggingService.getPloggings(userId, year, month);
+    }
+
 
     // 플로깅 저장
     @Operation(summary = "플로깅 저장", description = "플로깅 종료시 정보 받은 후 저장")

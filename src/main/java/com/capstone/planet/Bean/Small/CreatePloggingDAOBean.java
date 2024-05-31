@@ -40,7 +40,7 @@ public class CreatePloggingDAOBean {
 
         // 시간에서 년 월 일 가져오기
         String month = String.valueOf(now.getYear()) + String.format("%02d", now.getMonthValue());
-        String day = String.valueOf(now.getDayOfMonth());
+        Integer day = now.getDayOfMonth();
 
 
         PloggingDAO ploggingDAO = new PloggingDAO();

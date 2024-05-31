@@ -27,5 +27,7 @@ public class PloggingDAO {
     String pace;
     Integer score;
     Integer ploggingTime;
+    String month;
+    String day;
     LocalDateTime uploadTime;
 }

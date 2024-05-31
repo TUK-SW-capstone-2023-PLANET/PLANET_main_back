@@ -5,7 +5,6 @@ import com.capstone.planet.Model.DAO.PloggingDAO;
 import com.capstone.planet.Model.DAO.SeasonDAO;
 import com.capstone.planet.Model.DAO.UniversityDAO;
 import com.capstone.planet.Model.DAO.UserDAO;
-import com.capstone.planet.Model.DTO.ImageDTO;
 import com.capstone.planet.Model.DTO.LocationDTO;
 import com.capstone.planet.Model.DTO.RequestPloggingSaveDTO;
 import org.springframework.beans.factory.annotation.Autowired;

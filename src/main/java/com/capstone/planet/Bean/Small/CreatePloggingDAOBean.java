@@ -36,6 +36,12 @@ public class CreatePloggingDAOBean {
         }
 
 
+        LocalDateTime now = LocalDateTime.now().plusHours(9);
+
+        // 시간에서 년 월 일 가져오기
+        String month = String.valueOf(now.getYear()) + String.format("%02d", now.getMonthValue());
+        String day = String.valueOf(now.getDayOfMonth());
+
 
         PloggingDAO ploggingDAO = new PloggingDAO();
 
@@ -48,7 +54,9 @@ public class CreatePloggingDAOBean {
         ploggingDAO.setScore(requestPloggingSaveDTO.getScore());
         ploggingDAO.setTrashCount(trashCount);
         ploggingDAO.setPloggingTime(requestPloggingSaveDTO.getPloggingTime());
-        ploggingDAO.setUploadTime(LocalDateTime.now().plusHours(9));
+        ploggingDAO.setMonth(month);
+        ploggingDAO.setDay(day);
+        ploggingDAO.setUploadTime(now);
 
         ObjectMapper objectMapper = new ObjectMapper();
         try {

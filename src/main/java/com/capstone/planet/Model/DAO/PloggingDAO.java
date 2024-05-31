@@ -29,5 +29,6 @@ public class PloggingDAO {
     Integer ploggingTime;
     String month;
     Integer day;
+    String address;
     LocalDateTime uploadTime;
 }

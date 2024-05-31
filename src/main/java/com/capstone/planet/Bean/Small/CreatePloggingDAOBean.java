@@ -22,7 +22,7 @@ public class CreatePloggingDAOBean {
     }
 
     // 플로깅 DAO 생성
-    public PloggingDAO exec(String imageUrl, RequestPloggingSaveDTO requestPloggingSaveDTO){
+    public PloggingDAO exec(String address, String imageUrl, RequestPloggingSaveDTO requestPloggingSaveDTO){
 
         List<Map<String, Integer>> newTrash = new ArrayList<>();
         List<Map<String, Integer>> trash = requestPloggingSaveDTO.getTrash();
@@ -56,6 +56,7 @@ public class CreatePloggingDAOBean {
         ploggingDAO.setPloggingTime(requestPloggingSaveDTO.getPloggingTime());
         ploggingDAO.setMonth(month);
         ploggingDAO.setDay(day);
+        ploggingDAO.setAddress(address);
         ploggingDAO.setUploadTime(now);
 
         ObjectMapper objectMapper = new ObjectMapper();

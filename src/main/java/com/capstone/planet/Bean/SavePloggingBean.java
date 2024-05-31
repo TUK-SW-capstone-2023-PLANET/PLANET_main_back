@@ -26,10 +26,12 @@ public class SavePloggingBean {
     SaveUserDAOBean saveUserDAOBean;
     SaveUniversityDAOBean saveUniversityDAOBean;
     SaveSeasonDAOBean saveSeasonDAOBean;
+    GetAddressBean getAddressBean;
 
 
     @Autowired
-    public SavePloggingBean(CreateUniqueIdBean createUniqueIdBean, CreatePloggingDAOBean createPloggingDAOBean, SavePloggingDAOBean savePloggingDAOBean, CreateMultipartFileBean createMultipartFileBean, GetUserDAOBean getUserDAOBean, GetUniversityDAOBean getUniversityDAOBean, GetSeasonUserDAOBean getSeasonUserDAOBean, SaveUserDAOBean saveUserDAOBean, SaveUniversityDAOBean saveUniversityDAOBean, SaveSeasonDAOBean saveSeasonDAOBean) {
+    public SavePloggingBean(GetAddressBean getAddressBean, CreateUniqueIdBean createUniqueIdBean, CreatePloggingDAOBean createPloggingDAOBean, SavePloggingDAOBean savePloggingDAOBean, CreateMultipartFileBean createMultipartFileBean, GetUserDAOBean getUserDAOBean, GetUniversityDAOBean getUniversityDAOBean, GetSeasonUserDAOBean getSeasonUserDAOBean, SaveUserDAOBean saveUserDAOBean, SaveUniversityDAOBean saveUniversityDAOBean, SaveSeasonDAOBean saveSeasonDAOBean) {
+        this.getAddressBean = getAddressBean;
         this.createUniqueIdBean = createUniqueIdBean;
         this.createPloggingDAOBean = createPloggingDAOBean;
         this.savePloggingDAOBean = savePloggingDAOBean;
@@ -53,8 +55,10 @@ public class SavePloggingBean {
         // 위도 경도를 통해 이미지 url 가져오기
         String imageUrl = createMultipartFileBean.exec(longitude, latitude).getImageUrl();
 
+        String address = getAddressBean.exec(longitude, latitude);
+
         // 플로깅 DAO 생성
-        PloggingDAO ploggingDAO = createPloggingDAOBean.exec(imageUrl, requestPloggingSaveDTO);
+        PloggingDAO ploggingDAO = createPloggingDAOBean.exec(address, imageUrl, requestPloggingSaveDTO);
 
         UserDAO userDAO = getUserDAOBean.exec(requestPloggingSaveDTO.getUserId());
         if (userDAO == null) return 0L;

@@ -37,7 +37,7 @@ public class CreatePloggingDTOsBean {
                 .ploddingId(ploggingDAO.getPloggingId())
                 .userId(ploggingDAO.getUserId())
                 .imageUrl(ploggingDAO.getImageUrl())
-                .address("")
+                .address(ploggingDAO.getAddress())
                 .trashCount(ploggingDAO.getTrashCount())
                 .distance(ploggingDAO.getDistance().toString())
                 .ploggingTime(ploggingTime)

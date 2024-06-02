@@ -7,6 +7,8 @@ import com.capstone.planet.Model.DTO.TrashDTO;
 import com.capstone.planet.Model.DTO.TrashInfoDTO;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -25,13 +27,19 @@ public class CreatePloggingDTOBean {
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("a h시 m분");
         String formattedUploadTime2 = ploggingDAO.getUploadTime().plusSeconds(ploggingDAO.getPloggingTime()).format(formatter2);
 
+        double distance = ploggingDAO.getDistance();
+
+        // 두 번째 자리까지 반올림
+        BigDecimal roundedDistance = new BigDecimal(distance).setScale(2, RoundingMode.HALF_UP);
+
+
         return ResponsePloggingGetDTO.builder()
                 .ploggingId(ploggingDAO.getPloggingId())
                 .uploadTime(formattedDateTime)
                 .runningTime(formattedUploadTime1 + " ~ " + formattedUploadTime2)
                 .ploggingTime(ploggingDAO.getPloggingTime())
                 .trashCount(ploggingDAO.getTrashCount())
-                .distance(ploggingDAO.getDistance())
+                .distance(roundedDistance.doubleValue())
                 .kcal(ploggingDAO.getKcal())
                 .pace(ploggingDAO.getPace())
                 .score(ploggingDAO.getScore())

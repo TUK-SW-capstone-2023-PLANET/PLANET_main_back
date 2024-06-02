@@ -4,6 +4,8 @@ import com.capstone.planet.Model.DAO.PloggingDAO;
 import com.capstone.planet.Model.DTO.ResponsePloggingGetsDTO;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -33,13 +35,20 @@ public class CreatePloggingDTOsBean {
         // 결과 문자열 생성
         String ploggingTime = formattedStartTime + " ~ " + formattedEndTime + " (" + minutesBetween + "min)";
 
+        double distance = ploggingDAO.getDistance();
+
+        // 두 번째 자리까지 반올림
+        BigDecimal roundedDistance = new BigDecimal(distance).setScale(2, RoundingMode.HALF_UP);
+        double v = roundedDistance.doubleValue();
+        System.out.println("v = " + v);
+
         return ResponsePloggingGetsDTO.builder()
                 .ploddingId(ploggingDAO.getPloggingId())
                 .userId(ploggingDAO.getUserId())
                 .imageUrl(ploggingDAO.getImageUrl())
                 .address(ploggingDAO.getAddress())
                 .trashCount(ploggingDAO.getTrashCount())
-                .distance(ploggingDAO.getDistance().toString())
+                .distance(Double.toString(v))
                 .ploggingTime(ploggingTime)
                 .build();
     }

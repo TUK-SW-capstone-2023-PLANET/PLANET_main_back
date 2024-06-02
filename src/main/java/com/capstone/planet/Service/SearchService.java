@@ -1,9 +1,11 @@
 package com.capstone.planet.Service;
 
 import com.capstone.planet.Bean.GetSearchChatBean;
+import com.capstone.planet.Bean.GetSearchPloggingBean;
 import com.capstone.planet.Bean.GetSearchPostBean;
 import com.capstone.planet.Model.DTO.ResponseChatRoomGetDTO;
 import com.capstone.planet.Model.DTO.ResponsePostsGetDTO;
+import com.capstone.planet.Model.DTO.ResponseUserRanksGetDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ public class SearchService {
 
     GetSearchPostBean getSearchPostBean;
     GetSearchChatBean getSearchChatBean;
+    GetSearchPloggingBean getSearchPloggingBean;
 
     @Autowired
     public SearchService(GetSearchPostBean getSearchPostBean, GetSearchChatBean getSearchChatBean) {
@@ -29,5 +32,10 @@ public class SearchService {
     // 쪽지함 검색 조회
     public List<ResponseChatRoomGetDTO> getSearchChatRooms(Long userId, String search){
         return getSearchChatBean.exec(userId, search);
+    }
+
+    // 유저 랭킹 검색 조회
+    public List<ResponseUserRanksGetDTO> getSearchPlogging(String search){
+        return getSearchPloggingBean.exec(search);
     }
 }

@@ -2,6 +2,7 @@ package com.capstone.planet.Controller;
 
 import com.capstone.planet.Model.DTO.ResponseChatRoomGetDTO;
 import com.capstone.planet.Model.DTO.ResponsePostsGetDTO;
+import com.capstone.planet.Model.DTO.ResponseUserRanksGetDTO;
 import com.capstone.planet.Service.SearchService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,5 +36,12 @@ public class SearchController {
     @GetMapping("/chat/user/{userId}")
     public List<ResponseChatRoomGetDTO> getChatSearch(@PathVariable Long userId, @RequestParam String search){
         return searchService.getSearchChatRooms(userId, search);
+    }
+
+    // 플래닛 랭킹 검색
+    @Operation(summary = "플래닛 랭킹 검색", description = "플래닛 랭킹 검색")
+    @GetMapping("/planet/rank")
+    public List<ResponseUserRanksGetDTO> getPlanetRankSearch(@RequestParam String search){
+        return searchService.getSearchPlogging(search);
     }
 }

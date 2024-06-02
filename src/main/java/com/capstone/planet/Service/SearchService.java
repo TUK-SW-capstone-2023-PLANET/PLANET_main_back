@@ -1,13 +1,7 @@
 package com.capstone.planet.Service;
 
-import com.capstone.planet.Bean.GetSearchChatBean;
-import com.capstone.planet.Bean.GetSearchPloggingBean;
-import com.capstone.planet.Bean.GetSearchPostBean;
-import com.capstone.planet.Bean.GetSearchSeasonBean;
-import com.capstone.planet.Model.DTO.ResponseChatRoomGetDTO;
-import com.capstone.planet.Model.DTO.ResponsePostsGetDTO;
-import com.capstone.planet.Model.DTO.ResponseSeasonUserGetDTO;
-import com.capstone.planet.Model.DTO.ResponseUserRanksGetDTO;
+import com.capstone.planet.Bean.*;
+import com.capstone.planet.Model.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +14,15 @@ public class SearchService {
     GetSearchChatBean getSearchChatBean;
     GetSearchPloggingBean getSearchPloggingBean;
     GetSearchSeasonBean getSearchSeasonBean;
+    GetSearchUniversityBean getSearchUniversityBean;
 
     @Autowired
-    public SearchService(GetSearchPostBean getSearchPostBean, GetSearchChatBean getSearchChatBean, GetSearchPloggingBean getSearchPloggingBean, GetSearchSeasonBean getSearchSeasonBean) {
+    public SearchService(GetSearchPostBean getSearchPostBean, GetSearchChatBean getSearchChatBean, GetSearchPloggingBean getSearchPloggingBean, GetSearchSeasonBean getSearchSeasonBean, GetSearchUniversityBean getSearchUniversityBean) {
         this.getSearchPostBean = getSearchPostBean;
         this.getSearchChatBean = getSearchChatBean;
         this.getSearchPloggingBean = getSearchPloggingBean;
         this.getSearchSeasonBean = getSearchSeasonBean;
+        this.getSearchUniversityBean = getSearchUniversityBean;
     }
 
     // 게시글 검색 조회
@@ -47,5 +43,10 @@ public class SearchService {
     // 시즌 랭킹 검색 조회
     public List<ResponseSeasonUserGetDTO> getSearchSeason(String search){
         return getSearchSeasonBean.exec(search);
+    }
+
+    // 대학교 랭킹 검색 조회
+    public List<ResponseUniversityGetDTO> getSearchUniversity(String search){
+        return getSearchUniversityBean.exec(search);
     }
 }

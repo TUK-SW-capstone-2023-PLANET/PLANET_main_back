@@ -1,9 +1,6 @@
 package com.capstone.planet.Controller;
 
-import com.capstone.planet.Model.DTO.ResponseChatRoomGetDTO;
-import com.capstone.planet.Model.DTO.ResponsePostsGetDTO;
-import com.capstone.planet.Model.DTO.ResponseSeasonUserGetDTO;
-import com.capstone.planet.Model.DTO.ResponseUserRanksGetDTO;
+import com.capstone.planet.Model.DTO.*;
 import com.capstone.planet.Service.SearchService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -51,5 +48,12 @@ public class SearchController {
     @GetMapping("/season/rank")
     public List<ResponseSeasonUserGetDTO> getSeasonRankSearch(@RequestParam String search){
         return searchService.getSearchSeason(search);
+    }
+
+    // 대학교 랭킹 검색
+    @Operation(summary = "대학교 랭킹 검색", description = "대학교 랭킹 검색")
+    @GetMapping("/university/rank")
+    public List<ResponseUniversityGetDTO> getUniversityRankSearch(@RequestParam String search){
+        return searchService.getSearchUniversity(search);
     }
 }

@@ -1,5 +1,6 @@
 package com.capstone.planet.Controller;
 
+import com.capstone.planet.Model.DTO.ResponseChatRoomGetDTO;
 import com.capstone.planet.Model.DTO.ResponsePostsGetDTO;
 import com.capstone.planet.Service.SearchService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,10 +23,17 @@ public class SearchController {
         this.searchService = searchService;
     }
 
-    // 유저 검색
-    @Operation(summary = "유저 검색", description = "유저 검색 두가지 경우가 존재. /search/post/free : 자유게시판, /search/post/{대학교 이름} : 대학게시판, /search/post/ : 에러 처리")
+    // 게시물
+    @Operation(summary = "게시물 검색", description = "게시물 검색 두가지 경우가 존재. /search/post/free : 자유게시판, /search/post/{대학교 이름} : 대학게시판, /search/post/ : 에러 처리")
     @GetMapping("/post/{type}")
-    public List<ResponsePostsGetDTO> getUserSearch(@PathVariable String type, @RequestParam String search){
+    public List<ResponsePostsGetDTO> getSearchPosts(@PathVariable String type, @RequestParam String search){
         return searchService.getSearchPosts(type, search);
+    }
+
+    // 쪽지함 검색
+    @Operation(summary = "쪽지함 검색", description = "쪽지함 검색")
+    @GetMapping("/chat/user/{userId}")
+    public List<ResponseChatRoomGetDTO> getChatSearch(@PathVariable Long userId, @RequestParam String search){
+        return searchService.getSearchChatRooms(userId, search);
     }
 }

@@ -56,4 +56,11 @@ public class SearchController {
     public List<ResponseUniversityGetDTO> getUniversityRankSearch(@RequestParam String search){
         return searchService.getSearchUniversity(search);
     }
+
+    // 대학교 유저 랭킹 검색
+    @Operation(summary = "대학교 유저 랭킹 검색", description = "대학교 유저 랭킹 검색")
+    @GetMapping("/university/rank/user/{userId}")
+    public List<ResponseUserUniversityGetDTO> getUniversityUserRankSearch(@PathVariable Long userId, @RequestParam String search){
+        return searchService.getSearchUniversityUser(userId, search);
+    }
 }

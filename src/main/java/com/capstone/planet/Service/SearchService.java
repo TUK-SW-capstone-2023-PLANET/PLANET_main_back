@@ -16,15 +16,17 @@ public class SearchService {
     GetSearchSeasonBean getSearchSeasonBean;
     GetSearchUniversityBean getSearchUniversityBean;
     GetSearchUniversityUserBean getSearchUniversityUserBean;
+    GetSearchMyPostBean getSearchMyPostBean;
 
     @Autowired
-    public SearchService(GetSearchPostBean getSearchPostBean, GetSearchChatBean getSearchChatBean, GetSearchPloggingBean getSearchPloggingBean, GetSearchSeasonBean getSearchSeasonBean, GetSearchUniversityBean getSearchUniversityBean, GetSearchUniversityUserBean getSearchUniversityUserBean) {
+    public SearchService(GetSearchPostBean getSearchPostBean, GetSearchChatBean getSearchChatBean, GetSearchPloggingBean getSearchPloggingBean, GetSearchSeasonBean getSearchSeasonBean, GetSearchUniversityBean getSearchUniversityBean, GetSearchUniversityUserBean getSearchUniversityUserBean, GetSearchMyPostBean getSearchMyPostBean) {
         this.getSearchPostBean = getSearchPostBean;
         this.getSearchChatBean = getSearchChatBean;
         this.getSearchPloggingBean = getSearchPloggingBean;
         this.getSearchSeasonBean = getSearchSeasonBean;
         this.getSearchUniversityBean = getSearchUniversityBean;
         this.getSearchUniversityUserBean = getSearchUniversityUserBean;
+        this.getSearchMyPostBean = getSearchMyPostBean;
     }
 
     // 게시글 검색 조회
@@ -55,5 +57,10 @@ public class SearchService {
     // 대학교 유저 랭킹 검색 조회
     public List<ResponseUserUniversityGetDTO> getSearchUniversityUser(Long userId, String search){
         return getSearchUniversityUserBean.exec(userId, search);
+    }
+
+    // 내가 작성한 게시물 검색 조회
+    public List<ResponseMyPostGetDTO> getSearchMyPost(Long userId, String type, String search){
+        return getSearchMyPostBean.exec(userId, type, search);
     }
 }

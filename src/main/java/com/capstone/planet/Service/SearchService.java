@@ -18,9 +18,10 @@ public class SearchService {
     GetSearchUniversityUserBean getSearchUniversityUserBean;
     GetSearchMyPostBean getSearchMyPostBean;
     GetSearchMyCommentPostBean getSearchMyCommentPostBean;
+    GetSearchMapBean getSearchMapBean;
 
     @Autowired
-    public SearchService(GetSearchPostBean getSearchPostBean, GetSearchChatBean getSearchChatBean, GetSearchPloggingBean getSearchPloggingBean, GetSearchSeasonBean getSearchSeasonBean, GetSearchUniversityBean getSearchUniversityBean, GetSearchUniversityUserBean getSearchUniversityUserBean, GetSearchMyPostBean getSearchMyPostBean, GetSearchMyCommentPostBean getSearchMyCommentPostBean) {
+    public SearchService(GetSearchPostBean getSearchPostBean, GetSearchChatBean getSearchChatBean, GetSearchPloggingBean getSearchPloggingBean, GetSearchSeasonBean getSearchSeasonBean, GetSearchUniversityBean getSearchUniversityBean, GetSearchUniversityUserBean getSearchUniversityUserBean, GetSearchMyPostBean getSearchMyPostBean, GetSearchMyCommentPostBean getSearchMyCommentPostBean, GetSearchMapBean getSearchMapBean) {
         this.getSearchPostBean = getSearchPostBean;
         this.getSearchChatBean = getSearchChatBean;
         this.getSearchPloggingBean = getSearchPloggingBean;
@@ -29,6 +30,7 @@ public class SearchService {
         this.getSearchUniversityUserBean = getSearchUniversityUserBean;
         this.getSearchMyPostBean = getSearchMyPostBean;
         this.getSearchMyCommentPostBean = getSearchMyCommentPostBean;
+        this.getSearchMapBean = getSearchMapBean;
     }
 
     // 게시글 검색 조회
@@ -69,5 +71,10 @@ public class SearchService {
     // 내가 작성한 댓글이 있는 게시물 검색 조회
     public List<ResponseMyPostGetDTO> getSearchMyCommentPost(Long userId, String type, String search){
         return getSearchMyCommentPostBean.exec(userId, type, search);
+    }
+
+    // 지도 검색 조회
+    public ResponseSearchMapGetDTO getSearchMap(String search){
+        return getSearchMapBean.exec(search);
     }
 }

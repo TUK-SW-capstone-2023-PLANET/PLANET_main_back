@@ -34,13 +34,15 @@ public class MainController {
 
 
     //@Operation(summary = "상태 확인", description = "서버 생존 확인 API")
-    @GetMapping("/")
-    public JsonNode health() {
+    /*@GetMapping("/")
+    public String health() {
 
-        // 좌표값
-        String coords = "126.97838810000002,37.56661020000001";
+        String address= "경기도+시흥시+정왕동";
+
+        System.out.println("address = " + address);
+
         // API 호출을 위한 URL
-        String apiUrl = "https://naveropenapi.apigw.ntruss.com/map-reversegeocode/v2/gc?coords=" + coords;
+        String apiUrl = "https://naveropenapi.apigw.ntruss.com/map-geocode/v2/geocode?query=" + address;
 
         // HttpClient 객체 생성
         HttpClient httpClient = HttpClient.newHttpClient();
@@ -53,6 +55,8 @@ public class MainController {
                 .GET()
                 .build();
 
+        System.out.println("apiUrl = " + apiUrl);
+
         try {
             // HTTP 요청 보내기
             HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
@@ -63,48 +67,19 @@ public class MainController {
             ObjectMapper jsonMapper = new ObjectMapper();
 
             // XML 파싱하여 JsonNode로 변환
-            JsonNode jsonNode = xmlMapper.readTree(httpResponse.body());
+            JsonNode jsonNode = jsonMapper.readTree(httpResponse.body());
 
-            // 결과에서 주소 정보 가져오기
-            JsonNode resultsNode = jsonNode.get("results").get("order");
+            System.out.println("jsonNode = " + jsonNode.get("status"));
+            System.out.println("jsonNode.get(\"addresses\").get(\"x\") = " + jsonNode.get("addresses").get(0).get("x"));
+            System.out.println("jsonNode.get(\"addresses\").get(\"y\") = " + jsonNode.get("addresses").get(0).get("y"));
 
-            String area1 = "";
-            String area2 = "";
-            String area3 = "";
+            return jsonNode.toString();
 
-            for (JsonNode result : resultsNode) {
-                if (result.get("name").equals("legalcode")) {
-                    JsonNode regionNode = result.get("region");
-                    area1 = regionNode.get("area1").get("name").asText();
-                    area2 = regionNode.get("area2").get("name").asText();
-                    area3 = regionNode.get("area3").get("name").asText();
-                }
-
-            }
-            // 주소 출력
-            System.out.println(area1 + " " + area2 + " " + area3);
-
-
-            return jsonNode;
         } catch (IOException | InterruptedException e) {
             // 예외 발생 시 처리
             e.printStackTrace();
         }
 
         return null;
-    }
-
-    // XML을 JSON으로 변환하는 메소드
-    private static String convertXmlToJson(String xml) throws IOException {
-        // XML 매퍼 생성
-        XmlMapper xmlMapper = new XmlMapper();
-        // JSON 매퍼 생성
-        ObjectMapper jsonMapper = new ObjectMapper();
-
-        // XML 파싱하여 JsonNode로 변환
-        JsonNode jsonNode = xmlMapper.readTree(xml);
-
-        // JsonNode를 JSON 문자열로 변환하여 반환
-        return jsonMapper.writeValueAsString(jsonNode);
-    }
+    }*/
 }

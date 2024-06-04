@@ -77,4 +77,12 @@ public class SearchController {
     public List<ResponseMyPostGetDTO> getMyCommentPostSearch(@PathVariable Long userId, @PathVariable String type, @RequestParam String search) {
         return searchService.getSearchMyCommentPost(userId, type, search);
     }
+
+    // 지도 검색
+    @Operation(summary = "지도 검색", description = "지도 검색")
+    @GetMapping("/map")
+    public ResponseSearchMapGetDTO getMapSearch(@RequestParam String search){
+        System.out.println("search = " + search);
+        return searchService.getSearchMap(search);
+    }
 }

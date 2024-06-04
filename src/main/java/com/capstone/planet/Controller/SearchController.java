@@ -70,4 +70,11 @@ public class SearchController {
     public List<ResponseMyPostGetDTO> getMyPostSearch(@PathVariable Long userId, @PathVariable String type, @RequestParam String search){
         return searchService.getSearchMyPost(userId, type, search);
     }
+
+    // 내가 작성한 댓글 게시물 검색
+    @Operation(summary = "내가 작성한 댓글 게시물 검색", description = "내가 작성한 댓글 게시물 검색 세가지 경우가 존재. /search/post/my/comment/{userId}/all : 전체이자 기본으로 사용하면 좋을듯 /search/post/my/comment/{userId}/free : 자유게시판, /search/post/my/comment/{userId}/{userId} : 대학게시판, /search/post/my/comment/{userId} : 에러 처리")
+    @GetMapping("/post/my/comment/{userId}/{type}")
+    public List<ResponseMyPostGetDTO> getMyCommentPostSearch(@PathVariable Long userId, @PathVariable String type, @RequestParam String search) {
+        return searchService.getSearchMyCommentPost(userId, type, search);
+    }
 }

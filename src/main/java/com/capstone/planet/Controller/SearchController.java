@@ -82,7 +82,6 @@ public class SearchController {
     @Operation(summary = "지도 검색", description = "지도 검색")
     @GetMapping("/map")
     public ResponseSearchMapGetDTO getMapSearch(@RequestParam String search){
-        System.out.println("search = " + search);
         return searchService.getSearchMap(search);
     }
 }

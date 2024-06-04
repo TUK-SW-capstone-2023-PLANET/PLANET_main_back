@@ -4,6 +4,8 @@ import com.capstone.planet.Model.DTO.LocationDTO;
 import com.capstone.planet.Model.DTO.ResponseSearchMapGetDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -16,6 +18,13 @@ import java.time.format.DateTimeFormatter;
 
 @Component
 public class GetSearchMapBean {
+
+    Environment env;
+
+    @Autowired
+    public GetSearchMapBean(Environment env) {
+        this.env = env;
+    }
 
     // 지도 위치 검색
     public ResponseSearchMapGetDTO exec(String search) {
@@ -31,8 +40,8 @@ public class GetSearchMapBean {
         // HTTP 요청 객체 생성
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(apiUrl))
-                .header("X-NCP-APIGW-API-KEY-ID", "d62cogf955")
-                .header("X-NCP-APIGW-API-KEY", "PD9WvJTFLDShaTWdAN0JiYJPfusVsO3tRv4SMDbv")
+                .header("X-NCP-APIGW-API-KEY-ID", env.getProperty("naver.X-NCP-APIGW-API-KEY-ID"))
+                .header("X-NCP-APIGW-API-KEY", env.getProperty("naver.X-NCP-APIGW-API-KEY"))
                 .GET()
                 .build();
 

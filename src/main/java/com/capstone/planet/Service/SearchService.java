@@ -19,9 +19,10 @@ public class SearchService {
     GetSearchMyPostBean getSearchMyPostBean;
     GetSearchMyCommentPostBean getSearchMyCommentPostBean;
     GetSearchMapBean getSearchMapBean;
+    GetPostHistoryBean getPostHistoryBean;
 
     @Autowired
-    public SearchService(GetSearchPostBean getSearchPostBean, GetSearchChatBean getSearchChatBean, GetSearchPloggingBean getSearchPloggingBean, GetSearchSeasonBean getSearchSeasonBean, GetSearchUniversityBean getSearchUniversityBean, GetSearchUniversityUserBean getSearchUniversityUserBean, GetSearchMyPostBean getSearchMyPostBean, GetSearchMyCommentPostBean getSearchMyCommentPostBean, GetSearchMapBean getSearchMapBean) {
+    public SearchService(GetSearchPostBean getSearchPostBean, GetSearchChatBean getSearchChatBean, GetSearchPloggingBean getSearchPloggingBean, GetSearchSeasonBean getSearchSeasonBean, GetSearchUniversityBean getSearchUniversityBean, GetSearchUniversityUserBean getSearchUniversityUserBean, GetSearchMyPostBean getSearchMyPostBean, GetSearchMyCommentPostBean getSearchMyCommentPostBean, GetSearchMapBean getSearchMapBean, GetPostHistoryBean getPostHistoryBean) {
         this.getSearchPostBean = getSearchPostBean;
         this.getSearchChatBean = getSearchChatBean;
         this.getSearchPloggingBean = getSearchPloggingBean;
@@ -31,11 +32,12 @@ public class SearchService {
         this.getSearchMyPostBean = getSearchMyPostBean;
         this.getSearchMyCommentPostBean = getSearchMyCommentPostBean;
         this.getSearchMapBean = getSearchMapBean;
+        this.getPostHistoryBean = getPostHistoryBean;
     }
 
     // 게시글 검색 조회
-    public List<ResponsePostsGetDTO> getSearchPosts(String type, String search){
-        return getSearchPostBean.exec(type, search);
+    public List<ResponsePostsGetDTO> getSearchPosts(Long userId, String type, String search){
+        return getSearchPostBean.exec(userId, type, search);
     }
 
     // 쪽지함 검색 조회
@@ -77,4 +79,10 @@ public class SearchService {
     public ResponseSearchMapGetDTO getSearchMap(String search){
         return getSearchMapBean.exec(search);
     }
+
+    // 게시물 히스토리 조회
+    public List<String> getPostHistory(Long userId){
+        return getPostHistoryBean.exec(userId);
+    }
+
 }

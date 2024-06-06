@@ -24,9 +24,9 @@ public class SearchController {
 
     // 게시물
     @Operation(summary = "게시물 검색", description = "게시물 검색 두가지 경우가 존재. /search/post/free : 자유게시판, /search/post/{대학교 이름} : 대학게시판, /search/post/ : 에러 처리")
-    @GetMapping("/post/{type}")
-    public List<ResponsePostsGetDTO> getSearchPosts(@PathVariable String type, @RequestParam String search){
-        return searchService.getSearchPosts(type, search);
+    @GetMapping("/post/{type}/user/{userId}")
+    public List<ResponsePostsGetDTO> getSearchPosts(@PathVariable Long userId, @PathVariable String type, @RequestParam String search){
+        return searchService.getSearchPosts(userId, type, search);
     }
 
     // 쪽지함 검색
@@ -83,5 +83,12 @@ public class SearchController {
     @GetMapping("/map")
     public ResponseSearchMapGetDTO getMapSearch(@RequestParam String search){
         return searchService.getSearchMap(search);
+    }
+
+    // 게시물 검색 기록 유지
+    @Operation(summary = "게시물 검색 기록", description = "게시물 검색 기록 5개로 유지")
+    @GetMapping("/post/history/user/{userId}")
+    public List<String> getPostHistory(@PathVariable Long userId){
+        return searchService.getPostHistory(userId);
     }
 }

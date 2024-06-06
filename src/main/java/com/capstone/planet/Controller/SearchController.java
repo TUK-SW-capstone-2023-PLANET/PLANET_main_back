@@ -92,7 +92,7 @@ public class SearchController {
         return searchService.getPostHistory(userId);
     }
 
-    // 지도 검색 기록 유지
+    // 지도 검색 기록 유지  
     @Operation(summary = "지도 검색 기록", description = "지도 검색 기록 10개로 유지")
     @GetMapping("/map/history/user/{userId}")
     public List<String> getMapHistory(@PathVariable Long userId){

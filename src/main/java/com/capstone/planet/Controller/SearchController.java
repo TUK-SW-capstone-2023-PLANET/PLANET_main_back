@@ -80,9 +80,9 @@ public class SearchController {
 
     // 지도 검색
     @Operation(summary = "지도 검색", description = "지도 검색")
-    @GetMapping("/map")
-    public ResponseSearchMapGetDTO getMapSearch(@RequestParam String search){
-        return searchService.getSearchMap(search);
+    @GetMapping("/map/user/{userId}")
+    public ResponseSearchMapGetDTO getMapSearch(@PathVariable Long userId, @RequestParam String search){
+        return searchService.getSearchMap(userId, search);
     }
 
     // 게시물 검색 기록 유지
@@ -90,5 +90,12 @@ public class SearchController {
     @GetMapping("/post/history/user/{userId}")
     public List<String> getPostHistory(@PathVariable Long userId){
         return searchService.getPostHistory(userId);
+    }
+
+    // 지도 검색 기록 유지  
+    @Operation(summary = "지도 검색 기록", description = "지도 검색 기록 10개로 유지")
+    @GetMapping("/map/history/user/{userId}")
+    public List<String> getMapHistory(@PathVariable Long userId){
+        return searchService.getMapHistory(userId);
     }
 }

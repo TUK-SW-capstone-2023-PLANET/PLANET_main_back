@@ -1,5 +1,10 @@
 package com.capstone.planet.Bean;
 
+import com.capstone.planet.Bean.Small.CreateUniqueIdBean;
+import com.capstone.planet.Bean.Small.DeleteMapSearchHisotyDAOBean;
+import com.capstone.planet.Bean.Small.GetMapSearchHistoryDAOBean;
+import com.capstone.planet.Bean.Small.SaveMapSearchHistoryDAOBean;
+import com.capstone.planet.Model.DAO.MapSearchHistoryDAO;
 import com.capstone.planet.Model.DTO.LocationDTO;
 import com.capstone.planet.Model.DTO.ResponseSearchMapGetDTO;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -15,19 +20,28 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Component
 public class GetSearchMapBean {
 
     Environment env;
+    CreateUniqueIdBean createUniqueIdBean;
+    GetMapSearchHistoryDAOBean getMapSearchHistoryDAOBean;
+    SaveMapSearchHistoryDAOBean saveMapSearchHistoryDAOBean;
+    DeleteMapSearchHisotyDAOBean deleteMapSearchHisotyDAOBean;
 
     @Autowired
-    public GetSearchMapBean(Environment env) {
+    public GetSearchMapBean(Environment env, CreateUniqueIdBean createUniqueIdBean, GetMapSearchHistoryDAOBean getMapSearchHistoryDAOBean, SaveMapSearchHistoryDAOBean saveMapSearchHistoryDAOBean, DeleteMapSearchHisotyDAOBean deleteMapSearchHisotyDAOBean) {
         this.env = env;
+        this.createUniqueIdBean = createUniqueIdBean;
+        this.getMapSearchHistoryDAOBean = getMapSearchHistoryDAOBean;
+        this.saveMapSearchHistoryDAOBean = saveMapSearchHistoryDAOBean;
+        this.deleteMapSearchHisotyDAOBean = deleteMapSearchHisotyDAOBean;
     }
 
     // 지도 위치 검색
-    public ResponseSearchMapGetDTO exec(String search) {
+    public ResponseSearchMapGetDTO exec(Long userId, String search) {
 
         search = search.replace(" ", "+");
 
@@ -72,6 +86,8 @@ public class GetSearchMapBean {
                 responseSearchMapGetDTO.setLocation(locationDTO);
                 responseSearchMapGetDTO.setAddressCheck(false);
 
+                history(userId, search);
+
                 return responseSearchMapGetDTO;
             }
 
@@ -89,6 +105,8 @@ public class GetSearchMapBean {
             responseSearchMapGetDTO.setLocation(locationDTO);
             responseSearchMapGetDTO.setAddressCheck(true);
 
+            history(userId, search);
+
             return responseSearchMapGetDTO;
 
         } catch (IOException | InterruptedException e) {
@@ -97,6 +115,26 @@ public class GetSearchMapBean {
         }
 
         return null;
+    }
+
+    public void history(Long userId, String search){
+        MapSearchHistoryDAO mapSearchHistoryDAO = new MapSearchHistoryDAO();
+        mapSearchHistoryDAO.setMapSearchHistoryId(createUniqueIdBean.exec());
+        mapSearchHistoryDAO.setUserId(userId);
+        mapSearchHistoryDAO.setSearch(search);
+        mapSearchHistoryDAO.setUploadTime(LocalDateTime.now());
+
+        saveMapSearchHistoryDAOBean.exec(mapSearchHistoryDAO);
+
+        List<MapSearchHistoryDAO> mapSearchHistoryDAOS = getMapSearchHistoryDAOBean.exec(userId);
+
+        if (mapSearchHistoryDAOS.size() > 10) {
+            List<MapSearchHistoryDAO> itemsToDelete = mapSearchHistoryDAOS.stream()
+                    .skip(10)
+                    .toList();
+
+            deleteMapSearchHisotyDAOBean.exec(itemsToDelete);
+        }
     }
 
 }

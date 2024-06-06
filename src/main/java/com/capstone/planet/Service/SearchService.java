@@ -20,9 +20,10 @@ public class SearchService {
     GetSearchMyCommentPostBean getSearchMyCommentPostBean;
     GetSearchMapBean getSearchMapBean;
     GetPostHistoryBean getPostHistoryBean;
+    GetMapHistoryBean getMapHistoryBean;
 
     @Autowired
-    public SearchService(GetSearchPostBean getSearchPostBean, GetSearchChatBean getSearchChatBean, GetSearchPloggingBean getSearchPloggingBean, GetSearchSeasonBean getSearchSeasonBean, GetSearchUniversityBean getSearchUniversityBean, GetSearchUniversityUserBean getSearchUniversityUserBean, GetSearchMyPostBean getSearchMyPostBean, GetSearchMyCommentPostBean getSearchMyCommentPostBean, GetSearchMapBean getSearchMapBean, GetPostHistoryBean getPostHistoryBean) {
+    public SearchService(GetSearchPostBean getSearchPostBean, GetSearchChatBean getSearchChatBean, GetSearchPloggingBean getSearchPloggingBean, GetSearchSeasonBean getSearchSeasonBean, GetSearchUniversityBean getSearchUniversityBean, GetSearchUniversityUserBean getSearchUniversityUserBean, GetSearchMyPostBean getSearchMyPostBean, GetSearchMyCommentPostBean getSearchMyCommentPostBean, GetSearchMapBean getSearchMapBean, GetPostHistoryBean getPostHistoryBean, GetMapHistoryBean getMapHistoryBean) {
         this.getSearchPostBean = getSearchPostBean;
         this.getSearchChatBean = getSearchChatBean;
         this.getSearchPloggingBean = getSearchPloggingBean;
@@ -33,6 +34,7 @@ public class SearchService {
         this.getSearchMyCommentPostBean = getSearchMyCommentPostBean;
         this.getSearchMapBean = getSearchMapBean;
         this.getPostHistoryBean = getPostHistoryBean;
+        this.getMapHistoryBean = getMapHistoryBean;
     }
 
     // 게시글 검색 조회
@@ -76,13 +78,18 @@ public class SearchService {
     }
 
     // 지도 검색 조회
-    public ResponseSearchMapGetDTO getSearchMap(String search){
-        return getSearchMapBean.exec(search);
+    public ResponseSearchMapGetDTO getSearchMap(Long userId, String search){
+        return getSearchMapBean.exec(userId, search);
     }
 
     // 게시물 히스토리 조회
     public List<String> getPostHistory(Long userId){
         return getPostHistoryBean.exec(userId);
+    }
+
+    // 지도 히스토리 조회
+    public List<String> getMapHistory(Long userId){
+        return getMapHistoryBean.exec(userId);
     }
 
 }

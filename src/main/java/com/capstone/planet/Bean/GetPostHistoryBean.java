@@ -25,14 +25,9 @@ public class GetPostHistoryBean {
         if (postSearchHistoryDAOS == null) {
             return List.of();
         }
-        else if (postSearchHistoryDAOS.size()<6)
+        else
             return postSearchHistoryDAOS.stream()
                     .map(PostSearchHistoryDAO::getSearch)
                     .toList();
-        else
-            return postSearchHistoryDAOS.subList(0, 5).stream()
-                    .map(PostSearchHistoryDAO::getSearch)
-                    .toList();
-
     }
 }

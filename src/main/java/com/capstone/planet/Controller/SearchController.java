@@ -98,4 +98,5 @@ public class SearchController {
     public List<String> getMapHistory(@PathVariable Long userId){
         return searchService.getMapHistory(userId);
     }
+
 }

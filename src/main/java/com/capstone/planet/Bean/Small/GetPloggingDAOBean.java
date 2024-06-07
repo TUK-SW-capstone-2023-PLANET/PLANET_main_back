@@ -27,6 +27,10 @@ public class GetPloggingDAOBean {
         return ploggingRepositoryJPA.findByUserIdAndMonthOrderByDayAsc(userId, month);
     }
 
+    public List<PloggingDAO> exec(Long userId, Long check){
+        return ploggingRepositoryJPA.findByUserIdOrderByMonthDesc(userId);
+    }
+
     // 핫 플레이스 조회
     public List<PloggingDAO> exec(){
         return ploggingRepositoryJPA.findAll();

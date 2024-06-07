@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface PloggingRepositoryJPA extends JpaRepository<PloggingDAO, Long> {
     List<PloggingDAO> findByUserIdAndMonthOrderByDayAsc(Long userId, String month);
+
+    List<PloggingDAO> findByUserIdOrderByMonthDesc(Long userId);
 }

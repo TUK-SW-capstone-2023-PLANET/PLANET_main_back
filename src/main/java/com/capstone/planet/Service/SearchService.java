@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SearchService {
@@ -88,7 +89,7 @@ public class SearchService {
     }
 
     // 지도 히스토리 조회
-    public List<String> getMapHistory(Long userId){
+    public List<Map<String, String>> getMapHistory(Long userId){
         return getMapHistoryBean.exec(userId);
     }
 

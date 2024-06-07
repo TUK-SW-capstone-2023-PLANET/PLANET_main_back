@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Tag(name = "Search", description = "검색 관련 API")
 @RestController
@@ -95,7 +96,7 @@ public class SearchController {
     // 지도 검색 기록 유지  
     @Operation(summary = "지도 검색 기록", description = "지도 검색 기록 10개로 유지")
     @GetMapping("/map/history/user/{userId}")
-    public List<String> getMapHistory(@PathVariable Long userId){
+    public List<Map<String, String>> getMapHistory(@PathVariable Long userId){
         return searchService.getMapHistory(userId);
     }
 
